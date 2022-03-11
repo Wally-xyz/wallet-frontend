@@ -160,12 +160,15 @@ export const INITIAL_STATE: IAppState = {
 
 class App extends React.Component<{}> {
   public state: IAppState;
+  public fileInput: React.RefObject<HTMLInputElement>;
 
   constructor(props: any) {
     super(props);
     this.state = {
       ...INITIAL_STATE,
     };
+
+    this.fileInput = React.createRef();
   }
   public componentDidMount() {
     this.init();
@@ -367,6 +370,24 @@ class App extends React.Component<{}> {
     await this.updateSession({ activeIndex });
   };
 
+  public uploadFile = () => {
+    const data = new FormData()
+    if (!(this.fileInput.current && this.fileInput.current.files && this.fileInput.current.files.length)) {
+      return;
+    }
+    const file =  this.fileInput.current.files[0]
+    data.append('upload_file', file)
+    const name = 'test'
+    const description = 'test description'
+    fetch(`http://localhost:80/media/upload?name=${name}&description=${description}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${this.state.authToken}`
+      },
+      body: data,
+    })
+  }
+
   public toggleScanner = () => {
     console.log("ACTION", "toggleScanner");
     this.setState({ scanner: !this.state.scanner });
@@ -409,7 +430,7 @@ class App extends React.Component<{}> {
     const body = {
       'email': this.state.email,
     }
-    fetch(`http://localhost:80/auth/resendcode?email=${this.state.email}`, {
+    fetch(`http://localhost:80/auth/sendcode?email=${this.state.email}`, {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
@@ -431,7 +452,7 @@ class App extends React.Component<{}> {
       }
     }).then(response => response.json().then(response => response))
     this.setState({ 'authToken': response.access_token })
-    const wallets = await fetch(`http://localhost:80/tokens/wallet?access_token${response.accessToken}`, {
+    const wallets = await fetch(`http://localhost:80/tokens/wallet?access_token=${response.access_token}`, {
       headers: {
         'Authorization': `Bearer ${response.access_token}`
       }
@@ -538,6 +559,14 @@ class App extends React.Component<{}> {
                   </Column>
                 ) : (
                   <Column>
+                    {
+                      accounts.length
+                        ? <>
+                          <input type="file" accept="image/png, image/jpeg" ref={this.fileInput}/>
+                          <SButton onClick={this.uploadFile}>{`Upload`}</SButton>
+                        </>
+                        : <></>
+                    }
                     {accounts.length ? <AccountDetails
                       chains={getAppConfig().chains}
                       address={address}
@@ -566,7 +595,7 @@ class App extends React.Component<{}> {
                         </SActionsColumn>
                         <SActionsColumn>
                           <>
-                            <SInput onChange={(e: any) => this.setState({ 'code': e.target.value })} placeholder={"Enter Email"} />
+                            <SInput onChange={(e: any) => this.setState({ 'code': e.target.value })} placeholder={"Enter Code"} />
                             <SButton onClick={this.verifyCode}>{`Verify`}</SButton>
                           </>
                         </SActionsColumn>
