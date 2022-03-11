@@ -36,8 +36,6 @@ interface IAccountDetailsProps {
 
 const AccountDetails = (props: IAccountDetailsProps) => {
   const { chains, chainId, address, activeIndex, accounts, updateAddress, updateChain } = props;
-  console.log('Account Details')
-  console.log(props)
   const windowWidth = getViewportDimensions().x;
   const maxWidth = 468;
   const maxChar = 12;
@@ -47,8 +45,6 @@ const AccountDetails = (props: IAccountDetailsProps) => {
     index,
     display_address: ellipseAddress(addr, ellipseLength),
   }));
-  console.log(accountsMap)
-  console.log(address)
   return (
     <React.Fragment>
       <SSection>

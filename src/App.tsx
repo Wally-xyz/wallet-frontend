@@ -396,6 +396,7 @@ class App extends React.Component<{}> {
   };
 
   public onURIPaste = async (e: any) => {
+    console.log('URI Pasted')
     const data = e.target.value;
     const uri = typeof data === "string" ? data : "";
     if (uri) {
@@ -429,7 +430,6 @@ class App extends React.Component<{}> {
         'Content-Type': 'application/json',
       }
     }).then(response => response.json().then(response => response))
-    console.log(response)
     this.setState({ 'authToken': response.access_token })
     const wallets = await fetch(`http://localhost:80/tokens/wallet?access_token${response.accessToken}`, {
       headers: {
@@ -440,7 +440,6 @@ class App extends React.Component<{}> {
       'accounts': [wallets.data],
       'address': wallets.data,
     })
-    console.log(wallets.data)
   }
 
   public onQRCodeError = (error: Error) => {

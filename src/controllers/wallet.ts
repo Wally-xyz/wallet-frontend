@@ -10,7 +10,7 @@ import {
 } from "../constants/default";
 import { getAppConfig } from "../config";
 
-const apiDomain = 'http://localhost:8000'
+const apiDomain = 'http://localhost:80'
 
 export class WalletController {
   public path: string;
@@ -202,16 +202,17 @@ export class WalletController {
     return null;
   }
 
-  public async signPersonalMessage(message: any) {
+  public async signPersonalMessage(message: any, authToken: string) {
     if (this.wallet) {
       const body = {
         'message': message,
       }
-      const result = await fetch(`${apiDomain}/sign`, {
+      const result = await fetch(`${apiDomain}/tokens/sign`, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
         }
       }).then(response => {
         return response.json().then(data => {
