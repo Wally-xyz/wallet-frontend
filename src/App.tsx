@@ -124,6 +124,7 @@ export interface IAppState {
   address: string;
   email: string;
   code: string;
+  authToken: string;
   requests: any[];
   results: any[];
   payload: any;
@@ -150,6 +151,7 @@ export const INITIAL_STATE: IAppState = {
   address: DEFAULT_ADDRESS,
   email: "",
   code: "",
+  authToken: "",
   activeIndex: DEFAULT_ACTIVE_INDEX,
   requests: [],
   results: [],
@@ -415,18 +417,30 @@ class App extends React.Component<{}> {
     })
   }
 
-  public verifyCode = () => {
+  public verifyCode = async () => {
     const body = {
       'email': this.state.email,
       'code': this.state.code,
     }
-    fetch(`http://localhost:80/auth/verifyemail?email=${this.state.email}&code=${this.state.code}`, {
+    const response = await fetch(`http://localhost:80/auth/verifyemail?email=${this.state.email}&code=${this.state.code}`, {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
       }
+    }).then(response => response.json().then(response => response))
+    console.log(response)
+    this.setState({ 'authToken': response.access_token })
+    const wallets = await fetch(`http://localhost:80/tokens/wallet?access_token${response.accessToken}`, {
+      headers: {
+        'Authorization': `Bearer ${response.access_token}`
+      }
+    }).then(response => response.json().then(response => response))
+    this.setState({
+      'accounts': [wallets.data],
+      'address': wallets.data,
     })
+    console.log(wallets.data)
   }
 
   public onQRCodeError = (error: Error) => {
@@ -525,7 +539,7 @@ class App extends React.Component<{}> {
                   </Column>
                 ) : (
                   <Column>
-                    <AccountDetails
+                    {accounts.length ? <AccountDetails
                       chains={getAppConfig().chains}
                       address={address}
                       activeIndex={activeIndex}
@@ -533,8 +547,8 @@ class App extends React.Component<{}> {
                       accounts={accounts}
                       updateAddress={this.updateAddress}
                       updateChain={this.updateChain}
-                    />
-                    <SActionsColumn>
+                    /> : <></>}
+                    {accounts.length ? <SActionsColumn>
                       <SButton onClick={this.toggleScanner}>{`Scan`}</SButton>
                       {getAppConfig().styleOpts.showPasteUri && (
                         <>
@@ -542,16 +556,23 @@ class App extends React.Component<{}> {
                           <SInput onChange={this.onURIPaste} placeholder={"Paste wc: uri"} />
                         </>
                       )}
-                    </SActionsColumn>
-                    <SActionsColumn>
+                    </SActionsColumn> : <></>}
+                    {!accounts.length ?
                       <>
-                        <SInput onChange={(e: any) => this.setState({ 'email': e.target.value })} placeholder={"Enter Email"} />
-                        <SButton onClick={this.sendEmail}>{`Submit`}</SButton>
-                        <p>{"OR"}</p>
-                        <SInput onChange={(e: any) => this.setState({ 'code': e.target.value })} placeholder={"Enter Email"} />
-                        <SButton onClick={this.verifyCode}>{`Verify`}</SButton>
-                      </>
-                    </SActionsColumn>
+                        <SActionsColumn>
+                          <>
+                            <SInput onChange={(e: any) => this.setState({ 'email': e.target.value })} placeholder={"Enter Email"} />
+                            <SButton onClick={this.sendEmail}>{`Submit`}</SButton>
+                          </>
+                        </SActionsColumn>
+                        <SActionsColumn>
+                          <>
+                            <SInput onChange={(e: any) => this.setState({ 'code': e.target.value })} placeholder={"Enter Email"} />
+                            <SButton onClick={this.verifyCode}>{`Verify`}</SButton>
+                          </>
+                        </SActionsColumn>
+                      </> : <></>
+                    }
                   </Column>
                 )
               ) : !payload ? (

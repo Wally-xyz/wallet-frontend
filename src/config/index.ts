@@ -8,7 +8,7 @@ const appConfig: IAppConfig = {
   logo: walletconnectLogo,
   chainId: MAINNET_CHAIN_ID,
   derivationPath: ETH_STANDARD_PATH,
-  numberOfAccounts: 3,
+  numberOfAccounts: 0,
   colors: {
     defaultColor: "12, 12, 13",
     backgroundColor: "40, 44, 52",
