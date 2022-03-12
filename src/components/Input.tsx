@@ -24,3 +24,10 @@ const SInput = styled.input`
 const Input = (props: any) => <SInput {...props} />;
 
 export default Input;
+
+export const SSInput = styled(Input)`
+  width: 50%;
+  margin: 10px;
+  font-size: 14px;
+  height: 40px;
+`;

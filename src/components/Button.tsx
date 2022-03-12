@@ -126,3 +126,8 @@ Button.defaultProps = {
 };
 
 export default Button;
+
+export const SSButton = styled(Button)`
+  width: 50%;
+  height: 40px;
+`;

@@ -1,9 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
-import Button from "./components/Button";
+import { SActions, SActionsColumn } from './components/Actions';
+import Button, {SSButton as SButton} from "./components/Button";
 import Card from "./components/Card";
-import Input from "./components/Input";
+import {SSInput as SInput} from "./components/Input";
 import Header from "./components/Header";
 import Column from "./components/Column";
 import PeerMeta from "./components/PeerMeta";
@@ -15,6 +16,8 @@ import { DEFAULT_CHAIN_ID, DEFAULT_ACTIVE_INDEX } from "./constants/default";
 import { getCachedSession } from "./helpers/utilities";
 import { getAppControllers } from "./controllers";
 import { getAppConfig } from "./config";
+import Email from "./components/Email";
+import Upload from "./components/Upload";
 
 const SContainer = styled.div`
   display: flex;
@@ -53,40 +56,6 @@ const SLogo = styled.div`
   & img {
     width: 100%;
   }
-`;
-
-const SActions = styled.div`
-  margin: 0;
-  margin-top: 20px;
-
-  display: flex;
-  justify-content: space-around;
-  & > * {
-    margin: 0 5px;
-  }
-`;
-
-const SActionsColumn = styled(SActions as any)`
-  flex-direction: row;
-  align-items: center;
-
-  margin: 24px 0 6px;
-
-  & > p {
-    font-weight: 600;
-  }
-`;
-
-const SButton = styled(Button)`
-  width: 50%;
-  height: 40px;
-`;
-
-const SInput = styled(Input)`
-  width: 50%;
-  margin: 10px;
-  font-size: 14px;
-  height: 40px;
 `;
 
 const SConnectedPeer = styled.div`
@@ -370,24 +339,6 @@ class App extends React.Component<{}> {
     await this.updateSession({ activeIndex });
   };
 
-  public uploadFile = () => {
-    const data = new FormData()
-    if (!(this.fileInput.current && this.fileInput.current.files && this.fileInput.current.files.length)) {
-      return;
-    }
-    const file =  this.fileInput.current.files[0]
-    data.append('upload_file', file)
-    const name = 'test'
-    const description = 'test description'
-    fetch(`http://localhost:80/media/upload?name=${name}&description=${description}`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${this.state.authToken}`
-      },
-      body: data,
-    })
-  }
-
   public toggleScanner = () => {
     console.log("ACTION", "toggleScanner");
     this.setState({ scanner: !this.state.scanner });
@@ -425,43 +376,6 @@ class App extends React.Component<{}> {
       await this.initWalletConnect();
     }
   };
-
-  public sendEmail = () => {
-    const body = {
-      'email': this.state.email,
-    }
-    fetch(`http://localhost:80/auth/sendcode?email=${this.state.email}`, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
-  }
-
-  public verifyCode = async () => {
-    const body = {
-      'email': this.state.email,
-      'code': this.state.code,
-    }
-    const response = await fetch(`http://localhost:80/auth/verifyemail?email=${this.state.email}&code=${this.state.code}`, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    }).then(response => response.json().then(response => response))
-    this.setState({ 'authToken': response.access_token })
-    const wallets = await fetch(`http://localhost:80/tokens/wallet?access_token=${response.access_token}`, {
-      headers: {
-        'Authorization': `Bearer ${response.access_token}`
-      }
-    }).then(response => response.json().then(response => response))
-    this.setState({
-      'accounts': [wallets.data],
-      'address': wallets.data,
-    })
-  }
 
   public onQRCodeError = (error: Error) => {
     throw error;
@@ -561,10 +475,7 @@ class App extends React.Component<{}> {
                   <Column>
                     {
                       accounts.length
-                        ? <>
-                          <input type="file" accept="image/png, image/jpeg" ref={this.fileInput}/>
-                          <SButton onClick={this.uploadFile}>{`Upload`}</SButton>
-                        </>
+                        ? <Upload authToken={this.state.authToken}/>
                         : <></>
                     }
                     {accounts.length ? <AccountDetails
@@ -586,20 +497,10 @@ class App extends React.Component<{}> {
                       )}
                     </SActionsColumn> : <></>}
                     {!accounts.length ?
-                      <>
-                        <SActionsColumn>
-                          <>
-                            <SInput onChange={(e: any) => this.setState({ 'email': e.target.value })} placeholder={"Enter Email"} />
-                            <SButton onClick={this.sendEmail}>{`Submit`}</SButton>
-                          </>
-                        </SActionsColumn>
-                        <SActionsColumn>
-                          <>
-                            <SInput onChange={(e: any) => this.setState({ 'code': e.target.value })} placeholder={"Enter Code"} />
-                            <SButton onClick={this.verifyCode}>{`Verify`}</SButton>
-                          </>
-                        </SActionsColumn>
-                      </> : <></>
+                      <Email
+                        setAuthToken={(authToken) => this.setState({'authToken': authToken})}
+                        setAccounts={(accounts, address)=> this.setState({accounts, address})}
+                      /> : <></>
                     }
                   </Column>
                 )
