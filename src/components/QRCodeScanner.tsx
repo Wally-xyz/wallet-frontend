@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import QrReader from "react-qr-reader";
+import QrScanner from "qr-scanner";
 
 const SQRCodeScannerContainer = styled.div`
   position: fixed;
@@ -64,67 +64,65 @@ interface IQRCodeScannerProps {
   onClose: () => void;
 }
 
-interface IQRCodeScannerState {
-  delay: number | false;
-}
-
-class QRCodeScanner extends React.Component<IQRCodeScannerProps, IQRCodeScannerState> {
-  public state = {
-    delay: 300,
+const QRCodeScanner = (props: IQRCodeScannerProps) => {
+  const stopRecording = async () => {
+    qrScanner?.stop();
   };
 
-  public stopRecording = async () => {
-    await this.setState({ delay: false });
-  };
-
-  public handleScan = (data: string) => {
+  const handleScan = (data: string) => {
     if (data) {
-      const { result, error } = this.props.onValidate(data);
+      const { result, error } = props.onValidate(data);
       if (result) {
-        this.stopRecording();
-        this.props.onScan(result);
+        stopRecording();
+        props.onScan(result);
       } else {
-        this.handleError(error);
+        handleError(error);
       }
     }
   };
 
-  public handleError = (error: Error | null) => {
+  const handleError = (error: Error | null) => {
     if (error) {
-      this.props.onError(error);
+      props.onError(error);
     }
   };
 
-  public onClose = async () => {
+  const onClose = async () => {
     try {
-      await this.stopRecording();
-      this.props.onClose();
+      await stopRecording();
+      props.onClose();
     } catch (error) {
-      this.handleError(error);
+      handleError(error);
     }
   };
 
-  public componentWillUnmount() {
-    this.stopRecording();
-  }
-  public render() {
-    return (
-      <SQRCodeScannerContainer>
-        <SCloseButton onClick={this.onClose}>
-          <SFirstLine />
-          <SSecondLine />
-        </SCloseButton>
-        <SQRCodeScannerWrapper>
-          <QrReader
-            delay={this.state.delay}
-            onError={this.handleError}
-            onScan={this.handleScan}
-            style={{ width: "100%" }}
-          />
-        </SQRCodeScannerWrapper>
-      </SQRCodeScannerContainer>
-    );
-  }
+  // const videoElem: React.RefObject<HTMLVideoElement> = React.useRef(null);
+  let videoElem: HTMLVideoElement | undefined;
+  let qrScanner: QrScanner | undefined;
+  const videoRef: React.RefCallback<HTMLVideoElement> = React.useCallback(node => {
+    if (node !== null) {
+      videoElem = node;
+      qrScanner = new QrScanner(videoElem, result => handleScan(result.data), {
+        'highlightScanRegion': true,
+        'highlightCodeOutline': true,
+      });
+      qrScanner.setCamera('user');
+      qrScanner.setInversionMode("both");
+      qrScanner.start();
+    }
+  }, []);
+
+  return (
+    <SQRCodeScannerContainer>
+      <SCloseButton onClick={onClose}>
+        <SFirstLine />
+        <SSecondLine />
+      </SCloseButton>
+      <SQRCodeScannerWrapper>
+        <video ref={ videoRef } />
+      </SQRCodeScannerWrapper>
+    </SQRCodeScannerContainer>
+  );
 }
 
 export default QRCodeScanner;
