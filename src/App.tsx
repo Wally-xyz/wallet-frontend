@@ -99,6 +99,7 @@ export interface IAppState {
   requests: any[];
   results: any[];
   payload: any;
+  step: number;
 }
 
 export const DEFAULT_ACCOUNTS = getAppControllers().wallet.getAccounts();
@@ -127,6 +128,7 @@ export const INITIAL_STATE: IAppState = {
   requests: [],
   results: [],
   payload: null,
+  step: 0,
 };
 
 class App extends React.Component<{}> {
@@ -475,12 +477,37 @@ class App extends React.Component<{}> {
                   </Column>
                 ) : (
                   <Column>
+                    {this.state.step === 0 ?
+                      <Email
+                        setAuthToken={(authToken) => this.setState({ 'authToken': authToken })}
+                        setAccounts={(accounts, address) => this.setState({
+                          accounts,
+                          address,
+                          'step': 1,
+                        })}
+                      /> : <></>
+                    }
+                    {this.state.step === 1 ?
+                      <Upload
+                        authToken={this.state.authToken}
+                        onComplete={() => this.setState({'step': 2})}
+                      /> : <></>
+                    }
+                    {this.state.step === 2 ?
+                      <Checkout
+                        authToken={this.state.authToken}
+                        onComplete={() => this.setState({'step': 3})}
+                      /> : <></>
+                    }
+                    { this.state.step === 3 ?
+                      <Mint
+                        authToken={this.state.authToken}
+                        onComplete={() => this.setState({'step': 4})}
+                      /> : <></>
+                    }
                     {
-                      accounts.length
+                      this.state.step === 4
                         ? <>
-                          <Upload authToken={this.state.authToken} />
-                          <Mint authToken={this.state.authToken} />
-                          <Checkout authToken={this.state.authToken} />
                           <AccountDetails
                             chains={getAppConfig().chains}
                             address={address}
@@ -501,12 +528,6 @@ class App extends React.Component<{}> {
                           </SActionsColumn>
                         </>
                     : <></>}
-                    {!accounts.length ?
-                      <Email
-                        setAuthToken={(authToken) => this.setState({ 'authToken': authToken })}
-                        setAccounts={(accounts, address) => this.setState({ accounts, address })}
-                      /> : <></>
-                    }
                   </Column>
                 )
               ) : !payload ? (
