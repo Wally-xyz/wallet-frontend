@@ -2,9 +2,9 @@ import * as React from "react";
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
 import { SActions, SActionsColumn } from './components/Actions';
-import Button, {SSButton as SButton} from "./components/Button";
+import Button, { SSButton as SButton } from "./components/Button";
 import Card from "./components/Card";
-import {SSInput as SInput} from "./components/Input";
+import { SSInput as SInput } from "./components/Input";
 import Header from "./components/Header";
 import Column from "./components/Column";
 import PeerMeta from "./components/PeerMeta";
@@ -18,6 +18,8 @@ import { getAppControllers } from "./controllers";
 import { getAppConfig } from "./config";
 import Email from "./components/Email";
 import Upload from "./components/Upload";
+import Mint from "./components/Mint";
+import Checkout from "./components/Checkout";
 
 const SContainer = styled.div`
   display: flex;
@@ -475,31 +477,34 @@ class App extends React.Component<{}> {
                   <Column>
                     {
                       accounts.length
-                        ? <Upload authToken={this.state.authToken}/>
-                        : <></>
-                    }
-                    {accounts.length ? <AccountDetails
-                      chains={getAppConfig().chains}
-                      address={address}
-                      activeIndex={activeIndex}
-                      chainId={chainId}
-                      accounts={accounts}
-                      updateAddress={this.updateAddress}
-                      updateChain={this.updateChain}
-                    /> : <></>}
-                    {accounts.length ? <SActionsColumn>
-                      <SButton onClick={this.toggleScanner}>{`Scan`}</SButton>
-                      {getAppConfig().styleOpts.showPasteUri && (
-                        <>
-                          <p>{"OR"}</p>
-                          <SInput onChange={this.onURIPaste} placeholder={"Paste wc: uri"} />
+                        ? <>
+                          <Upload authToken={this.state.authToken} />
+                          <Mint authToken={this.state.authToken} />
+                          <Checkout authToken={this.state.authToken} />
+                          <AccountDetails
+                            chains={getAppConfig().chains}
+                            address={address}
+                            activeIndex={activeIndex}
+                            chainId={chainId}
+                            accounts={accounts}
+                            updateAddress={this.updateAddress}
+                            updateChain={this.updateChain}
+                          />
+                          <SActionsColumn>
+                            <SButton onClick={this.toggleScanner}>{`Scan`}</SButton>
+                            {getAppConfig().styleOpts.showPasteUri && (
+                              <>
+                                <p>{"OR"}</p>
+                                <SInput onChange={this.onURIPaste} placeholder={"Paste wc: uri"} />
+                              </>
+                            )}
+                          </SActionsColumn>
                         </>
-                      )}
-                    </SActionsColumn> : <></>}
+                    : <></>}
                     {!accounts.length ?
                       <Email
-                        setAuthToken={(authToken) => this.setState({'authToken': authToken})}
-                        setAccounts={(accounts, address)=> this.setState({accounts, address})}
+                        setAuthToken={(authToken) => this.setState({ 'authToken': authToken })}
+                        setAccounts={(accounts, address) => this.setState({ accounts, address })}
                       /> : <></>
                     }
                   </Column>
