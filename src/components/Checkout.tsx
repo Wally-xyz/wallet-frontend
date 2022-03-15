@@ -4,6 +4,7 @@ import { SSButton as SButton } from "./Button";
 
 interface Props {
     authToken: string;
+    onComplete: () => void;
 }
 
 const SSButton = styled(SButton)`
@@ -20,7 +21,8 @@ const Mint = (props: Props) => {
                 'Authorization': `Bearer ${props.authToken}`
             },
         }).then(response => response.json()).then(response => response)
-        window.location.href = response.checkout_session
+        // window.location.href = response.checkout_session
+        props.onComplete();
     }
 
     return (

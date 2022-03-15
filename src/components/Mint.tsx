@@ -4,6 +4,7 @@ import { SSButton as SButton } from "./Button";
 
 interface Props {
     authToken: string;
+    onComplete: () => void;
 }
 
 const SSButton = styled(SButton)`
@@ -22,6 +23,7 @@ const Mint = (props: Props) => {
             },
         }).then(response => response.json()).then(response => response)
         setTxn(response.hash)
+        props.onComplete();
     }
 
     return (

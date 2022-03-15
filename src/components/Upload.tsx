@@ -4,6 +4,7 @@ import { SSInput as SInput } from "./Input";
 
 interface Props {
     authToken: string;
+    onComplete: () => void;
 }
 
 const Email = (props: Props) => {
@@ -25,6 +26,7 @@ const Email = (props: Props) => {
             },
             body: data,
         })
+        props.onComplete()
     }
 
     return (
