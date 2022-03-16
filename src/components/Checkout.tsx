@@ -21,7 +21,7 @@ const Mint = (props: Props) => {
                 'Authorization': `Bearer ${props.authToken}`
             },
         }).then(response => response.json()).then(response => response)
-        // window.location.href = response.checkout_session
+        window.location.href = response.checkout_session
         props.onComplete();
     }
 
