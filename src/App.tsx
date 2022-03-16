@@ -152,6 +152,46 @@ class App extends React.Component<{}> {
 
     const session = getCachedSession();
 
+    const getQueryVariable: (variable:string) => string | null = (variable:string) => {
+      const query = window.location.search.substring(1);
+      const vars = query.split('&');
+      for (let i = 0; i < vars.length; i++) {
+          const pair = vars[i].split('=');
+          if (decodeURIComponent(pair[0]) === variable) {
+              return decodeURIComponent(pair[1]);
+          }
+      }
+      return null
+    }
+    if (getQueryVariable('success') === 'true') {
+      this.setState({ 'step': 4})
+    }
+    const authToken = window.localStorage.getItem('token')
+
+    if (authToken) {
+      this.setState({ authToken })
+      const wallets = await fetch(`http://localhost:80/tokens/wallet?access_token=${authToken}`, {
+          headers: {
+              'Authorization': `Bearer ${authToken}`
+          }
+      }).then(response => {
+        if (!response.ok) {
+          this.setState({
+            'step': 0,
+          })
+          throw new Error('Network response was not OK');
+        }
+        return response.json()
+      })
+      .then(response => {
+        this.setState({
+          'accounts': [response.data],
+          'address': response.data,
+        })
+      })
+      .catch(error => console.log(error))
+    }
+
     if (!session) {
       await getAppControllers().wallet.init(activeIndex, chainId);
     } else {
@@ -440,6 +480,12 @@ class App extends React.Component<{}> {
     await this.setState({ connector });
   };
 
+  public setAuthToken = (authToken: string) => {
+    this.setState({ authToken })
+    const ls = window.localStorage;
+    ls.setItem('token', authToken);
+  }
+
   public render() {
     const {
       peerMeta,
@@ -479,7 +525,7 @@ class App extends React.Component<{}> {
                   <Column>
                     {this.state.step === 0 ?
                       <Email
-                        setAuthToken={(authToken) => this.setState({ 'authToken': authToken })}
+                        setAuthToken={this.setAuthToken}
                         setAccounts={(accounts, address) => this.setState({
                           accounts,
                           address,
