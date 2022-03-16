@@ -163,8 +163,8 @@ class App extends React.Component<{}> {
       }
       return null
     }
-    if (getQueryVariable('success') === 'true') {
-      this.setState({ 'step': 4})
+    if (getQueryVariable('success') === 'True') {
+      this.setState({ 'step': 3})
     }
     const authToken = window.localStorage.getItem('token')
 
