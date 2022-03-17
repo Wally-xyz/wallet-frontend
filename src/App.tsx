@@ -170,7 +170,7 @@ class App extends React.Component<{}> {
     }
     const step = getQueryVariable('step')
     if (step) {
-      this.setState({ 'step': parseInt(step) })
+      this.setState({ 'step': parseInt(step, 10) })
     }
     const authToken = window.localStorage.getItem('token')
 
