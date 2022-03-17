@@ -176,7 +176,7 @@ class App extends React.Component<{}> {
 
     if (authToken) {
       this.setState({ authToken })
-      const wallets = await fetch(`http://localhost:80/tokens/wallet?access_token=${authToken}`, {
+      await fetch(`http://localhost:80/tokens/wallet?access_token=${authToken}`, {
           headers: {
               'Authorization': `Bearer ${authToken}`
           }
