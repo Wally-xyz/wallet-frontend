@@ -54,6 +54,7 @@ const SContent = styled.div`
 const SLogo = styled.div`
   padding: 10px 0;
   display: flex;
+  height: 100px;
   max-height: 100px;
   & img {
     width: 100%;
