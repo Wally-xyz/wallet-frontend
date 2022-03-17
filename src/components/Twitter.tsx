@@ -17,7 +17,7 @@ const Mint = (props: Props) => {
             <img src={stepOne}/>
             <img src={stepTwo}/>
             <img src={stepThree}/>
-            <SButton onClick={props.onComplete}>{`Mint`}</SButton>
+            <SButton onClick={props.onComplete}>{`Continue`}</SButton>
         </>
     );
 }
