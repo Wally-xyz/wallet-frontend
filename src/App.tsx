@@ -542,25 +542,25 @@ class App extends React.Component<{}> {
                     {this.state.step === 1 ?
                       <Upload
                         authToken={this.state.authToken}
-                        onComplete={() => this.setState({'step': 2})}
+                        onComplete={() => this.setState({'step': this.state.step+1})}
                       /> : <></>
                     }
                     {this.state.step === 2 ?
                       <Checkout
                         authToken={this.state.authToken}
-                        onComplete={() => this.setState({'step': 3})}
+                        onComplete={() => this.setState({'step': this.state.step+1})}
                       /> : <></>
                     }
                     { this.state.step === 3 ?
                       <Mint
                         authToken={this.state.authToken}
-                        onComplete={() => this.setState({'step': 4})}
+                        onComplete={() => this.setState({'step': this.state.step+1})}
                       /> : <></>
                     }
                     { this.state.step === 4 ?
                       <Twitter
                         authToken={this.state.authToken}
-                        onComplete={() => this.setState({'step': 4})}
+                        onComplete={() => this.setState({'step': this.state.step+1})}
                       /> : <></>
                     }
                     {
