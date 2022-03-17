@@ -20,6 +20,7 @@ import Email from "./components/Email";
 import Upload from "./components/Upload";
 import Mint from "./components/Mint";
 import Checkout from "./components/Checkout";
+import Twitter from "./components/Twitter";
 
 const SContainer = styled.div`
   display: flex;
@@ -166,6 +167,10 @@ class App extends React.Component<{}> {
     }
     if (getQueryVariable('success') === 'True' || getQueryVariable('success') === 'true') {
       this.setState({ 'step': 3})
+    }
+    const step = getQueryVariable('step')
+    if (step) {
+      this.setState({ 'step': parseInt(step) })
     }
     const authToken = window.localStorage.getItem('token')
 
@@ -552,8 +557,14 @@ class App extends React.Component<{}> {
                         onComplete={() => this.setState({'step': 4})}
                       /> : <></>
                     }
+                    { this.state.step === 4 ?
+                      <Twitter
+                        authToken={this.state.authToken}
+                        onComplete={() => this.setState({'step': 4})}
+                      /> : <></>
+                    }
                     {
-                      this.state.step === 4
+                      this.state.step === 5
                         ? <>
                           <AccountDetails
                             chains={getAppConfig().chains}

@@ -119,7 +119,10 @@ const QRCodeScanner = (props: IQRCodeScannerProps) => {
         <SSecondLine />
       </SCloseButton>
       <SQRCodeScannerWrapper>
-        <video ref={ videoRef } />
+        <video ref={videoRef} />
+        <div>
+          Hold the phone close to the camera and then slowly move it backward
+        </div>
       </SQRCodeScannerWrapper>
     </SQRCodeScannerContainer>
   );
