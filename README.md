@@ -10,6 +10,7 @@ Once you have the project id, setup the environment variable in file `.env.local
 
 ```
 REACT_APP_INFURA_PROJECT_ID=<your infura project id>
+REACT_APP_API_URL='http://localhost:80'
 ```
 
 ## Develop
