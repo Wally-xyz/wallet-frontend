@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { SSButton as SButton } from "./Button";
+import { API_URL } from "../constants/default";
 
 interface Props {
     authToken: string;
@@ -15,7 +16,7 @@ const SSButton = styled(SButton)`
 
 const Mint = (props: Props) => {
     const stripeCheckout = async () => {
-        const response = await fetch(`http://localhost:80/payments/checkoutsession`, {
+        const response = await fetch(`${API_URL}/payments/checkoutsession`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${props.authToken}`

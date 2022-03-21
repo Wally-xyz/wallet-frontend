@@ -7,10 +7,9 @@ import {
   MNEMONIC_KEY,
   DEFAULT_ACTIVE_INDEX,
   DEFAULT_CHAIN_ID,
+  API_URL,
 } from "../constants/default";
 import { getAppConfig } from "../config";
-
-const apiDomain = 'http://localhost:80'
 
 export class WalletController {
   public path: string;
@@ -207,7 +206,7 @@ export class WalletController {
       const body = {
         'message': message,
       }
-      const result = await fetch(`${apiDomain}/tokens/sign`, {
+      const result = await fetch(`${API_URL}/tokens/sign`, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {

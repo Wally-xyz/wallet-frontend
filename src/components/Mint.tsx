@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { SSButton as SButton } from "./Button";
+import { API_URL } from "../constants/default";
 
 interface Props {
     authToken: string;
@@ -16,7 +17,7 @@ const SSButton = styled(SButton)`
 const Mint = (props: Props) => {
     const [txn, setTxn] = React.useState();
     const [imgURL, setImgURL] = React.useState('');
-    fetch(`http://localhost:80/media/recent`, {
+    fetch(`${API_URL}/media/recent`, {
         headers: {
             'Authorization': `Bearer ${props.authToken}`
         },
@@ -24,7 +25,7 @@ const Mint = (props: Props) => {
         setImgURL(response.url);
     })
     const mintNFT = async () => {
-        const response = await fetch(`http://localhost:80/mint/mint`, {
+        const response = await fetch(`${API_URL}/mint/mint`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${props.authToken}`
