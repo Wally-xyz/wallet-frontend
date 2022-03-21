@@ -111,14 +111,14 @@ export function getChainData(chainId: number): IChainData {
     throw new Error("ChainId missing or not supported");
   }
 
-  const API_KEY = process.env.REACT_APP_INFURA_PROJECT_ID;
+  const API_KEY = process.env.REACT_APP_ALCHEMY_PROJECT_ID;
 
   if (!API_KEY) {
-    throw new Error("Environment variable REACT_APP_INFURA_PROJECT_ID is not set");
+    throw new Error("Environment variable REACT_APP_ALCHEMY_PROJECT_ID is not set");
   }
 
   if (
-    chainData.rpc_url.includes("infura.io") &&
+    chainData.rpc_url.includes("alchemyapi.io") &&
     chainData.rpc_url.includes("%API_KEY%") &&
     API_KEY
   ) {

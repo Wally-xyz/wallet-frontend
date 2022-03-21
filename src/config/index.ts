@@ -1,12 +1,12 @@
 import wallyLogo from "./assets/wally-logo.png";
-import { SUPPORTED_CHAINS, MAINNET_CHAIN_ID, ETH_STANDARD_PATH } from "../constants";
+import { SUPPORTED_CHAINS, DEFAULT_CHAIN_ID, ETH_STANDARD_PATH } from "../constants";
 import { IAppConfig } from "../helpers/types";
 import { getRpcEngine } from "../engines";
 
 const appConfig: IAppConfig = {
   name: "WalletConnect",
   logo: wallyLogo,
-  chainId: MAINNET_CHAIN_ID,
+  chainId: DEFAULT_CHAIN_ID,
   derivationPath: ETH_STANDARD_PATH,
   numberOfAccounts: 0,
   colors: {
