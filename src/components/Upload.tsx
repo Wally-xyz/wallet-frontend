@@ -1,4 +1,5 @@
 import * as React from "react";
+import styled from 'styled-components';
 import { SSButton as SButton } from "./Button";
 import { SSInput as SInput } from "./Input";
 import { API_URL } from "../constants/default";
@@ -8,10 +9,22 @@ interface Props {
     onComplete: () => void;
 }
 
+const SUpload = styled.input`
+    margin-bottom: 8px;
+`;
+
 const Email = (props: Props) => {
     const [name, setName] = React.useState('')
     const [description, setDescription] = React.useState('')
     const fileInput: React.RefObject<HTMLInputElement> = React.useRef(null);
+
+    const [image, setImage] = React.useState<string | null>(null)
+
+    const onImageChange = (event:any) => {
+        if (event.target.files && event.target.files[0]) {
+            setImage(URL.createObjectURL(event.target.files[0]));
+        }
+    }
 
     const uploadFile = () => {
         const data = new FormData()
@@ -37,7 +50,8 @@ const Email = (props: Props) => {
             </div>
             <SInput onChange={(e: any) => setName(e.target.value)} placeholder={"Enter title"} />
             <SInput onChange={(e: any) => setDescription(e.target.value)} placeholder={"Enter description"} />
-            <input type="file" accept="image/png, image/jpeg" ref={fileInput} />
+            <SUpload type="file" onChange={onImageChange} accept="image/png, image/jpeg" ref={fileInput} />
+            {image && <img src={image}/>}
             <SButton onClick={uploadFile}>{`Upload`}</SButton>
         </>
     );
