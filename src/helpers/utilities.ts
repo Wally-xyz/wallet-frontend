@@ -118,7 +118,7 @@ export function getChainData(chainId: number): IChainData {
   }
 
   if (
-    chainData.rpc_url.includes("infura.io") &&
+    chainData.rpc_url.includes("alchemyapi.io") &&
     chainData.rpc_url.includes("%API_KEY%") &&
     API_KEY
   ) {
