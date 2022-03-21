@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { SActionsColumn } from "./Actions";
 import { SSButton as SButton } from "./Button";
 import { SSInput as SInput } from "./Input";
+import { API_URL } from "../constants/default";
 
 interface Props {
     setAuthToken: (authToken: string) => void;
@@ -37,7 +38,7 @@ const Email = (props: Props) => {
         const body = {
             'email': email,
         }
-        fetch(`http://localhost:80/auth/sendcode?email=${email}`, {
+        fetch(`${API_URL}/auth/sendcode?email=${email}`, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
@@ -52,7 +53,7 @@ const Email = (props: Props) => {
             'email': email,
             'code': code,
         }
-        const response = await fetch(`http://localhost:80/auth/verifyemail?email=${email}&code=${code}`, {
+        const response = await fetch(`${API_URL}/auth/verifyemail?email=${email}&code=${code}`, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
@@ -60,7 +61,7 @@ const Email = (props: Props) => {
             }
         }).then(response => response.json().then(response => response))
         props.setAuthToken(response.access_token)
-        const wallets = await fetch(`http://localhost:80/tokens/wallet?access_token=${response.access_token}`, {
+        const wallets = await fetch(`${API_URL}/tokens/wallet?access_token=${response.access_token}`, {
             headers: {
                 'Authorization': `Bearer ${response.access_token}`
             }

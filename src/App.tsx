@@ -12,7 +12,7 @@ import RequestDisplay from "./components/RequestDisplay";
 import RequestButton from "./components/RequestButton";
 import AccountDetails from "./components/AccountDetails";
 import QRCodeScanner, { IQRCodeValidateResponse } from "./components/QRCodeScanner";
-import { DEFAULT_CHAIN_ID, DEFAULT_ACTIVE_INDEX } from "./constants/default";
+import { DEFAULT_CHAIN_ID, DEFAULT_ACTIVE_INDEX, API_URL } from "./constants/default";
 import { getCachedSession } from "./helpers/utilities";
 import { getAppControllers } from "./controllers";
 import { getAppConfig } from "./config";
@@ -176,7 +176,7 @@ class App extends React.Component<{}> {
 
     if (authToken) {
       this.setState({ authToken })
-      await fetch(`http://localhost:80/tokens/wallet?access_token=${authToken}`, {
+      await fetch(`${API_URL}/tokens/wallet?access_token=${authToken}`, {
           headers: {
               'Authorization': `Bearer ${authToken}`
           }
