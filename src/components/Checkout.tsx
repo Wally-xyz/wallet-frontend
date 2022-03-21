@@ -10,7 +10,7 @@ interface Props {
 
 const SSButton = styled(SButton)`
     &:hover {
-        color: red;
+        color: white;
     }
 `
 
@@ -28,6 +28,8 @@ const Mint = (props: Props) => {
 
     return (
         <>
+            <div>Minting your NFT to the blockchain writes the image to the blockchain and gives you verifiable
+                ownership over it. This costs ETH, so we'll collect $100 to cover the minting fees</div>
             <SSButton onClick={stripeCheckout}>{`Purchase`}</SSButton>
         </>
     );
