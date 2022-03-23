@@ -21,6 +21,7 @@ import Upload from "./components/Upload";
 import Mint from "./components/Mint";
 import Checkout from "./components/Checkout";
 import Twitter from "./components/Twitter";
+import Success from "./components/Success";
 
 const SContainer = styled.div`
   display: flex;
@@ -558,13 +559,19 @@ class App extends React.Component<{}> {
                       /> : <></>
                     }
                     { this.state.step === 4 ?
+                      <Success
+                        authToken={this.state.authToken}
+                        onComplete={() => this.setState({'step': this.state.step+1})}
+                      /> : <></>
+                    }
+                    { this.state.step === 5 ?
                       <Twitter
                         authToken={this.state.authToken}
                         onComplete={() => this.setState({'step': this.state.step+1})}
                       /> : <></>
                     }
                     {
-                      this.state.step === 5
+                      this.state.step === 6
                         ? <>
                           <AccountDetails
                             chains={getAppConfig().chains}
