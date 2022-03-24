@@ -15,7 +15,6 @@ const SUpload = styled.input`
 
 const Email = (props: Props) => {
     const [name, setName] = React.useState('')
-    const [description, setDescription] = React.useState('')
     const fileInput: React.RefObject<HTMLInputElement> = React.useRef(null);
 
     const [image, setImage] = React.useState<string | null>(null)
@@ -33,7 +32,7 @@ const Email = (props: Props) => {
         }
         const file = fileInput.current.files[0]
         data.append('upload_file', file)
-        fetch(`${API_URL}/media/upload?name=${name}&description=${description}`, {
+        fetch(`${API_URL}/media/upload?name=${name}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${props.authToken}`
@@ -46,10 +45,9 @@ const Email = (props: Props) => {
     return (
         <>
             <div>
-                Enter a name and description. Both of these will be publicly visible on the NFT
+                Enter a name. This will be publicly visible on the NFT
             </div>
             <SInput onChange={(e: any) => setName(e.target.value)} placeholder={"Enter title"} />
-            <SInput onChange={(e: any) => setDescription(e.target.value)} placeholder={"Enter description"} />
             <SUpload type="file" onChange={onImageChange} accept="image/png, image/jpeg" ref={fileInput} />
             {image && <img src={image}/>}
             <SButton onClick={uploadFile}>{`Upload`}</SButton>
