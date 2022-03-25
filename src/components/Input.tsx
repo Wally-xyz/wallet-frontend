@@ -28,6 +28,6 @@ export default Input;
 export const SSInput = styled(Input)`
   width: 50%;
   margin: 10px;
-  font-size: 14px;
+  font-size: 16px;
   height: 40px;
 `;

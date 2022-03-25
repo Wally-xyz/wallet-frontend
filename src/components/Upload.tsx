@@ -45,10 +45,13 @@ const Email = (props: Props) => {
     return (
         <>
             <div>
+                Upload the image that you want to mint as an NFT.
+            </div>
+            <SUpload type="file" onChange={onImageChange} accept="image/png, image/jpeg, image/gif" ref={fileInput} />
+            <div>
                 Enter a name. This will be publicly visible on the NFT
             </div>
             <SInput onChange={(e: any) => setName(e.target.value)} placeholder={"Enter title"} />
-            <SUpload type="file" onChange={onImageChange} accept="image/png, image/jpeg" ref={fileInput} />
             {image && <img src={image}/>}
             <SButton onClick={uploadFile}>{`Upload`}</SButton>
         </>
