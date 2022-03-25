@@ -22,7 +22,7 @@ const Mint = (props: Props) => {
             'Authorization': `Bearer ${props.authToken}`
         },
     }).then(response => response.json()).then(response => {
-        setImgURL(response.url);
+        setImgURL(response.s3_url);
     })
     const mintNFT = async () => {
         const response = await fetch(`${API_URL}/mint/mint`, {
