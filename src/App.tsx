@@ -103,6 +103,7 @@ export interface IAppState {
   results: any[];
   payload: any;
   step: number;
+  txn: string;
 }
 
 export const DEFAULT_ACCOUNTS = getAppControllers().wallet.getAccounts();
@@ -132,6 +133,7 @@ export const INITIAL_STATE: IAppState = {
   results: [],
   payload: null,
   step: 0,
+  txn: "",
 };
 
 class App extends React.Component<{}> {
@@ -557,12 +559,14 @@ class App extends React.Component<{}> {
                     { this.state.step === 3 ?
                       <Mint
                         authToken={this.state.authToken}
+                        setTxn={ (txn:string) => this.setState({txn})}
                         onComplete={() => this.setState({'step': this.state.step+1})}
                       /> : <></>
                     }
                     { this.state.step === 4 ?
                       <Success
                         authToken={this.state.authToken}
+                        txn={this.state.txn}
                         onComplete={() => this.setState({'step': this.state.step+1})}
                       /> : <></>
                     }

@@ -5,6 +5,7 @@ import { API_URL } from "../constants/default";
 
 interface Props {
     authToken: string;
+    setTxn: (txn: string) => void;
     onComplete: () => void;
 }
 
@@ -15,7 +16,6 @@ const SSButton = styled(SButton)`
 `
 
 const Mint = (props: Props) => {
-    const [txn, setTxn] = React.useState();
     const [imgURL, setImgURL] = React.useState('');
     fetch(`${API_URL}/media/recent`, {
         headers: {
@@ -31,7 +31,7 @@ const Mint = (props: Props) => {
                 'Authorization': `Bearer ${props.authToken}`
             },
         }).then(response => response.json()).then(response => response)
-        setTxn(response.hash)
+        props.setTxn(response.hash)
         props.onComplete();
     }
 
@@ -39,7 +39,6 @@ const Mint = (props: Props) => {
         <>
             {imgURL && <img src={imgURL}/>}
             <SSButton onClick={mintNFT}>{`Mint`}</SSButton>
-            {txn && <div>{txn}</div>}
         </>
     );
 }

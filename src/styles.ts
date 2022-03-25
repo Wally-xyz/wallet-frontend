@@ -131,7 +131,7 @@ export const globalStyle = `
     height: 100%;
   }
 
-  a, p, h1, h2, h3, h4, h5, h6 {
+  p, h1, h2, h3, h4, h5, h6 {
   	text-decoration: none;
   	margin: 0;
     padding: 0;
@@ -160,8 +160,6 @@ export const globalStyle = `
   a {
     background-color: transparent;
     -webkit-text-decoration-skip: objects;  
-    text-decoration: none;
-    color: inherit;
     outline: none;
   }
 
