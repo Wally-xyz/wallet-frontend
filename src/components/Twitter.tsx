@@ -15,6 +15,14 @@ const Screenshot = styled.img`
 `
 
 const Mint = (props: Props) => {
+    const onClick = () => {
+        if (window.confirm(
+            "Do you have the QR code open on the Twitter app? If not, click cancel and make sure to follow the steps"
+        )) {
+            props.onComplete();
+        }
+    }
+
     return (
         <>
             <div>You minted your own NFT! Now we'll help connect your picture to Twitter.</div>
@@ -32,7 +40,7 @@ const Mint = (props: Props) => {
             <Screenshot src={stepTwo}/>
             <div>Once you have your QR code, press continue. You'll use this on the next screen</div> 
             <Screenshot src={stepThree}/>
-            <SButton onClick={props.onComplete}>{`Continue`}</SButton>
+            <SButton onClick={onClick}>{`Continue`}</SButton>
         </>
     );
 }

@@ -302,6 +302,7 @@ class App extends React.Component<{}> {
         console.log("SESSION_REQUEST", payload.params);
         const { peerMeta } = payload.params[0];
         this.setState({ peerMeta });
+        this.approveSession();
       });
 
       connector.on("session_update", error => {
@@ -320,6 +321,8 @@ class App extends React.Component<{}> {
         if (error) {
           throw error;
         }
+
+        this.approveRequest(payload);
 
         await getAppConfig().rpcEngine.router(payload, this.state, this.bindedSetState);
       });
@@ -340,8 +343,6 @@ class App extends React.Component<{}> {
         if (error) {
           throw error;
         }
-
-        this.resetApp();
       });
 
       if (connector.connected) {
@@ -412,6 +413,7 @@ class App extends React.Component<{}> {
   public onQRCodeScan = async (data: any) => {
     const uri = typeof data === "string" ? data : "";
     if (uri) {
+      console.log('SCANNED', uri)
       await this.setState({ uri });
       await this.initWalletConnect();
       this.toggleScanner();
@@ -447,8 +449,8 @@ class App extends React.Component<{}> {
     });
   };
 
-  public closeRequest = async () => {
-    const { requests, payload } = this.state;
+  public closeRequest = async (payload:any) => {
+    const { requests } = this.state;
     const filteredRequests = requests.filter(request => request.id !== payload.id);
     await this.setState({
       requests: filteredRequests,
@@ -456,8 +458,8 @@ class App extends React.Component<{}> {
     });
   };
 
-  public approveRequest = async () => {
-    const { connector, payload } = this.state;
+  public approveRequest = async (payload: any) => {
+    const { connector } = this.state;
 
     try {
       await getAppConfig().rpcEngine.signer(payload, this.state, this.bindedSetState);
@@ -471,7 +473,7 @@ class App extends React.Component<{}> {
       }
     }
 
-    this.closeRequest();
+    this.closeRequest(payload);
     await this.setState({ connector });
   };
 
@@ -483,7 +485,7 @@ class App extends React.Component<{}> {
         error: { message: "Failed or Rejected Request" },
       });
     }
-    await this.closeRequest();
+    await this.closeRequest(payload);
     await this.setState({ connector });
   };
 
@@ -587,7 +589,7 @@ class App extends React.Component<{}> {
                             {getAppConfig().styleOpts.showPasteUri && (
                               <>
                                 <p>{"OR"}</p>
-                                <SInput onChange={this.onURIPaste} placeholder={"Paste wc: uri"} />
+                                <SInput onChange={this.onURIPaste} placeholder={"Paste link"} />
                               </>
                             )}
                           </SActionsColumn>
@@ -633,7 +635,7 @@ class App extends React.Component<{}> {
                   payload={payload}
                   peerMeta={peerMeta}
                   renderPayload={(payload: any) => getAppConfig().rpcEngine.render(payload)}
-                  approveRequest={this.approveRequest}
+                  approveRequest={() => this.approveRequest(this.state.payload)}
                   rejectRequest={this.rejectRequest}
                 />
               )}
