@@ -2,7 +2,7 @@ import * as React from "react";
 
 export function Whale(props: React.SVGAttributes<SVGElement>) {
   return (
-    <svg className={props.className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg {...props} fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_d_770_982)">
         <mask
           id="mask0_770_982"
