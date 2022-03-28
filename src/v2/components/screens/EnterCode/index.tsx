@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Chrome } from "../../Chrome";
 import { Input as _Input } from "../../Input";
-import { Gradient } from "../../buttons/Gradient";
+import { Button } from "../../Button";
 import { API_URL } from "../../../../constants/default";
 
 const Container = styled.article`
@@ -26,7 +26,7 @@ const Input = styled(_Input)`
   width: 100%;
 `;
 
-const Submit = styled(Gradient)`
+const Submit = styled(Button)`
   margin-top: 34px;
 `;
 
