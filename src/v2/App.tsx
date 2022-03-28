@@ -13,6 +13,7 @@ const GradientCircle1 = styled.div`
   filter: blur(300px);
   height: 836px;
   opacity: 0.8;
+  pointer-events: none;
   position: fixed;
   right: 0;
   top: 0;
@@ -27,6 +28,7 @@ const GradientCircle2 = styled.div`
   filter: blur(300px);
   height: 836px;
   left: 0;
+  pointer-events: none;
   position: fixed;
   transform: translateX(-50%) translateY(50%);
   width: 836px;
@@ -36,6 +38,8 @@ export function App() {
   const [state, setState] = React.useState({
     code: "",
     email: "",
+    authToken: "",
+    account: "",
   });
 
   return (
@@ -59,9 +63,12 @@ export function App() {
           path="/steps/3"
           element={
             <Step3
+              email={state.email}
               code={state.code}
               onCodeChange={code => setState(state => ({ ...state, code }))}
               onSubmit={() => console.log(state)}
+              setAccount={account => setState(state => ({ ...state, account }))}
+              setAuthToken={authToken => setState(state => ({ ...state, authToken}))}
             />
           }
         />

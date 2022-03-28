@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Chrome } from "../Chrome";
 import { Input as _Input } from "../Input";
 import { GradientLink } from "../buttons/Gradient";
+import { API_URL } from "../../../constants/default";
 
 const Container = styled.article`
   box-sizing: border-box;
@@ -42,6 +43,19 @@ interface Props {
 }
 
 export function Step2(props: Props) {
+  const sendEmail = () => {
+    const body = {
+        'email': props.email,
+    }
+    fetch(`${API_URL}/auth/sendcode?email=${props.email}`, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+  }
+
   return (
     <Chrome>
       <Container>
@@ -52,7 +66,7 @@ export function Step2(props: Props) {
           value={props.email}
           onChange={e => props.onEmailChange(e.currentTarget.value)}
         />
-        <Submit to="/steps/3" onClick={props.onSubmit}>
+        <Submit to="/steps/3" onClick={sendEmail}>
           Send verification
         </Submit>
       </Container>
