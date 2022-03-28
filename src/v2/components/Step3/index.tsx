@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Chrome } from "../Chrome";
 import { Input as _Input } from "../Input";
 import { GradientLink } from "../buttons/Gradient";
+import { API_URL } from "../../../constants/default";
 
 const Container = styled.article`
   box-sizing: border-box;
@@ -36,12 +37,37 @@ const Title = styled.header`
 `;
 
 interface Props {
+  email: string;
   code: string;
   onCodeChange(code: string): void;
-  onSubmit?(): void;
+  onSubmit(): void;
+  setAccount(address: string): void;
+  setAuthToken(authToken: string): void;
 }
 
 export function Step3(props: Props) {
+  const verifyCode = async () => {
+    const body = {
+      'email': props.email,
+      'code': props.code,
+    }
+    await fetch(`${API_URL}/auth/verifyemail?email=${props.email}&code=${props.code}`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+      if(response.access_token) {
+        props.setAuthToken(response.access_token)
+        props.setAccount(response.user.address)
+        props.onSubmit();
+      }
+    });
+  }
+
   return (
     <Chrome>
       <Container>
@@ -52,7 +78,7 @@ export function Step3(props: Props) {
           value={props.code}
           onChange={e => props.onCodeChange(e.currentTarget.value)}
         />
-        <Submit to="/steps/4" onClick={props.onSubmit}>
+        <Submit to="/steps/4" onClick={verifyCode}>
           Submit code
         </Submit>
       </Container>
