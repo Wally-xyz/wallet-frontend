@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { Step1 } from "./components/Step1";
-import { Step2 } from "./components/Step2";
-import { Step3 } from "./components/Step3";
-import { Step4 } from "./components/Step4";
+import { Start } from "./components/screens/Start";
+import { EnterEmail } from "./components/screens/EnterEmail";
+import { EnterCode } from "./components/screens/EnterCode";
+import { UploadImage } from "./components/screens/UploadImage";
+import { API_URL } from "../constants/default";
 
 const GradientCircle1 = styled.div`
   background: linear-gradient(90.87deg, rgba(40, 0, 71, 0.7) -41.78%, rgba(64, 0, 57, 0.7) 100%);
@@ -55,40 +56,42 @@ export function App() {
     name: "",
   });
 
+  const navigate = useNavigate();
+
   return (
     <>
       <GradientCircle1 />
       <GradientCircle2 />
       <Routes>
-        <Route path="/" element={<Step1 />} />
-        <Route path="/steps/1" element={<Step1 />} />
+        <Route path="/" element={<Start />} />
         <Route
-          path="/steps/2"
+          path="/enter-email"
           element={
-            <Step2
+            <EnterEmail
               email={state.email}
               onEmailChange={email => setState(state => ({ ...state, email }))}
-              onSubmit={() => console.log(state)}
+              onSubmit={() => navigate("/enter-code")}
             />
           }
         />
         <Route
-          path="/steps/3"
+          path="/enter-code"
           element={
-            <Step3
-              email={state.email}
+            <EnterCode
               code={state.code}
+              email={state.email}
               onCodeChange={code => setState(state => ({ ...state, code }))}
-              onSubmit={() => console.log(state)}
-              setAccount={account => setState(state => ({ ...state, account }))}
-              setAuthToken={authToken => setState(state => ({ ...state, authToken }))}
+              onSubmit={({ account, authToken }) => {
+                setState(state => ({ ...state, account, authToken }));
+                navigate("/upload-image");
+              }}
             />
           }
         />
         <Route
-          path="/steps/4"
+          path="/upload-image"
           element={
-            <Step4
+            <UploadImage
               image={state.image}
               imageUrl={state.imageUrl}
               name={state.name}
@@ -96,6 +99,24 @@ export function App() {
                 setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
               }
               onNameChange={name => setState(state => ({ ...state, name }))}
+              onSubmit={async () => {
+                if (!(state.image && state.name)) {
+                  return;
+                }
+
+                const data = new FormData();
+                data.append("upload_file", state.image);
+
+                await fetch(`${API_URL}/media/upload?name=${state.name}`, {
+                  method: "POST",
+                  headers: {
+                    Authorization: `Bearer ${state.authToken}`,
+                  },
+                  body: data,
+                });
+
+                navigate("/purchase");
+              }}
             />
           }
         />

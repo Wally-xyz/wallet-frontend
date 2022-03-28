@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { Logo as _Logo } from "../Logo";
-import { Whale as _Whale } from "../Whale";
-import { GradientLink } from "../buttons/Gradient";
+import { Logo as _Logo } from "../../Logo";
+import { Whale as _Whale } from "../../Whale";
+import { GradientLink } from "../../buttons/Gradient";
 
 const Logo = styled(_Logo)`
   height: 144px;
@@ -71,7 +71,7 @@ const Tagline = styled.div`
   text-align: center;
 `;
 
-export function Step1() {
+export function Start() {
   return (
     <Container>
       <Content>
@@ -85,7 +85,7 @@ export function Step1() {
           Turn your twitter profile into an NFT within minutes.*
         </Message>
         <Whale />
-        <Button to="/steps/2">
+        <Button to="/enter-email">
           Make an NFT
           <Star1>✨</Star1>
           <Star2>✨</Star2>
