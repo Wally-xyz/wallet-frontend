@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { Chrome } from "../Chrome";
-import { Input as _Input } from "../Input";
-import { GradientLink } from "../buttons/Gradient";
-import { API_URL } from "../../../constants/default";
+import { Chrome } from "../../Chrome";
+import { Input as _Input } from "../../Input";
+import { Gradient } from "../../buttons/Gradient";
+import { API_URL } from "../../../../constants/default";
 
 const Container = styled.article`
   box-sizing: border-box;
@@ -26,7 +26,7 @@ const Input = styled(_Input)`
   width: 100%;
 `;
 
-const Submit = styled(GradientLink)`
+const Submit = styled(Gradient)`
   margin-top: 34px;
 `;
 
@@ -40,33 +40,29 @@ interface Props {
   email: string;
   code: string;
   onCodeChange(code: string): void;
-  onSubmit(): void;
-  setAccount(address: string): void;
-  setAuthToken(authToken: string): void;
+  onSubmit(data: { account: string; authToken: string }): void;
 }
 
-export function Step3(props: Props) {
+export function EnterCode(props: Props) {
   const verifyCode = async () => {
     const body = {
-      'email': props.email,
-      'code': props.code,
-    }
+      email: props.email,
+      code: props.code,
+    };
     await fetch(`${API_URL}/auth/verifyemail?email=${props.email}&code=${props.code}`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(body),
       headers: {
-        'Content-Type': 'application/json',
-      }
+        "Content-Type": "application/json",
+      },
     })
-    .then(response => response.json())
-    .then(response => {
-      if(response.access_token) {
-        props.setAuthToken(response.access_token)
-        props.setAccount(response.user.address)
-        props.onSubmit();
-      }
-    });
-  }
+      .then(response => response.json())
+      .then(response => {
+        if (response.access_token) {
+          props.onSubmit({ account: response.user.address, authToken: response.access_token });
+        }
+      });
+  };
 
   return (
     <Chrome>
@@ -78,7 +74,7 @@ export function Step3(props: Props) {
           value={props.code}
           onChange={e => props.onCodeChange(e.currentTarget.value)}
         />
-        <Submit to="/steps/4" onClick={verifyCode}>
+        <Submit disabled={!props.code} onClick={verifyCode}>
           Submit code
         </Submit>
       </Container>

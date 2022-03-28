@@ -1,11 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
-import { Chrome } from "../Chrome";
-import { ImageUpload } from "../ImageUpload";
-import { Input } from "../Input";
-import { Gradient } from "../buttons/Gradient";
+import { Chrome } from "../../Chrome";
+import { ImageUpload } from "../../ImageUpload";
+import { Input } from "../../Input";
+import { Gradient } from "../../buttons/Gradient";
 
 const Container = styled.article`
   box-sizing: border-box;
@@ -52,11 +51,10 @@ interface Props {
   name: string;
   onImageChange(file: File): void;
   onNameChange(name: string): void;
+  onSubmit(): void;
 }
 
-export function Step4(props: Props) {
-  const navigate = useNavigate();
-
+export function UploadImage(props: Props) {
   return (
     <Chrome>
       <Container>
@@ -70,7 +68,7 @@ export function Step4(props: Props) {
               return;
             }
 
-            navigate("/steps/5");
+            props.onSubmit();
           }}
         >
           <ImageUpload
