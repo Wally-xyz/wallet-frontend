@@ -12,6 +12,7 @@ const appConfig: IAppConfig = {
   colors: {
     defaultColor: "12, 12, 13",
     backgroundColor: "40, 44, 52",
+    backgroundColorV2: "#0C0C0C",
   },
   chains: SUPPORTED_CHAINS,
   styleOpts: {

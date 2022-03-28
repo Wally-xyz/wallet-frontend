@@ -38,6 +38,7 @@
     "qr-scanner": "^1.4.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-router-dom": "6",
     "react-scripts-ts": "^4.0.8",
     "styled-components": "^5.2.0"
   },

@@ -223,3 +223,11 @@ export const globalStyle = `
     font-size: 16px;
   }
 `;
+
+export const globalStyleV2 = `
+  ${globalStyle}
+
+  body {
+    background-color: ${colors.backgroundColorV2};
+  }
+`;
