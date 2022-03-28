@@ -1,18 +1,21 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { createGlobalStyle } from "styled-components";
+import { BrowserRouter } from "react-router-dom";
 
-import App from "./App";
-import { globalStyle } from "./styles";
+import { App } from "./v2/App";
+import { globalStyleV2 } from "./styles";
 
 const GlobalStyle = createGlobalStyle`
-  ${globalStyle}
+  ${globalStyleV2}
 `;
 
 ReactDOM.render(
   <>
     <GlobalStyle />
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </>,
   document.getElementById("root"),
 );

@@ -159,6 +159,7 @@ export interface IAppConfig {
   colors: {
     defaultColor: string;
     backgroundColor: string;
+    backgroundColorV2: string;
   };
   chains: IChainData[];
   styleOpts: {
