@@ -6,6 +6,7 @@ import { Start } from "./components/screens/Start";
 import { EnterEmail } from "./components/screens/EnterEmail";
 import { EnterCode } from "./components/screens/EnterCode";
 import { UploadImage } from "./components/screens/UploadImage";
+import { Purchase } from "./components/screens/Purchase";
 import { API_URL } from "../constants/default";
 
 const GradientCircle1 = styled.div`
@@ -148,6 +149,24 @@ export function App() {
                 });
 
                 navigate("/purchase");
+              }}
+            />
+          }
+        />
+        <Route
+          path="/purchase"
+          element={
+            <Purchase
+              imageUrl={state.imageUrl || ""}
+              name={state.name}
+              onSubmit={async () => {
+                const resp = await fetch(`${API_URL}/payments/checkoutsession`, {
+                  method: "POST",
+                  headers: { Authorization: `Bearer ${state.authToken}` },
+                }).then(r => r.json());
+
+                const stripeCheckoutUrl = resp.checkout_session;
+                window.location.href = stripeCheckoutUrl;
               }}
             />
           }

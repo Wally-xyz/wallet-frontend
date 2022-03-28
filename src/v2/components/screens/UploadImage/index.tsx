@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Chrome } from "../../Chrome";
 import { ImageUpload } from "../../ImageUpload";
 import { Input } from "../../Input";
-import { Gradient } from "../../buttons/Gradient";
+import { Button } from "../../Button";
 
 const Container = styled.article`
   box-sizing: border-box;
@@ -35,7 +35,7 @@ const Name = styled(Input)`
   margin-top: 39px;
 `;
 
-const Submit = styled(Gradient)`
+const Submit = styled(Button)`
   margin-top: 45px;
 `;
 
