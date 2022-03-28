@@ -34,12 +34,25 @@ const GradientCircle2 = styled.div`
   width: 836px;
 `;
 
+interface State {
+  account: string;
+  authToken: string;
+  code: string;
+  email: string;
+  image?: File;
+  imageUrl?: string;
+  name: string;
+}
+
 export function App() {
-  const [state, setState] = React.useState({
+  const [state, setState] = React.useState<State>({
+    account: "",
+    authToken: "",
     code: "",
     email: "",
-    authToken: "",
-    account: "",
+    image: undefined,
+    imageUrl: undefined,
+    name: "",
   });
 
   return (
@@ -68,11 +81,24 @@ export function App() {
               onCodeChange={code => setState(state => ({ ...state, code }))}
               onSubmit={() => console.log(state)}
               setAccount={account => setState(state => ({ ...state, account }))}
-              setAuthToken={authToken => setState(state => ({ ...state, authToken}))}
+              setAuthToken={authToken => setState(state => ({ ...state, authToken }))}
             />
           }
         />
-        <Route path="/steps/4" element={<Step4 />} />
+        <Route
+          path="/steps/4"
+          element={
+            <Step4
+              image={state.image}
+              imageUrl={state.imageUrl}
+              name={state.name}
+              onImageChange={image =>
+                setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
+              }
+              onNameChange={name => setState(state => ({ ...state, name }))}
+            />
+          }
+        />
       </Routes>
     </>
   );
