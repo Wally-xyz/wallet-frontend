@@ -26,6 +26,7 @@
     "url": "https://github.com/walletconnect/walletconnect-test-wallet/issues"
   },
   "dependencies": {
+    "@types/eth-sig-util": "^2.1.1",
     "@walletconnect/client": "^1.7.1",
     "@walletconnect/utils": "^1.7.1",
     "axios": "^0.21.1",
@@ -38,6 +39,7 @@
     "qr-scanner": "^1.4.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-router-dom": "6",
     "react-scripts-ts": "^4.0.8",
     "styled-components": "^5.2.0"
   },
