@@ -4,6 +4,8 @@ import styled from "styled-components";
 
 import { Step1 } from "./components/Step1";
 import { Step2 } from "./components/Step2";
+import { Step3 } from "./components/Step3";
+import { Step4 } from "./components/Step4";
 
 const GradientCircle1 = styled.div`
   background: linear-gradient(90.87deg, rgba(40, 0, 71, 0.7) -41.78%, rgba(64, 0, 57, 0.7) 100%);
@@ -31,6 +33,11 @@ const GradientCircle2 = styled.div`
 `;
 
 export function App() {
+  const [state, setState] = React.useState({
+    code: "",
+    email: "",
+  });
+
   return (
     <>
       <GradientCircle1 />
@@ -38,7 +45,27 @@ export function App() {
       <Routes>
         <Route path="/" element={<Step1 />} />
         <Route path="/steps/1" element={<Step1 />} />
-        <Route path="/steps/2" element={<Step2 />} />
+        <Route
+          path="/steps/2"
+          element={
+            <Step2
+              email={state.email}
+              onEmailChange={email => setState(state => ({ ...state, email }))}
+              onSubmit={() => console.log(state)}
+            />
+          }
+        />
+        <Route
+          path="/steps/3"
+          element={
+            <Step3
+              code={state.code}
+              onCodeChange={code => setState(state => ({ ...state, code }))}
+              onSubmit={() => console.log(state)}
+            />
+          }
+        />
+        <Route path="/steps/4" element={<Step4 />} />
       </Routes>
     </>
   );

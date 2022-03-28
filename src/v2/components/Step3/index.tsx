@@ -12,7 +12,7 @@ const Container = styled.article`
   width: 100%;
 `;
 
-const Disclaimer = styled.div`
+const Explanation = styled.div`
   color: #ffffff;
   font-size: 20px;
   font-weigt: 400;
@@ -21,7 +21,7 @@ const Disclaimer = styled.div`
 
 const Input = styled(_Input)`
   margin-top: 90px;
-  max-width: 666px;
+  max-width: 250px;
   width: 100%;
 `;
 
@@ -36,24 +36,24 @@ const Title = styled.header`
 `;
 
 interface Props {
-  email: string;
-  onEmailChange(email: string): void;
+  code: string;
+  onCodeChange(code: string): void;
   onSubmit?(): void;
 }
 
-export function Step2(props: Props) {
+export function Step3(props: Props) {
   return (
     <Chrome>
       <Container>
-        <Title>📩 Let’s start with your email.</Title>
-        <Disclaimer>We’ll need to verify it.</Disclaimer>
+        <Title>✅ Nice! Check your email for the magic code.</Title>
+        <Explanation>Or click the “Authorize” button on your email.</Explanation>
         <Input
-          placeholder="name@email.com"
-          value={props.email}
-          onChange={e => props.onEmailChange(e.currentTarget.value)}
+          placeholder="magic code"
+          value={props.code}
+          onChange={e => props.onCodeChange(e.currentTarget.value)}
         />
-        <Submit to="/steps/3" onClick={props.onSubmit}>
-          Send verification
+        <Submit to="/steps/4" onClick={props.onSubmit}>
+          Submit code
         </Submit>
       </Container>
     </Chrome>

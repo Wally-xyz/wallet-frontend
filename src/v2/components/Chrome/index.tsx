@@ -5,9 +5,14 @@ import { Logo } from "../Logo";
 
 const Container = styled.article`
   display: grid;
-  grid-template-rows: max-content 1fr;
+  grid-template-rows: 132px 1fr 132px;
   grid-template-columns: 1fr;
   height: 100%;
+`;
+
+const Content = styled.div`
+  display: grid;
+  place-items: center;
 `;
 
 const Header = styled.header`
@@ -29,6 +34,7 @@ export function Chrome(props: Props) {
       <Header>
         <Wally />
       </Header>
+      <Content>{props.children}</Content>
     </Container>
   );
 }
