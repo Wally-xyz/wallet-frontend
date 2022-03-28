@@ -2,9 +2,9 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { UploadIcon } from "../UploadIcon";
-import { commonStyles } from "../buttons/Gradient";
+import { commonStyles } from "../Button";
 
-const Bordered = styled.div`
+export const Bordered = styled.div`
   border-radius: 100px;
   border: 4px dashed black;
   bottom: 0;
@@ -18,16 +18,18 @@ const Button = styled.div`
   ${commonStyles}
 `;
 
-const Container = styled.label`
+export const Container = styled.label`
   background: linear-gradient(87.18deg, #32adf0 -15.08%, #ff00fe 107.47%),
     linear-gradient(0deg, #ff5959, #ff5959);
   border-radius: 100px;
+  cursor: pointer;
+  display: block;
   height: 400px;
   position: relative;
   width: 400px;
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
   align-items: center;
   background-position: center center;
   background-size: cover;
@@ -73,7 +75,7 @@ export function ImageUpload(props: Props) {
   }, [input]);
 
   return (
-    <Container>
+    <Container className={props.className}>
       <Bordered />
       <Content
         style={{

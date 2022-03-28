@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Logo as _Logo } from "../../Logo";
 import { Whale as _Whale } from "../../Whale";
-import { GradientLink } from "../../buttons/Gradient";
+import { ButtonLink } from "../../Button";
 
 const Logo = styled(_Logo)`
   height: 144px;
@@ -15,7 +15,7 @@ const Whale = styled(_Whale)`
   margin-top: 45px;
 `;
 
-const Button = styled(GradientLink)`
+const Button = styled(ButtonLink)`
   margin-top: 65px;
   position: relative;
 `;

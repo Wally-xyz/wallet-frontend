@@ -7,6 +7,7 @@ export const commonStyles = css<{ disabled?: boolean }>`
   box-shadow: 0px 6.384615421295166px 31.923076629638672px 0px #f262ff80;
   cursor: pointer;
   color: #ffffff;
+  cursor: pointer;
   display: inline-block;
   font-size: 28px;
   font-weight: 700;
@@ -26,11 +27,11 @@ export const commonStyles = css<{ disabled?: boolean }>`
       : ""}
 `;
 
-export const Gradient = styled.button`
+export const Button = styled.button`
   ${commonStyles}
 `;
 
-export const GradientLink = styled(Link)<{ disabled?: boolean }>`
+export const ButtonLink = styled(Link)<{ disabled?: boolean }>`
   ${commonStyles}
   text-decoration: none;
 `;
