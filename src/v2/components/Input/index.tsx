@@ -14,6 +14,7 @@ const _Input = styled.input`
   display: block;
   font-size: 24px;
   outline: none;
+  width: 100%;
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.5);

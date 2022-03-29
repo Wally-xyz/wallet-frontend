@@ -48,7 +48,7 @@ export function EnterEmail(props: Props) {
       email: props.email,
     };
 
-    await fetch(`${API_URL}/auth/sendcode?email=${props.email}`, {
+    await fetch(`${API_URL}/auth/sendcode?email=${encodeURIComponent(props.email)}`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
