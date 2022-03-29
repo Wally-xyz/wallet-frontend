@@ -1,13 +1,16 @@
 import * as React from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
 
-import { Start } from "./components/screens/Start";
-import { EnterEmail } from "./components/screens/EnterEmail";
+import { ConnectTwitter } from "./components/screens/ConnectTwitter";
 import { EnterCode } from "./components/screens/EnterCode";
-import { UploadImage } from "./components/screens/UploadImage";
+import { EnterEmail } from "./components/screens/EnterEmail";
+import { Mint } from "./components/screens/Mint";
+import { MintComplete } from "./components/screens/MintComplete";
 import { Purchase } from "./components/screens/Purchase";
+import { Start } from "./components/screens/Start";
+import { UploadImage } from "./components/screens/UploadImage";
 import { API_URL } from "../constants/default";
 import { getAppConfig } from "../config";
 
@@ -87,35 +90,46 @@ export function App() {
     uri: undefined,
   });
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   const init = () => {
-    const authToken = window.localStorage.getItem('token')
+    const authToken = window.localStorage.getItem("token");
+    const path = location.pathname;
 
     const fetchWallets = async () => {
       await fetch(`${API_URL}/tokens/wallet?access_token=${authToken}`, {
         headers: {
-          'Authorization': `Bearer ${authToken}`
-        }
+          Authorization: `Bearer ${authToken}`,
+        },
       })
         .then(response => {
           if (!response.ok) {
-            throw new Error('Network response was not OK');
+            throw new Error("Network response was not OK");
           }
-          return response.json()
+          return response.json();
         })
         .then(response => {
-          setState({
-            ...state,
-            'address': response.data,
-          })
+          setState(state => ({ ...state, address: response.data }));
         })
-        .catch(error => console.log(error))
-    }
+        .catch(error => console.log(error));
+    };
+
+    const fetchImage = async () => {
+      const resp = await fetch(`${API_URL}/media/recent`, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      }).then(r => r.json());
+
+      setState(state => ({ ...state, imageUrl: resp.s3_url, name: resp.name }));
+    };
 
     if (authToken) {
-      setState({ ...state, authToken })
+      setState(state => ({ ...state, authToken }));
       fetchWallets();
+
+      if (path === "/mint") {
+        fetchImage();
+      }
     }
   };
 
@@ -207,7 +221,7 @@ export function App() {
     }
   };
 
-  const bindedSetState = (newState: Partial<State>) => setState( {...state, ...newState});
+  const bindedSetState = (newState: Partial<State>) => setState({ ...state, ...newState });
 
   const approveSession = () => {
     console.log("ACTION", "approveSession");
@@ -233,11 +247,11 @@ export function App() {
       }
     }
 
-    closeRequest(payload)
+    closeRequest(payload);
     await setState({ ...state, connector });
   };
 
-  const closeRequest = async (payload:any) => {
+  const closeRequest = async (payload: any) => {
     const { requests } = state;
     const filteredRequests = requests.filter(request => request.id !== payload.id);
     await setState({
@@ -246,7 +260,11 @@ export function App() {
     });
   };
 
-  React.useEffect(init, [])
+  React.useEffect(init, []);
+
+  if (location.search.includes("success=True")) {
+    return <Navigate to="/mint" replace />;
+  }
 
   return (
     <>
@@ -254,7 +272,7 @@ export function App() {
       <GradientCircle2 />
       <Routes>
         <Route path="/" element={<Start />} />
-        <Route path="/dummy" element={<button onClick={initWalletConnect}/>} />
+        <Route path="/dummy" element={<button onClick={initWalletConnect} />} />
         <Route
           path="/enter-email"
           element={
@@ -274,6 +292,7 @@ export function App() {
               onCodeChange={code => setState(state => ({ ...state, code }))}
               onSubmit={({ address, authToken }) => {
                 setState(state => ({ ...state, address, authToken }));
+                window.localStorage.setItem("token", authToken);
                 navigate("/upload-image");
               }}
             />
@@ -328,6 +347,39 @@ export function App() {
               }}
             />
           }
+        />
+        <Route
+          path="/mint"
+          element={
+            <Mint
+              imageUrl={state.imageUrl || ""}
+              name={state.name}
+              onMint={async () => {
+                const response = await fetch(`${API_URL}/mint/mint`, {
+                  method: "POST",
+                  headers: { Authorization: `Bearer ${state.authToken}` },
+                }).then(r => r.json());
+
+                console.log(response);
+
+                navigate("/mint-complete");
+              }}
+            />
+          }
+        />
+        <Route
+          path="/mint-complete"
+          element={
+            <MintComplete
+              imageUrl={state.imageUrl || ""}
+              name={state.name}
+              onNext={() => navigate("/connect-twitter")}
+            />
+          }
+        />
+        <Route
+          path="/connect-twitter"
+          element={<ConnectTwitter onContinue={() => navigate("/scan-code")} />}
         />
       </Routes>
     </>

@@ -6,7 +6,7 @@ import { Input as _Input } from "../../Input";
 import { Button } from "../../Button";
 import { API_URL } from "../../../../constants/default";
 
-const Container = styled.article`
+const Container = styled.form`
   box-sizing: border-box;
   max-width: 1000px;
   padding: 20px;
@@ -61,7 +61,12 @@ export function EnterEmail(props: Props) {
 
   return (
     <Chrome>
-      <Container>
+      <Container
+        onSubmit={e => {
+          e.preventDefault();
+          sendEmail();
+        }}
+      >
         <Title>📩 Let’s start with your email.</Title>
         <Disclaimer>We’ll need to verify it.</Disclaimer>
         <Input
@@ -69,9 +74,7 @@ export function EnterEmail(props: Props) {
           value={props.email}
           onChange={e => props.onEmailChange(e.currentTarget.value)}
         />
-        <Submit disabled={!props.email} onClick={sendEmail}>
-          Send verification
-        </Submit>
+        <Submit disabled={!props.email}>Send verification</Submit>
       </Container>
     </Chrome>
   );
