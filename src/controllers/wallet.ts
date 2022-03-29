@@ -202,27 +202,22 @@ export class WalletController {
   }
 
   public async signPersonalMessage(message: any, authToken: string) {
-    if (this.wallet) {
-      const body = {
-        'message': message,
-      }
-      const result = await fetch(`${API_URL}/tokens/sign`, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authToken}`
-        }
-      }).then(response => {
-        return response.json().then(data => {
-          return data.result;
-        })
-      })
-      return result;
-    } else {
-      console.error("No Active Account");
+    const body = {
+      'message': message,
     }
-    return null;
+    const result = await fetch(`${API_URL}/tokens/sign`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      }
+    }).then(response => {
+      return response.json().then(data => {
+        return data.result;
+      })
+    })
+    return result;
   }
 
   public async signTypedData(data: any) {

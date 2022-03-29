@@ -58,6 +58,38 @@ export function App() {
 
   const navigate = useNavigate();
 
+  const init = () => {
+    const authToken = window.localStorage.getItem('token')
+
+    const fetchWallets = async () => {
+      await fetch(`${API_URL}/tokens/wallet?access_token=${authToken}`, {
+        headers: {
+          'Authorization': `Bearer ${authToken}`
+        }
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not OK');
+          }
+          return response.json()
+        })
+        .then(response => {
+          setState({
+            ...state,
+            'account': response.data,
+          })
+        })
+        .catch(error => console.log(error))
+    }
+
+    if (authToken) {
+      setState({ ...state, authToken })
+      fetchWallets();
+    }
+  };
+
+  React.useEffect(init, [])
+
   return (
     <>
       <GradientCircle1 />
