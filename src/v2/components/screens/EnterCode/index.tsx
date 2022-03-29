@@ -6,7 +6,7 @@ import { Input as _Input } from "../../Input";
 import { Button } from "../../Button";
 import { API_URL } from "../../../../constants/default";
 
-const Container = styled.article`
+const Container = styled.form`
   box-sizing: border-box;
   max-width: 1000px;
   padding: 20px;
@@ -66,7 +66,12 @@ export function EnterCode(props: Props) {
 
   return (
     <Chrome>
-      <Container>
+      <Container
+        onSubmit={e => {
+          e.preventDefault();
+          verifyCode();
+        }}
+      >
         <Title>✅ Nice! Check your email for the magic code.</Title>
         <Explanation>Or click the “Authorize” button on your email.</Explanation>
         <Input
@@ -74,9 +79,7 @@ export function EnterCode(props: Props) {
           value={props.code}
           onChange={e => props.onCodeChange(e.currentTarget.value)}
         />
-        <Submit disabled={!props.code} onClick={verifyCode}>
-          Submit code
-        </Submit>
+        <Submit disabled={!props.code}>Submit code</Submit>
       </Container>
     </Chrome>
   );
