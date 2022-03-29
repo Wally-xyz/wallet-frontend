@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import WalletConnect from "@walletconnect/client";
 
 import { Start } from "./components/screens/Start";
 import { EnterEmail } from "./components/screens/EnterEmail";
@@ -8,6 +9,7 @@ import { EnterCode } from "./components/screens/EnterCode";
 import { UploadImage } from "./components/screens/UploadImage";
 import { Purchase } from "./components/screens/Purchase";
 import { API_URL } from "../constants/default";
+import { getAppConfig } from "../config";
 
 const GradientCircle1 = styled.div`
   background: linear-gradient(90.87deg, rgba(40, 0, 71, 0.7) -41.78%, rgba(64, 0, 57, 0.7) 100%);
@@ -36,25 +38,53 @@ const GradientCircle2 = styled.div`
   width: 836px;
 `;
 
-interface State {
-  account: string;
+export interface State {
+  address: string;
+  activeIndex: number;
   authToken: string;
+  chainId: number;
   code: string;
+  connected: boolean;
+  connector?: WalletConnect;
   email: string;
   image?: File;
   imageUrl?: string;
+  loading: boolean;
   name: string;
+  peerMeta: {
+    description: string;
+    url: string;
+    icons: string[];
+    name: string;
+    ssl: boolean;
+  };
+  requests: any[];
+  uri?: string;
 }
 
 export function App() {
   const [state, setState] = React.useState<State>({
-    account: "",
+    address: "",
+    activeIndex: 0,
     authToken: "",
+    chainId: getAppConfig().chainId,
     code: "",
+    connected: false,
+    connector: undefined,
     email: "",
     image: undefined,
     imageUrl: undefined,
+    loading: false,
     name: "",
+    peerMeta: {
+      description: "",
+      url: "",
+      icons: [],
+      name: "",
+      ssl: false,
+    },
+    requests: [],
+    uri: undefined,
   });
 
   const navigate = useNavigate();
@@ -77,7 +107,7 @@ export function App() {
         .then(response => {
           setState({
             ...state,
-            'account': response.data,
+            'address': response.data,
           })
         })
         .catch(error => console.log(error))
@@ -89,6 +119,133 @@ export function App() {
     }
   };
 
+  const initWalletConnect = async () => {
+    const { uri } = state;
+
+    setState({ ...state, loading: true });
+
+    try {
+      const connector = new WalletConnect({ uri });
+
+      if (!connector.connected) {
+        await connector.createSession();
+      }
+
+      await setState({
+        ...state,
+        loading: false,
+        connector,
+        uri: connector.uri,
+      });
+
+      subscribeToEvents();
+    } catch (error) {
+      setState({ ...state, loading: false });
+
+      throw error;
+    }
+  };
+
+  const subscribeToEvents = () => {
+    console.log("ACTION", "subscribeToEvents");
+    const { connector } = state;
+
+    if (connector) {
+      connector.on("session_request", (error, payload) => {
+        console.log("EVENT", "session_request");
+
+        if (error) {
+          throw error;
+        }
+        console.log("SESSION_REQUEST", payload.params);
+        const { peerMeta } = payload.params[0];
+        setState({ ...state, peerMeta });
+        approveSession();
+      });
+
+      connector.on("session_update", error => {
+        console.log("EVENT", "session_update");
+
+        if (error) {
+          throw error;
+        }
+      });
+
+      connector.on("call_request", async (error, payload) => {
+        // tslint:disable-next-line
+        console.log("EVENT", "call_request", "method", payload.method);
+        console.log("EVENT", "call_request", "params", payload.params);
+
+        if (error) {
+          throw error;
+        }
+
+        approveRequest(payload);
+
+        await getAppConfig().rpcEngine.router(payload, state, bindedSetState);
+      });
+
+      connector.on("connect", (error, payload) => {
+        console.log("EVENT", "connect");
+
+        if (error) {
+          throw error;
+        }
+
+        setState({ ...state, connected: true });
+      });
+
+      connector.on("disconnect", (error, payload) => {
+        console.log("EVENT", "disconnect");
+
+        if (error) {
+          throw error;
+        }
+      });
+
+      setState({ ...state, connector });
+    }
+  };
+
+  const bindedSetState = (newState: Partial<State>) => setState( {...state, ...newState});
+
+  const approveSession = () => {
+    console.log("ACTION", "approveSession");
+    const { connector, address } = state;
+    if (connector) {
+      connector.approveSession({ chainId: getAppConfig().chainId, accounts: [address] });
+    }
+    setState({ ...state, connector });
+  };
+
+  const approveRequest = async (payload: any) => {
+    const { connector } = state;
+
+    try {
+      await getAppConfig().rpcEngine.signer(payload, state, bindedSetState);
+    } catch (error) {
+      console.error(error);
+      if (connector) {
+        connector.rejectRequest({
+          id: payload.id,
+          error: { message: "Failed or Rejected Request" },
+        });
+      }
+    }
+
+    closeRequest(payload)
+    await setState({ ...state, connector });
+  };
+
+  const closeRequest = async (payload:any) => {
+    const { requests } = state;
+    const filteredRequests = requests.filter(request => request.id !== payload.id);
+    await setState({
+      ...state,
+      requests: filteredRequests,
+    });
+  };
+
   React.useEffect(init, [])
 
   return (
@@ -97,6 +254,7 @@ export function App() {
       <GradientCircle2 />
       <Routes>
         <Route path="/" element={<Start />} />
+        <Route path="/dummy" element={<button onClick={initWalletConnect}/>} />
         <Route
           path="/enter-email"
           element={
@@ -114,8 +272,8 @@ export function App() {
               code={state.code}
               email={state.email}
               onCodeChange={code => setState(state => ({ ...state, code }))}
-              onSubmit={({ account, authToken }) => {
-                setState(state => ({ ...state, account, authToken }));
+              onSubmit={({ address, authToken }) => {
+                setState(state => ({ ...state, address, authToken }));
                 navigate("/upload-image");
               }}
             />
