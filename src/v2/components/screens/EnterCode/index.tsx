@@ -40,7 +40,7 @@ interface Props {
   email: string;
   code: string;
   onCodeChange(code: string): void;
-  onSubmit(data: { account: string; authToken: string }): void;
+  onSubmit(data: { address: string; authToken: string }): void;
 }
 
 export function EnterCode(props: Props) {
@@ -59,7 +59,7 @@ export function EnterCode(props: Props) {
       .then(response => response.json())
       .then(response => {
         if (response.access_token) {
-          props.onSubmit({ account: response.user.address, authToken: response.access_token });
+          props.onSubmit({ address: response.user.address, authToken: response.access_token });
         }
       });
   };
