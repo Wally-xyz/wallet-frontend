@@ -49,7 +49,7 @@ export function EnterCode(props: Props) {
       email: props.email,
       code: props.code,
     };
-    await fetch(`${API_URL}/auth/verifyemail?email=${props.email}&code=${props.code}`, {
+    await fetch(`${API_URL}/auth/verifyemail?email=${encodeURIComponent(props.email)}&code=${props.code}`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
