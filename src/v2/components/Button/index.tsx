@@ -11,12 +11,7 @@ export const commonStyles = css<{ disabled?: boolean }>`
   display: inline-block;
   font-size: 28px;
   font-weight: 700;
-  padding: 11px 60px 13px;
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
+  padding: 12px 60px;
 
   ${props =>
     props.disabled

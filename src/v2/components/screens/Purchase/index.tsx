@@ -54,7 +54,7 @@ export function Purchase(props: Props) {
         </Disclaimer>
         <ImageTitle>{props.name}</ImageTitle>
         <ImagePreview imageUrl={props.imageUrl} />
-        <Submit>Purchase for $100</Submit>
+        <Submit onClick={props.onSubmit}>Purchase for $100</Submit>
         <Disclaimer>You’ll be taken to Stripe for a secure payment.</Disclaimer>
       </Container>
     </Chrome>
