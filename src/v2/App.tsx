@@ -127,7 +127,7 @@ export function App() {
       setState(state => ({ ...state, authToken }));
       fetchWallets();
 
-      if (path === "/mint") {
+      if (path === "/mint" || location.search.includes("success=True")) {
         fetchImage();
       }
     }
