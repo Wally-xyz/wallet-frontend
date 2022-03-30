@@ -3,12 +3,14 @@ import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
 
+import { Complete } from "./components/screens/Complete";
 import { ConnectTwitter } from "./components/screens/ConnectTwitter";
 import { EnterCode } from "./components/screens/EnterCode";
 import { EnterEmail } from "./components/screens/EnterEmail";
 import { Mint } from "./components/screens/Mint";
 import { MintComplete } from "./components/screens/MintComplete";
 import { Purchase } from "./components/screens/Purchase";
+import { ScanCode } from "./components/screens/ScanCode";
 import { Start } from "./components/screens/Start";
 import { UploadImage } from "./components/screens/UploadImage";
 import { API_URL } from "../constants/default";
@@ -133,10 +135,8 @@ export function App() {
     }
   };
 
-  const initWalletConnect = async () => {
-    const { uri } = state;
-
-    setState({ ...state, loading: true });
+  const initWalletConnect = async (uri: string) => {
+    setState(state => ({ ...state, uri, loading: true }));
 
     try {
       const connector = new WalletConnect({ uri });
@@ -145,16 +145,16 @@ export function App() {
         await connector.createSession();
       }
 
-      await setState({
+      await setState(state => ({
         ...state,
         loading: false,
         connector,
         uri: connector.uri,
-      });
+      }));
 
       subscribeToEvents();
     } catch (error) {
-      setState({ ...state, loading: false });
+      setState(state => ({ ...state, loading: false }));
 
       throw error;
     }
@@ -272,7 +272,10 @@ export function App() {
       <GradientCircle2 />
       <Routes>
         <Route path="/" element={<Start />} />
-        <Route path="/dummy" element={<button onClick={initWalletConnect} />} />
+        <Route
+          path="/dummy"
+          element={<button onClick={() => initWalletConnect(state.uri || "")} />}
+        />
         <Route
           path="/enter-email"
           element={
@@ -381,6 +384,18 @@ export function App() {
           path="/connect-twitter"
           element={<ConnectTwitter onContinue={() => navigate("/scan-code")} />}
         />
+        <Route
+          path="/scan-code"
+          element={
+            <ScanCode
+              onComplete={async uri => {
+                await initWalletConnect(uri);
+                navigate("/complete");
+              }}
+            />
+          }
+        />
+        <Route path="/complete" element={<Complete imageUrl={state.imageUrl || ""} />} />
       </Routes>
     </>
   );

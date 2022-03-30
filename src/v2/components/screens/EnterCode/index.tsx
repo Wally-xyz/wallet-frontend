@@ -49,18 +49,21 @@ export function EnterCode(props: Props) {
       email: props.email,
       code: props.code,
     };
-    await fetch(`${API_URL}/auth/verifyemail?email=${encodeURIComponent(props.email)}&code=${props.code}`, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
+    await fetch(
+      `${API_URL}/auth/verifyemail?email=${encodeURIComponent(props.email)}&code=${props.code}`,
+      {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    })
+    )
       .then(response => response.json())
       .then(response => {
         if (response.access_token) {
           const ls = window.localStorage;
-          ls.setItem('token', response.access_token);
+          ls.setItem("token", response.access_token);
           props.onSubmit({ address: response.user.address, authToken: response.access_token });
         }
       });
