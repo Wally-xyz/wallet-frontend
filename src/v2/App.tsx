@@ -28,6 +28,7 @@ const GradientCircle1 = styled.div`
   top: 0;
   transform: translateX(70%) translateY(-70%);
   width: 836px;
+  z-index: -1;
 `;
 
 const GradientCircle2 = styled.div`
@@ -41,6 +42,7 @@ const GradientCircle2 = styled.div`
   position: fixed;
   transform: translateX(-50%) translateY(50%);
   width: 836px;
+  z-index: -1;
 `;
 
 export interface State {
