@@ -254,10 +254,10 @@ export function App() {
   const closeRequest = async (payload: any) => {
     const { requests } = state;
     const filteredRequests = requests.filter(request => request.id !== payload.id);
-    await setState({
+    await setState(state => ({
       ...state,
       requests: filteredRequests,
-    });
+    }));
   };
 
   React.useEffect(init, []);
