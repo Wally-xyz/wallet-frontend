@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import { isValidAddress } from "@walletconnect/utils";
 
 import { QRCodeScanner } from "../../QRCodeScanner";
 
@@ -47,7 +46,7 @@ export function ScanCode(props: Props) {
   return (
     <Container>
       <Scanner
-        validator={isValidAddress}
+        validator={() => true}
         onSuccess={url => {
           setState(State.Success);
           setTimeout(() => props.onComplete(url), 2000);

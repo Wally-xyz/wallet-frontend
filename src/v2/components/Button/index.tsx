@@ -12,6 +12,24 @@ export const commonStyles = css<{ disabled?: boolean }>`
   font-size: 28px;
   font-weight: 700;
   padding: 12px 60px;
+  transition: transform 0.15s;
+
+  &:hover,
+  &:focus {
+    ${props =>
+      !props.disabled &&
+      `
+      transform: scale(1.05);
+    `}
+  }
+
+  &:active {
+    ${props =>
+      !props.disabled &&
+      `
+      transform: scale(0.98);
+    `}
+  }
 
   ${props =>
     props.disabled

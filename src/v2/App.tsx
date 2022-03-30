@@ -358,12 +358,10 @@ export function App() {
               imageUrl={state.imageUrl || ""}
               name={state.name}
               onMint={async () => {
-                const response = await fetch(`${API_URL}/mint/mint`, {
+                await fetch(`${API_URL}/mint/mint`, {
                   method: "POST",
                   headers: { Authorization: `Bearer ${state.authToken}` },
                 }).then(r => r.json());
-
-                console.log(response);
 
                 navigate("/mint-complete");
               }}
