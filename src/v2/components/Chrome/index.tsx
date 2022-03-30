@@ -35,6 +35,7 @@ export function Chrome(props: Props) {
         <Wally />
       </Header>
       <Content>{props.children}</Content>
+      <div />
     </Container>
   );
 }
