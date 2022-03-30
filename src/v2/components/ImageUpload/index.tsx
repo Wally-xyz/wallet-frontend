@@ -31,10 +31,10 @@ export const Container = styled.label`
 
 export const Content = styled.div`
   align-items: center;
+  background: black;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  background: black;
   border-radius: 96px;
   bottom: 4px;
   display: flex;
