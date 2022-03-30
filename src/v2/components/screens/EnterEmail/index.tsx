@@ -44,13 +44,9 @@ interface Props {
 
 export function EnterEmail(props: Props) {
   const sendEmail = async () => {
-    const body = {
-      email: props.email,
-    };
-
-    await fetch(`${API_URL}/auth/sendcode?email=${encodeURIComponent(props.email)}`, {
+    fetch(`${API_URL}/auth/sendcode?email=${encodeURIComponent(props.email)}`, {
       method: "POST",
-      body: JSON.stringify(body),
+      body: JSON.stringify({ email: props.email }),
       headers: {
         "Content-Type": "application/json",
       },

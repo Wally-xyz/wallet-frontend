@@ -254,10 +254,10 @@ export function App() {
   const closeRequest = async (payload: any) => {
     const { requests } = state;
     const filteredRequests = requests.filter(request => request.id !== payload.id);
-    await setState({
+    await setState(state => ({
       ...state,
       requests: filteredRequests,
-    });
+    }));
   };
 
   React.useEffect(init, []);
@@ -358,12 +358,10 @@ export function App() {
               imageUrl={state.imageUrl || ""}
               name={state.name}
               onMint={async () => {
-                const response = await fetch(`${API_URL}/mint/mint`, {
+                await fetch(`${API_URL}/mint/mint`, {
                   method: "POST",
                   headers: { Authorization: `Bearer ${state.authToken}` },
                 }).then(r => r.json());
-
-                console.log(response);
 
                 navigate("/mint-complete");
               }}
