@@ -109,6 +109,9 @@ export function App() {
       })
         .then(response => {
           if (!response.ok) {
+            if (path !== "/enter-email") {
+              navigate('/')
+            }
             throw new Error("Network response was not OK");
           }
           return response.json();
@@ -130,14 +133,14 @@ export function App() {
     if (authToken) {
       setState(state => ({ ...state, authToken }));
       fetchWallets();
-
-      if (path === "/mint" || location.search.includes("success=True")) {
-        fetchImage();
-      }
+      fetchImage();
     }
   };
 
   const initWalletConnect = async (uri: string) => {
+    if (!uri) {
+      return;
+    }
     setState(state => ({ ...state, uri, loading: true }));
 
     try {
@@ -153,8 +156,6 @@ export function App() {
         connector,
         uri: connector.uri,
       }));
-
-      subscribeToEvents();
     } catch (error) {
       setState(state => ({ ...state, loading: false }));
 
@@ -163,10 +164,11 @@ export function App() {
   };
 
   const subscribeToEvents = () => {
-    console.log("ACTION", "subscribeToEvents");
     const { connector } = state;
 
     if (connector) {
+      navigate("/complete");
+      console.log("ACTION", "subscribeToEvents");
       connector.on("session_request", (error, payload) => {
         console.log("EVENT", "session_request");
 
@@ -175,7 +177,7 @@ export function App() {
         }
         console.log("SESSION_REQUEST", payload.params);
         const { peerMeta } = payload.params[0];
-        setState({ ...state, peerMeta });
+        setState(state => ({ ...state, peerMeta }));
         approveSession();
       });
 
@@ -208,7 +210,7 @@ export function App() {
           throw error;
         }
 
-        setState({ ...state, connected: true });
+        setState(state => ({ ...state, connected: true }));
       });
 
       connector.on("disconnect", (error, payload) => {
@@ -219,11 +221,11 @@ export function App() {
         }
       });
 
-      setState({ ...state, connector });
+      setState(state => ({ ...state, connector }));
     }
   };
 
-  const bindedSetState = (newState: Partial<State>) => setState({ ...state, ...newState });
+  const bindedSetState = (newState: Partial<State>) => setState(state => ({ ...state, ...newState }));
 
   const approveSession = () => {
     console.log("ACTION", "approveSession");
@@ -231,7 +233,7 @@ export function App() {
     if (connector) {
       connector.approveSession({ chainId: getAppConfig().chainId, accounts: [address] });
     }
-    setState({ ...state, connector });
+    setState(state => ({ ...state, connector }));
   };
 
   const approveRequest = async (payload: any) => {
@@ -250,7 +252,7 @@ export function App() {
     }
 
     closeRequest(payload);
-    await setState({ ...state, connector });
+    await setState(state => ({ ...state, connector }));
   };
 
   const closeRequest = async (payload: any) => {
@@ -267,6 +269,18 @@ export function App() {
   if (location.search.includes("success=True")) {
     return <Navigate to="/mint" replace />;
   }
+
+  React.useEffect(() => {
+    if (state.uri) {
+      initWalletConnect(state.uri);
+    }
+  }, [state.uri])
+
+  React.useEffect(() => {
+    if (state.connector) {
+      subscribeToEvents();
+    }
+  }, [state.connector])
 
   return (
     <>
@@ -389,8 +403,7 @@ export function App() {
           element={
             <ScanCode
               onComplete={async uri => {
-                await initWalletConnect(uri);
-                navigate("/complete");
+                setState(state => ({ ...state, uri }))
               }}
             />
           }
