@@ -19,9 +19,9 @@ const Image = styled.div`
   filter: drop-shadow(0px 6.38462px 150px rgba(248, 166, 255, 0.2))
     drop-shadow(0px 6.38462px 40px rgba(242, 98, 255, 0.5))
     drop-shadow(0px 6.38462px 100px rgba(112, 221, 255, 0.2));
-  height: 400px;
+  height: 350px;
   margin: 16px 0 60px;
-  width: 400px;
+  width: 350px;
 `;
 
 const Name = styled.div`

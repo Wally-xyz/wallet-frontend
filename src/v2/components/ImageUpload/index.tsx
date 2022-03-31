@@ -24,9 +24,9 @@ export const Container = styled.label`
   border-radius: 100px;
   cursor: pointer;
   display: block;
-  height: 400px;
+  height: 350px;
   position: relative;
-  width: 400px;
+  width: 350px;
 `;
 
 export const Content = styled.div`
