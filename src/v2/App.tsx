@@ -3,6 +3,7 @@ import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
 
+import { CollectUsername } from "./components/screens/CollectUsername";
 import { Complete } from "./components/screens/Complete";
 import { ConnectTwitter } from "./components/screens/ConnectTwitter";
 import { EnterCode } from "./components/screens/EnterCode";
@@ -10,7 +11,6 @@ import { EnterEmail } from "./components/screens/EnterEmail";
 import { Mint } from "./components/screens/Mint";
 import { MintComplete } from "./components/screens/MintComplete";
 import { Purchase } from "./components/screens/Purchase";
-import { ScanCode } from "./components/screens/ScanCode";
 import { Start } from "./components/screens/Start";
 import { UploadImage } from "./components/screens/UploadImage";
 import { API_URL } from "../constants/default";
@@ -66,6 +66,7 @@ export interface State {
     ssl: boolean;
   };
   requests: any[];
+  twitterUsername: string;
   uri?: string;
 }
 
@@ -91,6 +92,7 @@ export function App() {
       ssl: false,
     },
     requests: [],
+    twitterUsername: "",
     uri: undefined,
   });
 
@@ -110,7 +112,7 @@ export function App() {
         .then(response => {
           if (!response.ok) {
             if (path !== "/enter-email") {
-              navigate('/')
+              navigate("/");
             }
             throw new Error("Network response was not OK");
           }
@@ -225,7 +227,8 @@ export function App() {
     }
   };
 
-  const bindedSetState = (newState: Partial<State>) => setState(state => ({ ...state, ...newState }));
+  const bindedSetState = (newState: Partial<State>) =>
+    setState(state => ({ ...state, ...newState }));
 
   const approveSession = () => {
     console.log("ACTION", "approveSession");
@@ -274,13 +277,13 @@ export function App() {
     if (state.uri) {
       initWalletConnect(state.uri);
     }
-  }, [state.uri])
+  }, [state.uri]);
 
   React.useEffect(() => {
     if (state.connector) {
       subscribeToEvents();
     }
-  }, [state.connector])
+  }, [state.connector]);
 
   return (
     <>
@@ -390,25 +393,36 @@ export function App() {
             <MintComplete
               imageUrl={state.imageUrl || ""}
               name={state.name}
-              onNext={() => navigate("/connect-twitter")}
+              onNext={() => navigate("/username")}
+            />
+          }
+        />
+        <Route
+          path="/username"
+          element={
+            <CollectUsername
+              username={state.twitterUsername}
+              onUsernameChange={twitterUsername =>
+                setState(state => ({ ...state, twitterUsername }))
+              }
+              onSubmit={() => navigate("/connect-twitter")}
             />
           }
         />
         <Route
           path="/connect-twitter"
-          element={<ConnectTwitter onContinue={() => navigate("/scan-code")} />}
-        />
-        <Route
-          path="/scan-code"
           element={
-            <ScanCode
-              onComplete={async uri => {
-                setState(state => ({ ...state, uri }))
+            <ConnectTwitter
+              onContinue={uri => {
+                setState(state => ({ ...state, uri }));
               }}
             />
           }
         />
-        <Route path="/complete" element={<Complete imageUrl={state.imageUrl || ""} />} />
+        <Route
+          path="/complete"
+          element={<Complete imageUrl={state.imageUrl || ""} username={state.twitterUsername} />}
+        />
       </Routes>
     </>
   );

@@ -47,6 +47,7 @@ const View = styled.a`
 
 interface Props {
   imageUrl: string;
+  username: string;
 }
 
 export function Complete(props: Props) {
@@ -56,7 +57,7 @@ export function Complete(props: Props) {
         <Title>😎 Check it out—your cool new profile.</Title>
         <Explanation>Freshly minted on the Ethereum network.</Explanation>
         <Image style={{ backgroundImage: `url(${props.imageUrl})` }} />
-        <View href="#">View on Twitter</View>
+        <View href={`https://www.twitter.com/${props.username}`}>View on Twitter</View>
       </Container>
     </Chrome>
   );
