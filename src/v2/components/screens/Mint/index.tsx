@@ -41,9 +41,9 @@ const Image = styled.div<{ distance?: number }>`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 100px;
-  height: 400px;
+  height: 350px;
   margin-top: 16px;
-  width: 400px;
+  width: 350px;
 `;
 
 const Name = styled.div`
@@ -53,27 +53,17 @@ const Name = styled.div`
   margin-top: 56px;
 `;
 
-const Star1 = styled.div`
-  font-size: 50px;
-  left 0;
-  position: absolute;
-  top: 0;
-  transform: translateX(-120px) translateY(-60px);
-`;
-
-const Star2 = styled.div`
-  bottom: 0;
-  font-size: 50px;
-  position: absolute;
-  right 0;
-  transform: translateX(70px) translateY(5px);
-`;
-
 const Title = styled.header`
   color: #ffffff;
   font-size: 28px;
   font-weight: 600;
+  text-align: center;
 `;
+
+const PressAndHoldExplainer = styled.div`
+    color: #ffffff;
+    margin-top: 16px;
+`
 
 interface Props {
   imageUrl: string;
@@ -116,8 +106,8 @@ export function Mint(props: Props) {
         <Image distance={shake} style={{ backgroundImage: `url(${props.imageUrl})` }} />
         <Footer>
           <PressAndHoldButton
-            onMouseDown={() => startShake()}
-            onMouseUp={() => stopShake()}
+            onPointerDown={() => startShake()}
+            onPointerUp={() => stopShake()}
             onComplete={() => {
               setMinting(true);
               stopShake();
@@ -126,12 +116,7 @@ export function Mint(props: Props) {
           >
             {minting ? "Minting..." : "Mint"}
           </PressAndHoldButton>
-          {!minting && (
-            <>
-              <Star1>✨</Star1>
-              <Star2>✨</Star2>
-            </>
-          )}
+          <PressAndHoldExplainer>☝️ Press and hold</PressAndHoldExplainer>
         </Footer>
       </Container>
     </Chrome>
