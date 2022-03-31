@@ -27,9 +27,9 @@ const Image = styled.div`
   border-radius: 100px;
   box-shadow: 0px 30px 200px 0px #f262ff80, 0px 20px 200px 0px #70ddff33,
     0px 10px 100px 0px #f262ff80;
-  height: 400px;
+  height: 350px;
   margin-top: 70px;
-  width: 400px;
+  width: 350px;
 `;
 
 const Title = styled.header`
