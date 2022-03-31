@@ -5,9 +5,25 @@ import { Chrome } from "../../Chrome";
 import { Button } from "../../Button";
 
 const Container = styled.form`
+  box-sizing: border-box;
+  max-width: 1100px;
+  padding: 40px;
+  width: 100%;
+`;
+
+const Content = styled.div`
   align-items: center;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: 80px;
+  grid-template-columns: 350px 1fr;
+`;
+
+const Disclaimer = styled.div`
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 600;
+  margin-top: 24px;
 `;
 
 const Image = styled.div`
@@ -20,7 +36,7 @@ const Image = styled.div`
     drop-shadow(0px 6.38462px 40px rgba(242, 98, 255, 0.5))
     drop-shadow(0px 6.38462px 100px rgba(112, 221, 255, 0.2));
   height: 350px;
-  margin: 16px 0 60px;
+  margin-top: 16px;
   width: 350px;
 `;
 
@@ -28,7 +44,21 @@ const Name = styled.div`
   color: #ffffff;
   font-size: 28px;
   font-weight: 800;
-  margin-top: 60px;
+  text-align: center;
+`;
+
+const OpenSea = styled.a`
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+  font-size: 18px;
+  line-height: 25px;
+  margin: 8px 0 32px;
+  text-decoration: none;
+
+  strong {
+    color: rgba(255, 255, 255, 1);
+    text-style: normal;
+  }
 `;
 
 const Submit = styled(Button)`
@@ -56,11 +86,22 @@ export function MintComplete(props: Props) {
           props.onNext();
         }}
       >
-        <Title>🎉 Woohoo! You did it!</Title>
-        <Name>{props.name}</Name>
-        <Image style={{ backgroundImage: `url(${props.imageUrl})` }} />
-        <Title>👉 Next, connect it to Twitter so all your friends can see.</Title>
-        <Submit>Connect to Twitter</Submit>
+        <Content>
+          <div>
+            <Name>{props.name}</Name>
+            <Image style={{ backgroundImage: `url(${props.imageUrl})` }} />
+          </div>
+          <div>
+            <Title>🎉 Woohoo! You did it!</Title>
+            <OpenSea>
+              Your NFT now lives in a bunch of places. Check it out on <strong>OpenSea</strong>, a
+              marketplace for NFTs.
+            </OpenSea>
+            <Title>👉 Next, connect it to Twitter so all your friends can see.</Title>
+            <Submit>Connect to Twitter</Submit>
+            <Disclaimer>️To connect your NFT, you must be subscribed to Twitter Blue.</Disclaimer>
+          </div>
+        </Content>
       </Container>
     </Chrome>
   );

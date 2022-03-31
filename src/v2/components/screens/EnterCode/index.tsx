@@ -6,6 +6,7 @@ import { Chrome } from "../../Chrome";
 import { Input as _Input } from "../../Input";
 import { Button } from "../../Button";
 import { API_URL } from "../../../../constants/default";
+import { EasyIntegration } from "../../tips/EasyIntegration";
 
 const Container = styled.form`
   box-sizing: border-box;
@@ -47,26 +48,23 @@ interface Props {
 const useQuery = () => {
   const { search } = useLocation();
   return React.useMemo(() => new URLSearchParams(search), [search]);
-}
+};
 
 export function EnterCode(props: Props) {
   const query = useQuery();
 
-  const verifyCode = async (email:string, code:string) => {
+  const verifyCode = async (email: string, code: string) => {
     const body = {
       email,
       code,
     };
-    await fetch(
-      `${API_URL}/auth/verifyemail?email=${encodeURIComponent(email)}&code=${code}`,
-      {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    await fetch(`${API_URL}/auth/verifyemail?email=${encodeURIComponent(email)}&code=${code}`, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
       },
-    )
+    })
       .then(response => response.json())
       .then(response => {
         if (response.access_token) {
@@ -78,15 +76,15 @@ export function EnterCode(props: Props) {
   };
 
   React.useEffect(() => {
-    const email = query.get('email')
-    const code = query.get('code')
+    const email = query.get("email");
+    const code = query.get("code");
     if (email && code) {
-      verifyCode(email, code)
+      verifyCode(email, code);
     }
-  }, [])
+  }, []);
 
   return (
-    <Chrome>
+    <Chrome footer={<EasyIntegration />}>
       <Container
         onSubmit={e => {
           e.preventDefault();

@@ -3,6 +3,7 @@ import styled, { css, keyframes } from "styled-components";
 
 import { Chrome } from "../../Chrome";
 import { PressAndHoldButton } from "../../PressAndHoldButton";
+import { EasyMinting } from "../../tips/EasyMinting";
 
 const shake = keyframes`
   0% { transform: translateX(0) }
@@ -17,9 +18,31 @@ const shake = keyframes`
 `;
 
 const Container = styled.div`
+  box-sizing: border-box;
+  max-width: 1200px;
+  padding: 40px;
+  width: 100%;
+`;
+
+const Content = styled.div`
   align-items: center;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: 80px;
+  grid-template-columns: 350px 1fr;
+`;
+
+const Etherscan = styled.a`
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  text-decoration: none;
+
+  strong {
+    color: rgba(255, 255, 255, 1);
+    text-style: normal;
+  }
 `;
 
 const Footer = styled.footer`
@@ -46,11 +69,15 @@ const Image = styled.div<{ distance?: number }>`
   width: 350px;
 `;
 
+const Left = styled.div`
+  position: relative;
+`;
+
 const Name = styled.div`
   color: #ffffff;
   font-size: 28px;
   font-weight: 800;
-  margin-top: 56px;
+  text-align: center;
 `;
 
 const Title = styled.header`
@@ -61,9 +88,9 @@ const Title = styled.header`
 `;
 
 const PressAndHoldExplainer = styled.div`
-    color: #ffffff;
-    margin-top: 16px;
-`
+  color: #ffffff;
+  margin-top: 16px;
+`;
 
 interface Props {
   imageUrl: string;
@@ -74,6 +101,7 @@ interface Props {
 export function Mint(props: Props) {
   const [minting, setMinting] = React.useState(false);
   const [shake, setShake] = React.useState(0);
+  const [complete, setComplete] = React.useState(false);
   const timeout = React.useRef<number | null>(null);
 
   const stopShake = React.useCallback(() => {
@@ -95,29 +123,52 @@ export function Mint(props: Props) {
   }, [setShake, stopShake]);
 
   return (
-    <Chrome>
+    <Chrome footer={<EasyMinting />}>
       <Container>
-        <Title>
-          {minting
-            ? "⏳ Waiting for the minting fairies to finish..."
-            : "🔨 Everything looks good. You’re ready to mint!"}
-        </Title>
-        <Name>{props.name}</Name>
-        <Image distance={shake} style={{ backgroundImage: `url(${props.imageUrl})` }} />
-        <Footer>
-          <PressAndHoldButton
-            onPointerDown={() => startShake()}
-            onPointerUp={() => stopShake()}
-            onComplete={() => {
-              setMinting(true);
-              stopShake();
-              props.onMint();
-            }}
-          >
-            {minting ? "Minting..." : "Mint"}
-          </PressAndHoldButton>
-          <PressAndHoldExplainer>☝️ Press and hold</PressAndHoldExplainer>
-        </Footer>
+        <Content>
+          <Left>
+            <Name>{props.name}</Name>
+            <Image distance={shake} style={{ backgroundImage: `url(${props.imageUrl})` }} />
+          </Left>
+          <div>
+            <Title>
+              {minting
+                ? "⏳ Waiting for the minting fairies to finish..."
+                : "🔨 Everything looks good. You’re ready to mint!"}
+            </Title>
+            {minting ? (
+              <Etherscan>
+                Wanna get technical? See your NFT status on <strong>etherscan</strong>.
+              </Etherscan>
+            ) : (
+              <Etherscan>&nbsp;</Etherscan>
+            )}
+            <Footer>
+              <PressAndHoldButton
+                onPointerDown={() => {
+                  setMinting(true);
+                  startShake();
+                }}
+                onPointerUp={() => {
+                  if (!complete) {
+                    setMinting(false);
+                  }
+
+                  stopShake();
+                }}
+                onComplete={() => {
+                  setComplete(true);
+                  setMinting(true);
+                  stopShake();
+                  props.onMint();
+                }}
+              >
+                {minting ? "Minting..." : "Mint"}
+              </PressAndHoldButton>
+              <PressAndHoldExplainer>☝️ Press and hold</PressAndHoldExplainer>
+            </Footer>
+          </div>
+        </Content>
       </Container>
     </Chrome>
   );

@@ -5,6 +5,7 @@ import { Chrome } from "../../Chrome";
 import { Input as _Input } from "../../Input";
 import { Button } from "../../Button";
 import { API_URL } from "../../../../constants/default";
+import { EasyIntegration } from "../../tips/EasyIntegration";
 
 const Container = styled.form`
   box-sizing: border-box;
@@ -56,7 +57,7 @@ export function EnterEmail(props: Props) {
   };
 
   return (
-    <Chrome>
+    <Chrome footer={<EasyIntegration />}>
       <Container
         onSubmit={e => {
           e.preventDefault();
