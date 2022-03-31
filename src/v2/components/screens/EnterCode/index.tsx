@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
 import { Chrome } from "../../Chrome";
 import { Input as _Input } from "../../Input";
@@ -43,14 +44,21 @@ interface Props {
   onSubmit(data: { address: string; authToken: string }): void;
 }
 
+const useQuery = () => {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 export function EnterCode(props: Props) {
-  const verifyCode = async () => {
+  const query = useQuery();
+
+  const verifyCode = async (email:string, code:string) => {
     const body = {
-      email: props.email,
-      code: props.code,
+      email,
+      code,
     };
     await fetch(
-      `${API_URL}/auth/verifyemail?email=${encodeURIComponent(props.email)}&code=${props.code}`,
+      `${API_URL}/auth/verifyemail?email=${encodeURIComponent(email)}&code=${code}`,
       {
         method: "POST",
         body: JSON.stringify(body),
@@ -69,12 +77,20 @@ export function EnterCode(props: Props) {
       });
   };
 
+  React.useEffect(() => {
+    const email = query.get('email')
+    const code = query.get('code')
+    if (email && code) {
+      verifyCode(email, code)
+    }
+  }, [])
+
   return (
     <Chrome>
       <Container
         onSubmit={e => {
           e.preventDefault();
-          verifyCode();
+          verifyCode(props.email, props.code);
         }}
       >
         <Title>✅ Nice! Check your email for the magic code.</Title>
