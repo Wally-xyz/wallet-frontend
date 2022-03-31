@@ -48,6 +48,10 @@ export function ScanCode(props: Props) {
       <Scanner
         validator={() => true}
         onSuccess={url => {
+          const sound = require("../../../../assets/success-sound-effect.mp3")
+          const audio = new Audio(sound);
+          audio.volume = 0.1;
+          audio.play();
           setState(State.Success);
           setTimeout(() => props.onComplete(url), 2000);
         }}
