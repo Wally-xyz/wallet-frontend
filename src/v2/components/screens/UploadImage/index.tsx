@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { responsive } from '../../../../styles';
 
 import { Chrome } from "../../Chrome";
 import { ImageUpload } from "../../ImageUpload";
@@ -14,7 +15,11 @@ const Container = styled.article`
 `;
 
 const Details = styled.div`
-  padding-top: 145px;
+  padding-top: 105px;
+
+  @media screen and (${responsive.xs.max}) {
+    padding-top: 10px;
+  }
 `;
 
 const Disclaimer = styled.div`
@@ -25,10 +30,11 @@ const Disclaimer = styled.div`
 `;
 
 const Form = styled.form`
-  display: grid;
+  display: flex;
   gap: 63px;
   grid-template-columns: 400px 1fr;
   margin-top: 56px;
+  flex-wrap: wrap;
 `;
 
 const Name = styled(Input)`

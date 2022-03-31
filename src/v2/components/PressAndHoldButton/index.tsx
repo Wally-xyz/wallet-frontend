@@ -75,19 +75,19 @@ export function PressAndHoldButton(props: Props) {
   return (
     <Button
       {...rest}
-      onMouseDown={e => {
+      onPointerDown={e => {
         if (progress.current && !progress.current.classList.contains("complete")) {
           progress.current.classList.add("progressing");
         }
 
-        rest.onMouseDown?.(e);
+        rest.onPointerDown?.(e);
       }}
-      onMouseUp={e => {
+      onPointerUp={e => {
         if (progress.current) {
           progress.current.classList.remove("progressing");
         }
 
-        rest.onMouseUp?.(e);
+        rest.onPointerUp?.(e);
       }}
     >
       <ProgressWrapper>
