@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { responsive } from '../../../../styles';
+import { responsive } from "../../../../styles";
 
 import { Chrome } from "../../Chrome";
 import { ImageUpload } from "../../ImageUpload";
