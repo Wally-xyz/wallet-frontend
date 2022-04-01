@@ -29,6 +29,11 @@ const Content = styled.div`
   display: grid;
   gap: 80px;
   grid-template-columns: 350px 1fr;
+
+  @media (max-width: 940px) {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
 `;
 
 const Etherscan = styled.a`

@@ -5,9 +5,9 @@ import { Logo } from "../Logo";
 
 const Container = styled.article`
   display: grid;
-  grid-template-rows: 132px 1fr 132px;
+  grid-template-rows: minmax(132px, max-content) 1fr minmax(132px, max-content);
   grid-template-columns: 1fr;
-  height: 100%;
+  min-height: 100%;
 `;
 
 const Content = styled.div`
