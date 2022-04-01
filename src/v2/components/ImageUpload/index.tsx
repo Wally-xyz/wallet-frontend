@@ -12,6 +12,10 @@ export const Bordered = styled.div`
   position: absolute;
   right: 0;
   top: 0;
+
+  @media (max-width: 940px) {
+    border-radius: 86px;
+  }
 `;
 
 const Button = styled.div`
@@ -27,6 +31,12 @@ export const Container = styled.label`
   height: 350px;
   position: relative;
   width: 350px;
+
+  @media (max-width: 940px) {
+    border-radius: 86px;
+    height: 305px;
+    width: 305px;
+  }
 `;
 
 export const Content = styled.div`
@@ -44,6 +54,10 @@ export const Content = styled.div`
   position: absolute;
   right: 4px;
   top: 4px;
+
+  @media (max-width: 940px) {
+    border-radius: 82px;
+  }
 `;
 
 const Icon = styled(UploadIcon)`

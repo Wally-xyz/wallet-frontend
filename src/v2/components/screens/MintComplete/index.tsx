@@ -16,6 +16,11 @@ const Content = styled.div`
   display: grid;
   gap: 80px;
   grid-template-columns: 350px 1fr;
+
+  @media (max-width: 940px) {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
 `;
 
 const Disclaimer = styled.div`
@@ -24,6 +29,10 @@ const Disclaimer = styled.div`
   line-height: 19px;
   font-weight: 600;
   margin-top: 24px;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 const Image = styled.div`
@@ -59,6 +68,18 @@ const OpenSea = styled.a`
     color: rgba(255, 255, 255, 1);
     text-style: normal;
   }
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
+`;
+
+const RightCol = styled.div`
+  @media (max-width: 940px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const Submit = styled(Button)`
@@ -69,6 +90,10 @@ const Title = styled.header`
   color: #ffffff;
   font-size: 28px;
   font-weight: 600;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 interface Props {
@@ -91,7 +116,7 @@ export function MintComplete(props: Props) {
             <Name>{props.name}</Name>
             <Image style={{ backgroundImage: `url(${props.imageUrl})` }} />
           </div>
-          <div>
+          <RightCol>
             <Title>🎉 Woohoo! You did it!</Title>
             <OpenSea>
               Your NFT now lives in a bunch of places. Check it out on <strong>OpenSea</strong>, a
@@ -100,7 +125,7 @@ export function MintComplete(props: Props) {
             <Title>👉 Next, connect it to Twitter so all your friends can see.</Title>
             <Submit>Connect to Twitter</Submit>
             <Disclaimer>️To connect your NFT, you must be subscribed to Twitter Blue.</Disclaimer>
-          </div>
+          </RightCol>
         </Content>
       </Container>
     </Chrome>

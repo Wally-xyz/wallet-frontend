@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import { responsive } from "../../../../styles";
 
 import { Chrome } from "../../Chrome";
 import { ImageUpload } from "../../ImageUpload";
@@ -17,8 +16,12 @@ const Container = styled.article`
 const Details = styled.div`
   padding-top: 105px;
 
-  @media screen and (${responsive.xs.max}) {
+  @media (max-width: 940px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     padding-top: 10px;
+    width: 100%;
   }
 `;
 
@@ -27,18 +30,30 @@ const Disclaimer = styled.div`
   font-size: 20px;
   font-weigt: 400;
   opacity: 0.5;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 const Form = styled.form`
   display: flex;
   gap: 63px;
-  grid-template-columns: 400px 1fr;
   margin-top: 56px;
   flex-wrap: wrap;
+
+  @media (max-width: 940px) {
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 const Name = styled(Input)`
   margin-top: 39px;
+
+  @media (max-width: 940px) {
+    width: 80%;
+  }
 `;
 
 const Submit = styled(Button)`
@@ -49,12 +64,17 @@ const Title = styled.header`
   color: #ffffff;
   font-size: 28px;
   font-weight: 600;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 interface Props {
   image?: File;
   imageUrl?: string;
   name: string;
+  uploading?: boolean;
   onImageChange(file: File): void;
   onNameChange(name: string): void;
   onSubmit(): void;
@@ -90,7 +110,9 @@ export function UploadImage(props: Props) {
               value={props.name}
               onChange={e => props.onNameChange(e.currentTarget.value)}
             />
-            <Submit disabled={!(props.image && props.name)}>Done</Submit>
+            <Submit disabled={!(props.image && props.name) || props.uploading}>
+              {props.uploading ? "Uploading..." : "Done"}
+            </Submit>
           </Details>
         </Form>
       </Container>

@@ -96,6 +96,8 @@ export function App() {
     uri: undefined,
   });
 
+  const [uploadingImage, setUploadingImage] = React.useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -323,6 +325,7 @@ export function App() {
               image={state.image}
               imageUrl={state.imageUrl}
               name={state.name}
+              uploading={uploadingImage}
               onImageChange={image =>
                 setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
               }
@@ -334,6 +337,7 @@ export function App() {
 
                 const data = new FormData();
                 data.append("upload_file", state.image);
+                setUploadingImage(true);
 
                 await fetch(`${API_URL}/media/upload?name=${state.name}`, {
                   method: "POST",
@@ -343,6 +347,7 @@ export function App() {
                   body: data,
                 });
 
+                setUploadingImage(false);
                 navigate("/purchase");
               }}
             />
@@ -378,7 +383,7 @@ export function App() {
                   headers: { Authorization: `Bearer ${state.authToken}` },
                 }).then(r => r.json());
 
-                navigate("/mint-complete");
+                setTimeout(() => navigate("/mint-complete"), 2000);
               }}
             />
           }

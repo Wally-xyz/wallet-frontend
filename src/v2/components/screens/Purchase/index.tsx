@@ -18,6 +18,11 @@ const Content = styled.div`
   display: grid;
   gap: 80px;
   grid-template-columns: 400px 1fr;
+
+  @media (max-width: 940px) {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
 `;
 
 const Disclaimer = styled.div`
@@ -25,6 +30,10 @@ const Disclaimer = styled.div`
   font-size: 20px;
   font-weigt: 400;
   opacity: 0.5;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 const ImageTitle = styled.div`
@@ -35,9 +44,21 @@ const ImageTitle = styled.div`
   text-align: center;
 `;
 
+const RightCol = styled.div`
+  @media (max-width: 940px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
 const Submit = styled(Button)`
   margin-bottom: 16px;
   margin-top: 56px;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 const Title = styled.header`
@@ -45,6 +66,10 @@ const Title = styled.header`
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 16px;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 interface Props {
@@ -62,15 +87,15 @@ export function Purchase(props: Props) {
             <ImageTitle>{props.name}</ImageTitle>
             <ImagePreview imageUrl={props.imageUrl} />
           </div>
-          <div>
-            <Title>💰We’ll also need $100 bucks, thanks.</Title>
+          <RightCol>
+            <Title>Buy crypto and NFTs with just a credit card</Title>
             <Disclaimer>
               Minting your NFT writes the image to the blockchain and gives you verifiable
               ownership. This costs ETH, so we’ll collect $100 to cover the minting fees.
             </Disclaimer>
             <Submit onClick={props.onSubmit}>Purchase for $100</Submit>
             <Disclaimer>You’ll be taken to Stripe for a secure payment.</Disclaimer>
-          </div>
+          </RightCol>
         </Content>
       </Container>
     </Chrome>
