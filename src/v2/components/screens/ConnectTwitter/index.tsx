@@ -23,6 +23,11 @@ const Container = styled.div`
   max-width: 1200px;
   padding: 20px;
   width: 100%;
+
+  @media (max-width: 940px) {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
 `;
 
 const Disclaimer = styled.div`
@@ -31,6 +36,19 @@ const Disclaimer = styled.div`
   font-weigt: 400;
   opacity: 0.5;
   margin-top: 16px;
+
+  @media (max-width: 940px) {
+    display: none;
+  }
+`;
+
+const DisclaimerMobile = styled(Disclaimer)`
+  display: none;
+
+  @media (max-width: 940px) {
+    display: block;
+    text-align: center;
+  }
 `;
 
 const DisclaimerScanner = styled(Disclaimer)`
@@ -70,6 +88,14 @@ const Hand = styled.div<{ show?: boolean }>`
 const Input = styled(_Input)`
   margin-top: 48px;
   width: 330px;
+`;
+
+const RightCol = styled.div`
+  @media (max-width: 940px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const Scanner = styled(QRCodeScanner)`
@@ -120,6 +146,10 @@ const Title = styled.header`
   color: #ffffff;
   font-size: 28px;
   font-weight: 600;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 function SlideTitle(props: { step: number }) {
@@ -261,7 +291,7 @@ export function ConnectTwitter(props: Props) {
             />
           </Dots>
         </div>
-        <div>
+        <RightCol>
           {scanning ? (
             <>
               <Title>
@@ -291,7 +321,8 @@ export function ConnectTwitter(props: Props) {
           ) : (
             <>
               <Title>📱 You’ll need to connect by scanning a QR code.</Title>
-              <Disclaimer>Follow the step by step instructions on the right.</Disclaimer>
+              <Disclaimer>Follow the step by step instructions on the left.</Disclaimer>
+              <DisclaimerMobile>Follow the step by step instructions above.</DisclaimerMobile>
               <Submit
                 onClick={() => {
                   const resp = window.confirm(
@@ -322,7 +353,7 @@ export function ConnectTwitter(props: Props) {
           >
             Submit
           </Submit>
-        </div>
+        </RightCol>
       </Container>
     </Chrome>
   );
