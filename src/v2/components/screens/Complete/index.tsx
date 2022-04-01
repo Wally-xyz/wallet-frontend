@@ -27,9 +27,9 @@ const Image = styled.div`
   border-radius: 100px;
   box-shadow: 0px 30px 200px 0px #f262ff80, 0px 20px 200px 0px #70ddff33,
     0px 10px 100px 0px #f262ff80;
-  height: 400px;
+  height: 350px;
   margin-top: 70px;
-  width: 400px;
+  width: 350px;
 `;
 
 const Title = styled.header`
@@ -47,6 +47,7 @@ const View = styled.a`
 
 interface Props {
   imageUrl: string;
+  username: string;
 }
 
 export function Complete(props: Props) {
@@ -56,7 +57,7 @@ export function Complete(props: Props) {
         <Title>😎 Check it out—your cool new profile.</Title>
         <Explanation>Freshly minted on the Ethereum network.</Explanation>
         <Image style={{ backgroundImage: `url(${props.imageUrl})` }} />
-        <View href="#">View on Twitter</View>
+        <View href={`https://www.twitter.com/${props.username}`}>View on Twitter</View>
       </Container>
     </Chrome>
   );

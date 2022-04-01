@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
 
+import { CollectUsername } from "./components/screens/CollectUsername";
 import { Complete } from "./components/screens/Complete";
 import { ConnectTwitter } from "./components/screens/ConnectTwitter";
 import { EnterCode } from "./components/screens/EnterCode";
@@ -10,7 +11,6 @@ import { EnterEmail } from "./components/screens/EnterEmail";
 import { Mint } from "./components/screens/Mint";
 import { MintComplete } from "./components/screens/MintComplete";
 import { Purchase } from "./components/screens/Purchase";
-import { ScanCode } from "./components/screens/ScanCode";
 import { Start } from "./components/screens/Start";
 import { UploadImage } from "./components/screens/UploadImage";
 import { API_URL } from "../constants/default";
@@ -57,6 +57,7 @@ export interface State {
   image?: File;
   imageUrl?: string;
   loading: boolean;
+  openseaUrl: string;
   name: string;
   peerMeta: {
     description: string;
@@ -66,6 +67,7 @@ export interface State {
     ssl: boolean;
   };
   requests: any[];
+  twitterUsername: string;
   uri?: string;
 }
 
@@ -83,6 +85,7 @@ export function App() {
     imageUrl: undefined,
     loading: false,
     name: "",
+    openseaUrl: "",
     peerMeta: {
       description: "",
       url: "",
@@ -91,11 +94,23 @@ export function App() {
       ssl: false,
     },
     requests: [],
+    twitterUsername: "",
     uri: undefined,
   });
 
+  const [uploadingImage, setUploadingImage] = React.useState(false);
+  const [mintingTx, setMintingTx] = React.useState("");
+
   const location = useLocation();
   const navigate = useNavigate();
+
+  const fetchImage = async (authToken:string) => {
+    const resp = await fetch(`${API_URL}/media/recent`, {
+      headers: { Authorization: `Bearer ${authToken}` },
+    }).then(r => r.json());
+
+    setState(state => ({ ...state, openseaUrl: resp.opensea_url, imageUrl: resp.s3_url, name: resp.name }));
+  };
 
   const init = () => {
     const authToken = window.localStorage.getItem("token");
@@ -110,7 +125,7 @@ export function App() {
         .then(response => {
           if (!response.ok) {
             if (path !== "/enter-email") {
-              navigate('/')
+              navigate("/");
             }
             throw new Error("Network response was not OK");
           }
@@ -122,18 +137,10 @@ export function App() {
         .catch(error => console.log(error));
     };
 
-    const fetchImage = async () => {
-      const resp = await fetch(`${API_URL}/media/recent`, {
-        headers: { Authorization: `Bearer ${authToken}` },
-      }).then(r => r.json());
-
-      setState(state => ({ ...state, imageUrl: resp.s3_url, name: resp.name }));
-    };
-
     if (authToken) {
       setState(state => ({ ...state, authToken }));
       fetchWallets();
-      fetchImage();
+      fetchImage(authToken);
     }
   };
 
@@ -167,7 +174,6 @@ export function App() {
     const { connector } = state;
 
     if (connector) {
-      navigate("/complete");
       console.log("ACTION", "subscribeToEvents");
       connector.on("session_request", (error, payload) => {
         console.log("EVENT", "session_request");
@@ -179,6 +185,7 @@ export function App() {
         const { peerMeta } = payload.params[0];
         setState(state => ({ ...state, peerMeta }));
         approveSession();
+        navigate("/complete");
       });
 
       connector.on("session_update", error => {
@@ -225,7 +232,8 @@ export function App() {
     }
   };
 
-  const bindedSetState = (newState: Partial<State>) => setState(state => ({ ...state, ...newState }));
+  const bindedSetState = (newState: Partial<State>) =>
+    setState(state => ({ ...state, ...newState }));
 
   const approveSession = () => {
     console.log("ACTION", "approveSession");
@@ -266,21 +274,23 @@ export function App() {
 
   React.useEffect(init, []);
 
-  if (location.search.includes("success=True")) {
-    return <Navigate to="/mint" replace />;
-  }
-
   React.useEffect(() => {
     if (state.uri) {
       initWalletConnect(state.uri);
     }
-  }, [state.uri])
+  }, [state.uri]);
 
   React.useEffect(() => {
     if (state.connector) {
       subscribeToEvents();
     }
-  }, [state.connector])
+  }, [state.connector]);
+
+  React.useEffect(() => {
+    if (location.pathname === '/mint-complete') {
+      fetchImage(state.authToken)
+    }
+  }, [location])
 
   return (
     <>
@@ -324,6 +334,7 @@ export function App() {
               image={state.image}
               imageUrl={state.imageUrl}
               name={state.name}
+              uploading={uploadingImage}
               onImageChange={image =>
                 setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
               }
@@ -335,6 +346,7 @@ export function App() {
 
                 const data = new FormData();
                 data.append("upload_file", state.image);
+                setUploadingImage(true);
 
                 await fetch(`${API_URL}/media/upload?name=${state.name}`, {
                   method: "POST",
@@ -344,6 +356,7 @@ export function App() {
                   body: data,
                 });
 
+                setUploadingImage(false);
                 navigate("/purchase");
               }}
             />
@@ -373,13 +386,15 @@ export function App() {
             <Mint
               imageUrl={state.imageUrl || ""}
               name={state.name}
+              tx={mintingTx}
               onMint={async () => {
-                await fetch(`${API_URL}/mint/mint`, {
+                const resp = await fetch(`${API_URL}/mint/mint`, {
                   method: "POST",
                   headers: { Authorization: `Bearer ${state.authToken}` },
                 }).then(r => r.json());
 
-                navigate("/mint-complete");
+                setMintingTx(resp.hash);
+                setTimeout(() => navigate("/mint-complete"), 10000);
               }}
             />
           }
@@ -390,25 +405,37 @@ export function App() {
             <MintComplete
               imageUrl={state.imageUrl || ""}
               name={state.name}
-              onNext={() => navigate("/connect-twitter")}
+              onNext={() => navigate("/username")}
+              openseaUrl={state.openseaUrl}
+            />
+          }
+        />
+        <Route
+          path="/username"
+          element={
+            <CollectUsername
+              username={state.twitterUsername}
+              onUsernameChange={twitterUsername =>
+                setState(state => ({ ...state, twitterUsername }))
+              }
+              onSubmit={() => navigate("/connect-twitter")}
             />
           }
         />
         <Route
           path="/connect-twitter"
-          element={<ConnectTwitter onContinue={() => navigate("/scan-code")} />}
-        />
-        <Route
-          path="/scan-code"
           element={
-            <ScanCode
-              onComplete={async uri => {
-                setState(state => ({ ...state, uri }))
+            <ConnectTwitter
+              onContinue={uri => {
+                setState(state => ({ ...state, uri }));
               }}
             />
           }
         />
-        <Route path="/complete" element={<Complete imageUrl={state.imageUrl || ""} />} />
+        <Route
+          path="/complete"
+          element={<Complete imageUrl={state.imageUrl || ""} username={state.twitterUsername} />}
+        />
       </Routes>
     </>
   );
