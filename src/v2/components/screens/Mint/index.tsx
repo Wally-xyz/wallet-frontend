@@ -106,7 +106,6 @@ interface Props {
 export function Mint(props: Props) {
   const [minting, setMinting] = React.useState(false);
   const [shake, setShake] = React.useState(0);
-  const [complete, setComplete] = React.useState(false);
   const timeout = React.useRef<number | null>(null);
 
   const stopShake = React.useCallback(() => {
@@ -142,7 +141,7 @@ export function Mint(props: Props) {
                 : "🔨 Everything looks good. You’re ready to mint!"}
             </Title>
             {minting ? (
-              <Etherscan>
+              <Etherscan href="https://etherscan.io/" target="_blank">
                 Wanna get technical? See your NFT status on <strong>etherscan</strong>.
               </Etherscan>
             ) : (
@@ -151,18 +150,12 @@ export function Mint(props: Props) {
             <Footer>
               <PressAndHoldButton
                 onPointerDown={() => {
-                  setMinting(true);
                   startShake();
                 }}
                 onPointerUp={() => {
-                  if (!complete) {
-                    setMinting(false);
-                  }
-
                   stopShake();
                 }}
                 onComplete={() => {
-                  setComplete(true);
                   setMinting(true);
                   stopShake();
                   props.onMint();

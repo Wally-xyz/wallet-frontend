@@ -20,6 +20,10 @@ const AlreadyConnected = styled.div`
   color: rgba(255, 255, 255);
   font-size: 20px;
   margin-top: 32px;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 const Button = styled(ButtonLink)`
@@ -32,6 +36,11 @@ const Center = styled.div`
   display: grid;
   gap: 65px;
   grid-template-columns: 1fr max-content;
+
+  @media (max-width: 940px) {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
 `;
 
 const ConnectToTwitter = styled(Link)`
@@ -39,6 +48,10 @@ const ConnectToTwitter = styled(Link)`
   font-size: 20px;
   font-weight: 700;
   text-decoration: none;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 const Container = styled.article`
@@ -54,18 +67,30 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 620px;
+
+  @media (max-width: 940px) {
+    align-items: center;
+  }
 `;
 
 const Disclaimer = styled.footer`
   color: rgba(255, 255, 255, 0.5);
   font-size: 20px;
   margin-top: 80px;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 const Message = styled.div`
   font-weight: 400;
   font-size: 20px;
   margin-top: 28px;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
 `;
 
 const Star1 = styled.div`
@@ -88,6 +113,20 @@ const Tagline = styled.div`
   font-weight: 600;
   font-size: 28px;
   margin-top: 24px;
+
+  @media (max-width: 940px) {
+    text-align: center;
+  }
+`;
+
+const RightCol = styled.div`
+  padding: 20px;
+
+  @media (max-width: 940px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export function Start() {
@@ -114,11 +153,11 @@ export function Start() {
             on your desktop browser.
           </Disclaimer>
         </Content>
-        <div>
+        <RightCol>
           <Whale />
           <AlreadyConnected>Already have an NFT with us?</AlreadyConnected>
           <ConnectToTwitter to="/connect-twitter">Connect it to Twitter</ConnectToTwitter>
-        </div>
+        </RightCol>
       </Center>
     </Container>
   );

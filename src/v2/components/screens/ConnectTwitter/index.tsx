@@ -38,6 +38,15 @@ const Disclaimer = styled.div`
   margin-top: 16px;
 
   @media (max-width: 940px) {
+    display: none;
+  }
+`;
+
+const DisclaimerMobile = styled(Disclaimer)`
+  display: none;
+
+  @media (max-width: 940px) {
+    display: block;
     text-align: center;
   }
 `;
@@ -312,7 +321,8 @@ export function ConnectTwitter(props: Props) {
           ) : (
             <>
               <Title>📱 You’ll need to connect by scanning a QR code.</Title>
-              <Disclaimer>Follow the step by step instructions on the right.</Disclaimer>
+              <Disclaimer>Follow the step by step instructions on the left.</Disclaimer>
+              <DisclaimerMobile>Follow the step by step instructions above.</DisclaimerMobile>
               <Submit
                 onClick={() => {
                   const resp = window.confirm(
