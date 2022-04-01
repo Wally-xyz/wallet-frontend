@@ -287,7 +287,7 @@ export function App() {
   }, [state.connector]);
 
   React.useEffect(() => {
-    if (location.pathname === '/mint-complete') {
+    if (location.pathname === '/mint-complete' && state.authToken) {
       fetchImage(state.authToken)
     }
   }, [location])
