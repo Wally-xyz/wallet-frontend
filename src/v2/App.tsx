@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
 
@@ -265,10 +265,6 @@ export function App() {
   };
 
   React.useEffect(init, []);
-
-  if (location.search.includes("success=True")) {
-    return <Navigate to="/mint" replace />;
-  }
 
   React.useEffect(() => {
     if (state.uri) {
