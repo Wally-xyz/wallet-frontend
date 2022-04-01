@@ -99,6 +99,7 @@ const Title = styled.header`
 interface Props {
   imageUrl: string;
   name: string;
+  openseaUrl: string;
   onNext(): void;
 }
 
@@ -119,8 +120,8 @@ export function MintComplete(props: Props) {
           <RightCol>
             <Title>🎉 Woohoo! You did it!</Title>
             <OpenSea>
-              Your NFT now lives in a bunch of places. Check it out on <strong>OpenSea</strong>, a
-              marketplace for NFTs.
+              Your NFT now lives in a bunch of places. Check it out on
+              <a href={props.openseaUrl} target="_blank">OpenSea</a>, a marketplace for NFTs.
             </OpenSea>
             <Title>👉 Next, connect it to Twitter so all your friends can see.</Title>
             <Submit>Connect to Twitter</Submit>

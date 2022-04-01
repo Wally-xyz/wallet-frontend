@@ -57,6 +57,7 @@ export interface State {
   image?: File;
   imageUrl?: string;
   loading: boolean;
+  openseaUrl: string;
   name: string;
   peerMeta: {
     description: string;
@@ -84,6 +85,7 @@ export function App() {
     imageUrl: undefined,
     loading: false,
     name: "",
+    openseaUrl: "",
     peerMeta: {
       description: "",
       url: "",
@@ -100,6 +102,14 @@ export function App() {
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const fetchImage = async (authToken:string) => {
+    const resp = await fetch(`${API_URL}/media/recent`, {
+      headers: { Authorization: `Bearer ${authToken}` },
+    }).then(r => r.json());
+
+    setState(state => ({ ...state, openseaUrl: resp.opensea_url, imageUrl: resp.s3_url, name: resp.name }));
+  };
 
   const init = () => {
     const authToken = window.localStorage.getItem("token");
@@ -126,18 +136,10 @@ export function App() {
         .catch(error => console.log(error));
     };
 
-    const fetchImage = async () => {
-      const resp = await fetch(`${API_URL}/media/recent`, {
-        headers: { Authorization: `Bearer ${authToken}` },
-      }).then(r => r.json());
-
-      setState(state => ({ ...state, imageUrl: resp.s3_url, name: resp.name }));
-    };
-
     if (authToken) {
       setState(state => ({ ...state, authToken }));
       fetchWallets();
-      fetchImage();
+      fetchImage(authToken);
     }
   };
 
@@ -283,6 +285,12 @@ export function App() {
     }
   }, [state.connector]);
 
+  React.useEffect(() => {
+    if (location.pathname === '/mint-complete') {
+      fetchImage(state.authToken)
+    }
+  }, [location])
+
   return (
     <>
       <GradientCircle1 />
@@ -395,6 +403,7 @@ export function App() {
               imageUrl={state.imageUrl || ""}
               name={state.name}
               onNext={() => navigate("/username")}
+              openseaUrl={state.openseaUrl}
             />
           }
         />
