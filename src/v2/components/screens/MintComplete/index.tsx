@@ -119,9 +119,9 @@ export function MintComplete(props: Props) {
           </div>
           <RightCol>
             <Title>🎉 Woohoo! You did it!</Title>
-            <OpenSea>
+            <OpenSea href={props.openseaUrl} target="_blank">
               Your NFT now lives in a bunch of places. Check it out on
-              <a href={props.openseaUrl} target="_blank">OpenSea</a>, a marketplace for NFTs.
+              <strong>OpenSea</strong>, a marketplace for NFTs.
             </OpenSea>
             <Title>👉 Next, connect it to Twitter so all your friends can see.</Title>
             <Submit>Connect to Twitter</Submit>
