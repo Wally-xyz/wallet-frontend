@@ -97,6 +97,7 @@ export function App() {
   });
 
   const [uploadingImage, setUploadingImage] = React.useState(false);
+  const [mintingTx, setMintingTx] = React.useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -377,13 +378,15 @@ export function App() {
             <Mint
               imageUrl={state.imageUrl || ""}
               name={state.name}
+              tx={mintingTx}
               onMint={async () => {
-                await fetch(`${API_URL}/mint/mint`, {
+                const resp = await fetch(`${API_URL}/mint/mint`, {
                   method: "POST",
                   headers: { Authorization: `Bearer ${state.authToken}` },
                 }).then(r => r.json());
 
-                setTimeout(() => navigate("/mint-complete"), 2000);
+                setMintingTx(resp.hash);
+                setTimeout(() => navigate("/mint-complete"), 10000);
               }}
             />
           }

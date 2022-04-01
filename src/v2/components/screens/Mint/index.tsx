@@ -100,6 +100,7 @@ const PressAndHoldExplainer = styled.div`
 interface Props {
   imageUrl: string;
   name: string;
+  tx?: string;
   onMint(): void;
 }
 
@@ -140,8 +141,8 @@ export function Mint(props: Props) {
                 ? "⏳ Waiting for the minting fairies to finish..."
                 : "🔨 Everything looks good. You’re ready to mint!"}
             </Title>
-            {minting ? (
-              <Etherscan href="https://etherscan.io/" target="_blank">
+            {minting && props.tx ? (
+              <Etherscan href={`https://etherscan.io/tx/${props.tx}`} target="_blank">
                 Wanna get technical? See your NFT status on <strong>etherscan</strong>.
               </Etherscan>
             ) : (
