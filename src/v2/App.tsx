@@ -171,7 +171,6 @@ export function App() {
     const { connector } = state;
 
     if (connector) {
-      navigate("/complete");
       console.log("ACTION", "subscribeToEvents");
       connector.on("session_request", (error, payload) => {
         console.log("EVENT", "session_request");
@@ -183,6 +182,7 @@ export function App() {
         const { peerMeta } = payload.params[0];
         setState(state => ({ ...state, peerMeta }));
         approveSession();
+        navigate("/complete");
       });
 
       connector.on("session_update", error => {

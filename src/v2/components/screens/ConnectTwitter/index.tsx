@@ -204,6 +204,12 @@ export function ConnectTwitter(props: Props) {
 
   const timeout = React.useRef<number>(0);
 
+  const waitForConnection = () => {
+    setTimeout(() => {
+      setScannerState(ScannerState.Failure)
+    }, 10000)
+  }
+
   const transition = React.useCallback(() => {
     if (slide < 5) {
       setSlide(slide => slide + 1);
@@ -215,6 +221,13 @@ export function ConnectTwitter(props: Props) {
   React.useEffect(() => {
     timeout.current = setTimeout(transition, 3000);
   }, [transition]);
+
+  let scannerTitle = "💡 Tip: Hold the phone close to the camera, then slowly move it back towards you."
+  if (scannerState === ScannerState.Success) {
+    scannerTitle = "✅ Got it! Connecting..."
+  } else if (scannerState === ScannerState.Failure) {
+    scannerTitle = "❌ Hmm, we're having trouble connecting to twitter. Try killing your twitter app and trying again."
+  }
 
   return (
     <Chrome>
@@ -295,9 +308,7 @@ export function ConnectTwitter(props: Props) {
           {scanning ? (
             <>
               <Title>
-                {scannerState === ScannerState.Success
-                  ? "✅ Got it!"
-                  : "💡 Tip: Hold the phone close to the camera, then slowly move it back towards you."}
+                {scannerTitle}
               </Title>
               <Scanner
                 validator={() => true}
@@ -307,6 +318,7 @@ export function ConnectTwitter(props: Props) {
                   audio.volume = 0.1;
                   audio.play();
                   setScannerState(ScannerState.Success);
+                  waitForConnection();
                   setTimeout(() => props.onContinue(url), 2000);
                 }}
                 onFailure={() => {
@@ -324,15 +336,7 @@ export function ConnectTwitter(props: Props) {
               <Disclaimer>Follow the step by step instructions on the left.</Disclaimer>
               <DisclaimerMobile>Follow the step by step instructions above.</DisclaimerMobile>
               <Submit
-                onClick={() => {
-                  const resp = window.confirm(
-                    "Do you have the QR code open on the Twitter app? If not, click cancel and make sure to follow the steps",
-                  );
-
-                  if (resp) {
-                    setScanning(true);
-                  }
-                }}
+                onClick={() => setScanning(true)}
               >
                 Scan QR Code
                 <Hand show={slide === 5}>👈</Hand>
