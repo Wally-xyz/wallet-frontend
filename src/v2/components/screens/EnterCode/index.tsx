@@ -70,7 +70,7 @@ export function EnterCode(props: Props) {
         if (response.access_token) {
           const ls = window.localStorage;
           ls.setItem("token", response.access_token);
-          props.onSubmit({ address: response.user.address, authToken: response.access_token });
+          props.onSubmit({ address: response.address, authToken: response.access_token });
         }
       });
   };
