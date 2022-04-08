@@ -91,9 +91,9 @@ export function Purchase(props: Props) {
             <Title>Buy crypto and NFTs with just a credit card</Title>
             <Disclaimer>
               Minting your NFT writes the image to the blockchain and gives you verifiable
-              ownership. This costs ETH, so we’ll collect $100 to cover the minting fees.
+              ownership. This costs ETH, so we’ll collect $50 to cover the minting fees.
             </Disclaimer>
-            <Submit onClick={props.onSubmit}>Purchase for $100</Submit>
+            <Submit onClick={props.onSubmit}>Purchase for $50</Submit>
             <Disclaimer>You’ll be taken to Stripe for a secure payment.</Disclaimer>
           </RightCol>
         </Content>
