@@ -29,7 +29,7 @@ const Mint = (props: Props) => {
     return (
         <>
             <p>Minting your NFT to the blockchain writes the image to the blockchain and gives you verifiable
-                ownership over it. This costs ETH, so we'll collect $100 to cover the minting fees</p>
+                ownership over it. This costs ETH, so we'll collect $50 to cover the minting fees</p>
             <SSButton onClick={stripeCheckout}>{`Purchase`}</SSButton>
         </>
     );
