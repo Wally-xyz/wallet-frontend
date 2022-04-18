@@ -5,6 +5,7 @@ import { Chrome } from "../../Chrome";
 import { ImageUpload } from "../../ImageUpload";
 import { Input } from "../../Input";
 import { Button } from "../../Button";
+import { WalletCreated } from "../../tips/WalletCreated";
 
 const Container = styled.article`
   box-sizing: border-box;
@@ -71,6 +72,7 @@ const Title = styled.header`
 `;
 
 interface Props {
+  address?: string;
   image?: File;
   imageUrl?: string;
   name: string;
@@ -82,7 +84,7 @@ interface Props {
 
 export function UploadImage(props: Props) {
   return (
-    <Chrome>
+    <Chrome  footer={<WalletCreated address={props.address}/>}>
       <Container>
         <Title>🖼 It’s time to upload your image.</Title>
         <Disclaimer>Pick something cool!</Disclaimer>
