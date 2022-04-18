@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { Logo } from "../Logo";
+import { EasyMintLogo as Logo } from "../EasyMintLogo";
 
 const Container = styled.article`
   display: grid;
@@ -13,12 +13,6 @@ const Container = styled.article`
 const Content = styled.div`
   display: grid;
   place-items: center;
-`;
-
-const Demo = styled.div`
-  color: #ffffff;
-  font-size: 28px;
-  font-weight: 700;
 `;
 
 const Footer = styled.footer`
@@ -50,7 +44,6 @@ export function Chrome(props: Props) {
     <Container className={props.className}>
       <Header>
         <Wally />
-        <Demo>Demo - Create an NFT</Demo>
       </Header>
       <Content>{props.children}</Content>
       {props.footer ? <Footer>{props.footer}</Footer> : <div />}
