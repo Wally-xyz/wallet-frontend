@@ -331,6 +331,7 @@ export function App() {
           path="/upload-image"
           element={
             <UploadImage
+              address={state.address}
               image={state.image}
               imageUrl={state.imageUrl}
               name={state.name}

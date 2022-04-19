@@ -2,11 +2,17 @@ import * as React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import { EasyMintLogo as _EasyMintLogo } from "../../EasyMintLogo";
 import { Logo as _Logo } from "../../Logo";
 import { Whale as _Whale } from "../../Whale";
 import { ButtonLink } from "../../Button";
 
 const Logo = styled(_Logo)`
+  height: 26px;
+  margin: 0 8px;
+`;
+
+const EasyMintLogo = styled(_EasyMintLogo)`
   height: 144px;
 `;
 
@@ -129,12 +135,22 @@ const RightCol = styled.div`
   }
 `;
 
+const PoweredBy = styled.div`
+  display: flex;
+  margin-top: 60px;
+`
+
+const DocsLink = styled.a`
+  color: #34C2FF;
+  margin-left: 8px;
+`
+
 export function Start() {
   return (
     <Container>
       <Center>
         <Content>
-          <Logo />
+          <EasyMintLogo />
           <Tagline>
             Wally lets you easily integrate wallets into user accounts through our APIs.
           </Tagline>
@@ -152,6 +168,9 @@ export function Start() {
             *To complete the demo you need to be subscribed to Twitter Blue. This process works best
             on your desktop browser.
           </Disclaimer>
+          <PoweredBy>
+            This app is powered by <Logo/> | <DocsLink href="https://docs.wallylabs.xyz">View API docs</DocsLink>
+          </PoweredBy>
         </Content>
         <RightCol>
           <Whale />
