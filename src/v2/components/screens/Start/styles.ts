@@ -48,22 +48,18 @@ export const Center = styled.div`
 export const Container = styled.article`
   height: 100%;
   width: 100%;
-  background-image: url("/landing_background.svg");
-`;
-
-export const Wrapper = styled.div`
+  background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(18, 21, 23, 0.92) 0%,
+      rgba(5, 5, 5, 0.98) 100%
+    ),
+    url("/landing_background.png");
+  background-repeat: repeat;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100%;
-  width: 100%;
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(18, 21, 23, 0.92) 0%,
-    rgba(5, 5, 5, 0.98) 100%
-  );
 `;
 
 export const EasyMintLogo = styled(_EasyMintLogo)`
