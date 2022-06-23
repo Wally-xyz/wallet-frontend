@@ -32,6 +32,7 @@ export const TopBarWrapper = styled.div`
 export const Content = styled.div`
   margin-top: 48px;
   margin-left: 40px;
+  margin-right: 40px;
 `;
 
 export const StepTitle = styled.h5`
@@ -65,4 +66,49 @@ export const SignupMethodTitle = styled.div`
   color: #dce2e5;
 
   margin-top: 24px;
+`;
+
+export const SignupMethodSubtitle = styled.div`
+  /* Wally/H3 */
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height, or 120% */
+
+  letter-spacing: 0.0025em;
+
+  color: #e6ecef;
+  margin-top: 48px;
+`;
+
+export const SignupText = styled.div`
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  /* or 150% */
+
+  letter-spacing: 0.0025em;
+
+  color: #d9e3e8;
+  margin-top: 64px;
+`;
+
+export const APICallTitle = styled.div`
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 12px;
+  /* identical to box height, or 67% */
+
+  letter-spacing: 0.0025em;
+
+  color: #e6ecef;
+
+  margin-top: 64px;
 `;
