@@ -15,6 +15,14 @@ export const Container = styled.article`
   background: #1a1533;
 `;
 
+export const TopNavWrapper = styled.div`
+  display: flex;
+  width: 98%;
+  flex-direction: column;
+  margin-right: 64px;
+  margin-left: 32px;
+`;
+
 export const TitleWrapper = styled.div`
   align-self: baseline;
   margin-left: 48px;
