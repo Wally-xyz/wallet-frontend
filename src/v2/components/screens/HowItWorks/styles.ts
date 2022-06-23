@@ -5,24 +5,14 @@ import { EasyMintLogo as _EasyMintLogo } from "../../EasyMintLogo";
 import { Whale as _Whale } from "../../Whale";
 
 export const Container = styled.article`
-  height: 100%;
-  width: 100%;
-  background: #1a1533;
-`;
-
-export const Wrapper = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   height: 100%;
   width: 100%;
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(18, 21, 23, 0.92) 0%,
-    rgba(5, 5, 5, 0.98) 100%
-  );
+  background: #1a1533;
 `;
 
 export const TitleWrapper = styled.div`
@@ -111,10 +101,10 @@ export const Footer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 160px;
   width: 100%;
   justify-content: flex-end;
   margin-right: 64px;
+  margin-bottom: 64px;
 `;
 
 export const StartDemoButton = styled.button`

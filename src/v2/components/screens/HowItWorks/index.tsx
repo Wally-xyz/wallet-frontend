@@ -9,7 +9,6 @@ import {
   Footer,
   SubTitle,
   Title,
-  Wrapper,
   BackButton,
   StartDemoButton,
 } from "./styles";
@@ -17,7 +16,7 @@ import {
 export function HowItWorks() {
   return (
     <Container>
-      <Wrapper>
+      <div>
         <TopNav />
         <TitleWrapper>
           <Title>How It Works</Title>
@@ -26,12 +25,12 @@ export function HowItWorks() {
             your application.
           </SubTitle>
         </TitleWrapper>
-        <Illustration />
-        <Footer>
-          <BackButton to="/">Go Back</BackButton>
-          <StartDemoButton>Start EasyMint Demo</StartDemoButton>
-        </Footer>
-      </Wrapper>
+      </div>
+      <Illustration />
+      <Footer>
+        <BackButton to="/">Go Back</BackButton>
+        <StartDemoButton>Start EasyMint Demo</StartDemoButton>
+      </Footer>
     </Container>
   );
 }

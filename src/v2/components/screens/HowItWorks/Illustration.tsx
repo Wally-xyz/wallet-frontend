@@ -7,7 +7,6 @@ export const Illustration = () => (
     viewBox="0 0 1040 362"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    style={{ marginTop: "10%" }}
   >
     <rect
       x="33.5"
