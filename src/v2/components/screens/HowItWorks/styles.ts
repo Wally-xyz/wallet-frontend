@@ -103,6 +103,10 @@ export const BackButton = styled(Link)`
   text-decoration: none;
 
   color: #f2f6f7;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 export const Footer = styled.footer`
@@ -136,10 +140,15 @@ export const StartDemoButton = styled.button`
   font-weight: 810;
   font-size: 16px;
   line-height: 12px;
+  cursor: pointer;
   /* identical to box height, or 75% */
 
   text-align: center;
   letter-spacing: 0.0125em;
 
   color: #0a0a0b;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;

@@ -4,7 +4,7 @@ import { Input as _Input } from "../../../Input";
 
 export const Container = styled.div`
   width: 50%;
-  height: 100%;
+  min-height: 100%;
   background: #121517;
   padding: 48px 0;
 `;
