@@ -115,6 +115,10 @@ export const globalStyle = `
     -webkit-text-size-adjust: 100%;  
   }
 
+  body {
+    background: #131516;
+  }
+
   button {
     border-style: none;
     line-height: 1em;

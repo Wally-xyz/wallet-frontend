@@ -15,6 +15,7 @@ import { Start } from "./components/screens/Start";
 import { UploadImage } from "./components/screens/UploadImage";
 import { API_URL } from "../constants/default";
 import { getAppConfig } from "../config";
+import { HowItWorks } from "./components/screens/HowItWorks";
 
 const GradientCircle1 = styled.div`
   background: linear-gradient(90.87deg, rgba(40, 0, 71, 0.7) -41.78%, rgba(64, 0, 57, 0.7) 100%);
@@ -104,12 +105,17 @@ export function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const fetchImage = async (authToken:string) => {
+  const fetchImage = async (authToken: string) => {
     const resp = await fetch(`${API_URL}/media/recent`, {
       headers: { Authorization: `Bearer ${authToken}` },
     }).then(r => r.json());
 
-    setState(state => ({ ...state, openseaUrl: resp.opensea_url, imageUrl: resp.s3_url, name: resp.name }));
+    setState(state => ({
+      ...state,
+      openseaUrl: resp.opensea_url,
+      imageUrl: resp.s3_url,
+      name: resp.name,
+    }));
   };
 
   const init = () => {
@@ -287,10 +293,10 @@ export function App() {
   }, [state.connector]);
 
   React.useEffect(() => {
-    if (location.pathname === '/mint-complete' && state.authToken) {
-      fetchImage(state.authToken)
+    if (location.pathname === "/mint-complete" && state.authToken) {
+      fetchImage(state.authToken);
     }
-  }, [location])
+  }, [location]);
 
   return (
     <>
@@ -298,6 +304,7 @@ export function App() {
       <GradientCircle2 />
       <Routes>
         <Route path="/" element={<Start />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
         <Route
           path="/dummy"
           element={<button onClick={() => initWalletConnect(state.uri || "")} />}
