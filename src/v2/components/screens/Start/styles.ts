@@ -20,9 +20,9 @@ export const Button = styled(ButtonLink)`
   box-shadow: 0px 8px 0px -4px #030303;
   border-radius: 4px;
 
-  font-family: "New York";
+  font-family: "Inter";
   font-style: normal;
-  font-weight: 810;
+  font-weight: 700;
   font-size: 20px;
   line-height: 12px;
   /* identical to box height, or 60% */
@@ -48,22 +48,18 @@ export const Center = styled.div`
 export const Container = styled.article`
   height: 100%;
   width: 100%;
-  background-image: url("/landing_background.svg");
-`;
-
-export const Wrapper = styled.div`
+  background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(18, 21, 23, 0.92) 0%,
+      rgba(5, 5, 5, 0.98) 100%
+    ),
+    url("/landing_background.png");
+  background-repeat: repeat;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100%;
-  width: 100%;
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(18, 21, 23, 0.92) 0%,
-    rgba(5, 5, 5, 0.98) 100%
-  );
 `;
 
 export const EasyMintLogo = styled(_EasyMintLogo)`
@@ -94,10 +90,10 @@ export const TwitterInfo = styled.div`
   width: 50%;
   height: 48px;
 
-  font-family: "New York";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 568;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 24px;
   /* or 171% */
 
@@ -111,41 +107,14 @@ export const TwitterBlueText = styled.span`
   color: #0088ff;
 `;
 
-export const TopNav = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  margin: 32px 32px 0 0;
-`;
-
 export const Tagline = styled.div`
   //styleName: EasyMint/H1;
-  font-family: New York;
+  font-family: "Inter";
   font-size: 40px;
   font-weight: 934;
   line-height: 56px;
   letter-spacing: 0.0025em;
   text-align: center;
-`;
-
-export const TopNavIconWrapper = styled.span`
-  margin-left: 10px;
-`;
-
-export const TopNavLink = styled.a`
-  display: flex;
-  align-items: center;
-  color: #cec6d2;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  height: 12px;
-  line-height: 12px;
-  margin-right: 32px;
-  text-decoration: none;
-  letter-spacing: 0.0025em;
 `;
 
 export const FlexWrapper = styled.div`
@@ -182,7 +151,7 @@ export const FooterHeading = styled.h5`
 `;
 
 export const FooterText = styled.span`
-  width: 40%;
+  width: 45%;
   height: 48px;
 
   /* Wally/Paragraph */
@@ -190,7 +159,7 @@ export const FooterText = styled.span`
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
   /* or 150% */
 
