@@ -103,7 +103,6 @@ export const globalStyle = `
     font-stretch: normal;
     font-weight: ${fonts.weight.normal};
     font-size: ${fonts.size.medium};
-    background-color: rgb(${colors.backgroundColor});
     color: rgb(${colors.white});
     overflow-y:auto;
     text-rendering: optimizeLegibility;
@@ -226,8 +225,4 @@ export const globalStyle = `
 
 export const globalStyleV2 = `
   ${globalStyle}
-
-  body {
-    background-color: ${colors.backgroundColorV2};
-  }
 `;
