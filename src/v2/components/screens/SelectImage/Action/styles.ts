@@ -1,5 +1,5 @@
 import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
-import { CourierText, Heading2, TextLight } from "src/v2/components/Styles/Typography";
+import { CourierText, Heading3, TextLight } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
 
 import { Input as _Input } from "../../../Input";
@@ -11,7 +11,8 @@ export const Container = styled.div`
   padding: 48px 0;
 `;
 
-export const SubTitle = styled(Heading2)`
+export const SubTitle = styled(Heading3)`
+  text-align: center;
   width: 475px;
 `;
 
@@ -25,22 +26,22 @@ export const ImageSubTitle = styled(TextLight)`
 `;
 
 export const ContentWrapper = styled(FlexColumn)`
-  margin-top: 100px;
+  margin: 100px 48px 0;
 `;
 
 export const ImageWrapper = styled(FlexColumn)`
   align-items: flex-start;
-  &:not(:last-child) {
-    margin-right: 24px;
-  }
 `;
 
 export const ImageSection = styled(FlexRow)`
   margin-top: 64px;
   align-items: baseline;
+  width: 100%;
+  justify-content: space-between;
 `;
 
 export const ButtonSection = styled(FlexRow)`
   margin-top: 64px;
   justify-content: space-between;
+  width: 100%;
 `;

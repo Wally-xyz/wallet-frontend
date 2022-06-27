@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { FlexRow } from "src/v2/components/Styles/Layout";
+import { Heading3 } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -48,7 +48,7 @@ export const SignupText = styled.div`
   margin-top: 64px;
 `;
 
-export const APICallTitle = styled.div`
+export const APICallTitle = styled(Heading3)`
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
@@ -96,26 +96,4 @@ export const Footer = styled.footer`
   align-items: center;
   justify-content: flex-end;
   margin-top: 200px;
-`;
-
-export const NextStepButton = styled(Link)`
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 800;
-  font-size: 14px;
-  line-height: 12px;
-  /* identical to box height, or 86% */
-
-  text-align: right;
-  letter-spacing: 0.0025em;
-
-  color: #e6ecef;
-  text-decoration: none;
-  margin-right: 16px;
-  display: flex;
-  align-items: center;
-`;
-
-export const NextStepText = styled.div`
-  margin-right: 8px;
 `;

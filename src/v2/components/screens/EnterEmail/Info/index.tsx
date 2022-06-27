@@ -1,7 +1,7 @@
 import * as React from "react";
+import { NextStepButton } from "src/v2/components/Styles/NavButtons";
 import { Heading2, Heading5, Heading3 } from "src/v2/components/Styles/Typography";
 import { TopNav } from "src/v2/components/TopNav";
-import { RightArrow } from "src/v2/icons/RightArrow";
 import { Code } from "../../../Code";
 import { Illustration } from "./Illustration";
 
@@ -11,8 +11,6 @@ import {
   Content,
   Footer,
   Highlightor,
-  NextStepButton,
-  NextStepText,
   Option,
   OptionsWrapper,
   TopBarWrapper,
@@ -61,10 +59,7 @@ export function Info() {
         />
       </Content>
       <Footer>
-        <NextStepButton to={"/select-image"}>
-          <NextStepText>Next Step</NextStepText>
-          <RightArrow />
-        </NextStepButton>
+        <NextStepButton to="/select-image" />
       </Footer>
     </Container>
   );
