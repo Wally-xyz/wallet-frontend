@@ -33,7 +33,7 @@ export function Action() {
             <ImageSubTitle>16 of 200 Remaining</ImageSubTitle>
           </ImageWrapper>
           <ImageWrapper>
-            <ImageTitle>Dronies</ImageTitle>
+            <ImageTitle>MMCC</ImageTitle>
             <img style={{ marginTop: -8 }} src="/images/mmcc.svg" />
             <ImageSubTitle>98 of 100 Remaining</ImageSubTitle>
           </ImageWrapper>
