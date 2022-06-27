@@ -1,3 +1,5 @@
+import { FlexColumn } from "src/v2/components/Styles/Layout";
+import { Heading2 } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
 
 import { Input as _Input } from "../../../Input";
@@ -45,51 +47,15 @@ export const EmailInput = styled(_Input)`
   margin-top: 10px;
 `;
 
-export const Title = styled.h1`
-  /* EasyMint/H1 */
-
-  font-family: "New York";
-  font-style: normal;
-  font-weight: 934;
-  font-size: 40px;
-  line-height: 56px;
-  /* identical to box height, or 140% */
-
-  text-align: center;
-  letter-spacing: 0.0025em;
-
-  color: #e6ecef;
-`;
-
-export const SubTitle = styled.div`
+export const SubTitle = styled(Heading2)`
   width: 416px;
-  height: 64px;
-
-  /* EasyMint/H2 */
-
-  font-family: "New York";
-  font-style: normal;
-  font-weight: 496;
-  font-size: 20px;
-  line-height: 32px;
-  /* or 160% */
-
-  text-align: center;
-  letter-spacing: -0.005em;
-
-  color: #c0d0d8;
 `;
 
-export const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+export const ContentWrapper = styled(FlexColumn)`
   margin-top: 100px;
-  align-items: center;
 `;
 
-export const EmailInputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+export const EmailInputWrapper = styled(FlexColumn)`
   margin-top: 64px;
   align-items: flex-start;
 `;
