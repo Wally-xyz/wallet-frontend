@@ -34,7 +34,7 @@ export function Info() {
         </Paragraph>
         <ApiTitle>Wally API Process</ApiTitle>
         <Illustration />
-        <CodeBlockTitle>Code Snippets</CodeBlockTitle>
+        <ApiTitle>Code Snippets</ApiTitle>
         <OptionsWrapper>
           <Option>Payload</Option>
           <Option>Curl</Option>

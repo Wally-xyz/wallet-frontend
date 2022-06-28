@@ -1,4 +1,5 @@
 import { FlexRow } from "src/v2/components/Styles/Layout";
+import { Heading3 } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -81,4 +82,9 @@ export const Footer = styled.footer`
   align-items: center;
   justify-content: flex-end;
   margin-top: 200px;
+`;
+
+export const ApiTitle = styled(Heading3)`
+  margin-top: 24px;
+  text-align: left;
 `;

@@ -66,6 +66,7 @@ export const SignupText = styled.div`
 `;
 
 export const ApiTitle = styled(Heading3)`
+  margin-top: 24px;
   text-align: left;
 `;
 
