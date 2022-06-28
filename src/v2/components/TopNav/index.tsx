@@ -6,9 +6,9 @@ import { Logo } from "src/v2/icons/Logo";
 
 import { Wrapper, IconWrapper, NavLink, NavRouterLink } from "./styles";
 
-export function TopNav() {
+export function TopNav({ variant = "BIG" }: { variant?: string }) {
   return (
-    <Wrapper>
+    <Wrapper variant={variant}>
       <NavRouterLink to="/how-it-works">How It Works</NavRouterLink>
       <NavLink href="/dummy">
         Demos

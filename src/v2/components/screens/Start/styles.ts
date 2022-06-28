@@ -62,18 +62,6 @@ export const Container = styled.article`
   justify-content: flex-start;
 `;
 
-export const EasyMintLogo = styled(_EasyMintLogo)`
-  width: 137.48px;
-  height: 32px;
-`;
-
-export const EasyMintLogoWrapper = styled.div`
-  align-self: baseline;
-  margin-left: 48px;
-  display: flex;
-  align-items: center;
-`;
-
 export const Message = styled.div`
   font-weight: 400;
   font-size: 20px;
@@ -167,30 +155,4 @@ export const FooterText = styled.span`
   margin-left: 24px;
 
   color: #dfe8ec;
-`;
-
-export const DemoBadge = styled.span`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 6px 10px 7px;
-  gap: 8px;
-
-  height: 24px;
-
-  background: #334047;
-  border-radius: 6px;
-
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 11px;
-  /* identical to box height, or 73% */
-
-  color: #f2f6f7;
-
-  text-shadow: 0px 1px 0px rgba(19, 21, 22, 0.48);
-
-  margin-left: 8px;
 `;
