@@ -1,15 +1,13 @@
 import * as React from "react";
 
 import { Logo } from "src/v2/icons/Logo";
+import { EasyMintLogo } from "../../EasyMintLogo";
 import { TopNav } from "../../TopNav";
 
 import {
   Button,
   Center,
   Container,
-  DemoBadge,
-  EasyMintLogo,
-  EasyMintLogoWrapper,
   Footer,
   FooterHeading,
   FooterText,
@@ -24,10 +22,7 @@ export function Start() {
   return (
     <Container>
       <TopNav />
-      <EasyMintLogoWrapper>
-        <EasyMintLogo />
-        <DemoBadge>Demo</DemoBadge>
-      </EasyMintLogoWrapper>
+      <EasyMintLogo />
       <Center>
         <FlexWrapper>
           <Tagline>Create an NFT in minutes</Tagline>

@@ -11,12 +11,13 @@ import {
   Title,
   BackButton,
   StartDemoButton,
+  TopNavWrapper,
 } from "./styles";
 
 export function HowItWorks() {
   return (
     <Container>
-      <div>
+      <TopNavWrapper>
         <TopNav />
         <TitleWrapper>
           <Title>How It Works</Title>
@@ -25,7 +26,7 @@ export function HowItWorks() {
             your application.
           </SubTitle>
         </TitleWrapper>
-      </div>
+      </TopNavWrapper>
       <Illustration />
       <Footer>
         <BackButton to="/">Go Back</BackButton>

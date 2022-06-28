@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ variant?: string }>`
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  margin: 32px 32px 0 0;
+  margin: ${({ variant }) => (variant === "BIG" ? "32px 64px 0 0" : "32px 0")};
 `;
 
 export const IconWrapper = styled.span`
