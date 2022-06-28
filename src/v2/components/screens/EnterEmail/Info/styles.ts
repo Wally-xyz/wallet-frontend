@@ -1,5 +1,4 @@
 import { FlexRow } from "src/v2/components/Styles/Layout";
-import { Heading3 } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -7,6 +6,7 @@ export const Container = styled.div`
   box-sizing: border-box;
   max-width: 1000px;
   width: 50%;
+  margin-left: 50%;
   background: #1a1533;
 `;
 
@@ -48,21 +48,6 @@ export const SignupText = styled.div`
   margin-top: 64px;
 `;
 
-export const APICallTitle = styled(Heading3)`
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 12px;
-  /* identical to box height, or 67% */
-
-  letter-spacing: 0.0025em;
-
-  color: #e6ecef;
-
-  margin-top: 64px;
-`;
-
 export const Separator = styled.div`
   background: rgba(252, 253, 253, 0.08);
   border-radius: 1px;
@@ -76,11 +61,11 @@ export const OptionsWrapper = styled(FlexRow)`
 export const Option = styled.div`
   padding-bottom: 16px;
   text-align: center;
-  width: 160px;
+  width: 33%;
 `;
 
 export const Highlightor = styled.div`
-  width: 160px;
+  width: 33%;
   height: 4px;
 
   background: linear-gradient(87.18deg, #32adf0 -15.08%, #ff00fe 107.47%);

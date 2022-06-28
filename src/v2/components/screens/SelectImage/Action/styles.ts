@@ -9,10 +9,12 @@ export const Container = styled.div`
   min-height: 100%;
   background: #121517;
   padding: 48px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
 `;
 
 export const SubTitle = styled(Heading3)`
-  text-align: center;
   width: 475px;
 `;
 
@@ -31,6 +33,10 @@ export const ContentWrapper = styled(FlexColumn)`
 
 export const ImageWrapper = styled(FlexColumn)`
   align-items: flex-start;
+`;
+
+export const ImageContainer = styled(FlexColumn)`
+  min-height: 120px;
 `;
 
 export const ImageSection = styled(FlexRow)`

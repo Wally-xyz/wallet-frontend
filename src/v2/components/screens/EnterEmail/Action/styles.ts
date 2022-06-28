@@ -1,53 +1,22 @@
+import { PrimaryButton } from "src/v2/components/Styles/Button";
+import { Input } from "src/v2/components/Styles/Input";
 import { FlexColumn } from "src/v2/components/Styles/Layout";
-import { Heading2 } from "src/v2/components/Styles/Typography";
+import { Heading3 } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
-
-import { Input as _Input } from "../../../Input";
 
 export const Container = styled.div`
   width: 50%;
   min-height: 100%;
   background: #121517;
   padding: 48px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
 `;
 
-export const EmailInput = styled(_Input)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 16px;
-  gap: 8px;
+export const EmailInput = styled(Input)``;
 
-  width: 416px;
-  height: 44px;
-
-  background: #090a0b;
-  border: 1px solid #334047;
-  box-shadow: 0px 8px 0px -4px #090a0b;
-  border-radius: 4px;
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
-
-  font-family: "New York";
-  font-style: normal;
-  font-weight: 674;
-  font-size: 16px;
-  line-height: 12px;
-  /* identical to box height, or 75% */
-
-  letter-spacing: 0.01em;
-
-  color: #45565f;
-
-  margin-top: 10px;
-`;
-
-export const SubTitle = styled(Heading2)`
+export const SubTitle = styled(Heading3)`
   width: 416px;
 `;
 
@@ -58,21 +27,10 @@ export const ContentWrapper = styled(FlexColumn)`
 export const EmailInputWrapper = styled(FlexColumn)`
   margin-top: 64px;
   align-items: flex-start;
+  width: 392px;
 `;
 
-export const EmailLabel = styled.label`
-  height: 10px;
-
-  /* EasyMint/Input Label */
-
-  font-family: "Courier";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 10px;
-  /* identical to box height, or 71% */
-
-  letter-spacing: 0.04em;
-
-  color: #a6bdc9;
+export const SubmitButton = styled(PrimaryButton)`
+  margin-top: 32px;
+  align-self: flex-end;
 `;

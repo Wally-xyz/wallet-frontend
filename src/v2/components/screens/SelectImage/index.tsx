@@ -6,9 +6,6 @@ import { Container } from "./styles";
 import { Action } from "./Action";
 import { Info } from "./Info";
 
-// interface Props {
-// }
-
 export function SelectImage() {
   return (
     <Container>

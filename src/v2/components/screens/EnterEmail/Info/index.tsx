@@ -6,7 +6,6 @@ import { Code } from "../../../Code";
 import { Illustration } from "./Illustration";
 
 import {
-  APICallTitle,
   Container,
   Content,
   Footer,
@@ -34,14 +33,14 @@ export function Info() {
         </OptionsWrapper>
         <Highlightor />
         <Separator />
-        <Heading3>Wally API Process</Heading3>
+        <Heading3 align="left">Wally API Process</Heading3>
         <Illustration />
         <SignupText>
           Placeholder text to demonstrate what Wally will be doing in the background here, as well
           as let users know which option(s) are available to them in the API with each of these
           types of signup methods.
         </SignupText>
-        <APICallTitle>API Call</APICallTitle>
+        <Heading3 align="left">API Call</Heading3>
         <Code
           code={`fetch(
     'https://api.wallylabs.xyz/wallets/create', {
