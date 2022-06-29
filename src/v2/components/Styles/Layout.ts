@@ -12,3 +12,7 @@ export const FlexRow = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const Separator = styled.div<{ width?: string }>`
+  width: ${({ width }) => width || "24px"};
+`;

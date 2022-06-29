@@ -7,10 +7,10 @@ import { Heading1 } from "src/v2/components/Styles/Typography";
 import {
   Container,
   ContentWrapper,
-  EmailLabel,
   EmailInput,
   EmailInputWrapper,
   SubTitle,
+  SubmitButton,
 } from "./styles";
 
 interface Props {
@@ -37,12 +37,12 @@ export function Action(props: Props) {
       <EasyMintLogo />
       <ContentWrapper>
         <Heading1>Sign Up</Heading1>
-        <SubTitle>
+        <SubTitle align="center">
           Sign up with just your email. Click the link you receive to create an account.
         </SubTitle>
         <EmailInputWrapper>
-          <EmailLabel>Email Address</EmailLabel>
-          <EmailInput />
+          <EmailInput label="Email Address" />
+          <SubmitButton>Send Email</SubmitButton>
         </EmailInputWrapper>
       </ContentWrapper>
     </Container>
