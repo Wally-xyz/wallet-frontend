@@ -3,8 +3,10 @@ import { NextStepButton, PrevStepButton } from "src/v2/components/Styles/NavButt
 import { Heading2, Heading5, Paragraph } from "src/v2/components/Styles/Typography";
 import { TopNav } from "src/v2/components/TopNav";
 import { Code } from "../../../Code";
+import { Illustration } from "./Illustration";
 
 import {
+  ApiTitle,
   CodeBlockTitle,
   Container,
   Content,
@@ -23,9 +25,16 @@ export function Info() {
         <TopNav variant="SMALL" />
       </TopBarWrapper>
       <Content>
-        <Heading5>Step 2</Heading5>
-        <Heading2>Select image for NFT</Heading2>
-        <Paragraph>The Wally API supports easily uploading images to IPFS</Paragraph>
+        <Heading5>Step 3</Heading5>
+        <Heading2>Users can pay without needing crypto</Heading2>
+        <Paragraph>
+          Users pay you with a credit card and the crypto is paid directly to the blockchain from an
+          app wallet. This means users never touch the tokens and you don’t need to use onboarding
+          providers like Moonpay or Ramp.
+        </Paragraph>
+        <ApiTitle>Wally API Process</ApiTitle>
+        <Illustration />
+        <ApiTitle>Code Snippets</ApiTitle>
         <OptionsWrapper>
           <Option>Payload</Option>
           <Option>Curl</Option>
@@ -59,7 +68,7 @@ export function Info() {
       </Content>
       <Footer>
         <PrevStepButton to="/enter-email" />
-        <NextStepButton to="/purchase" />
+        <NextStepButton to="/" />
       </Footer>
     </Container>
   );

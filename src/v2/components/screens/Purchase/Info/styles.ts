@@ -65,6 +65,11 @@ export const SignupText = styled.div`
   margin-top: 64px;
 `;
 
+export const ApiTitle = styled(Heading3)`
+  margin-top: 24px;
+  text-align: left;
+`;
+
 export const CodeBlockTitle = styled(Heading3)`
   margin-top: 48px;
   text-align: left;
@@ -104,5 +109,5 @@ export const Footer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 200px;
+  margin-top: 120px;
 `;
