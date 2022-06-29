@@ -28,11 +28,15 @@ export const ImageSubTitle = styled(TextLight)`
 `;
 
 export const ContentWrapper = styled(FlexColumn)`
-  margin: 100px 48px 0;
+  margin: 75px 48px 0;
 `;
 
 export const ImageWrapper = styled(FlexColumn)`
   align-items: flex-start;
+
+  &:not(:last-of-type) {
+    margin-right: 24px;
+  }
 `;
 
 export const ImageContainer = styled(FlexColumn)`
@@ -43,7 +47,7 @@ export const ImageSection = styled(FlexRow)`
   margin-top: 64px;
   align-items: baseline;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const ButtonSection = styled(FlexRow)`
