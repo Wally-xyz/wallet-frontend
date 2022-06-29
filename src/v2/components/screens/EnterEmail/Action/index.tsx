@@ -1,5 +1,6 @@
 import * as React from "react";
 import { EasyMintLogo } from "src/v2/components/EasyMintLogo";
+import { Heading1 } from "src/v2/components/Styles/Typography";
 
 // import { API_URL } from "../../../../../constants/default";
 
@@ -10,7 +11,6 @@ import {
   EmailInput,
   EmailInputWrapper,
   SubTitle,
-  Title,
 } from "./styles";
 
 interface Props {
@@ -36,7 +36,7 @@ export function Action(props: Props) {
     <Container>
       <EasyMintLogo />
       <ContentWrapper>
-        <Title>Sign Up</Title>
+        <Heading1>Sign Up</Heading1>
         <SubTitle>
           Sign up with just your email. Click the link you receive to create an account.
         </SubTitle>

@@ -1,6 +1,7 @@
 import * as React from "react";
+import { NextStepButton } from "src/v2/components/Styles/NavButtons";
+import { Heading2, Heading5, Heading3 } from "src/v2/components/Styles/Typography";
 import { TopNav } from "src/v2/components/TopNav";
-import { RightArrow } from "src/v2/icons/RightArrow";
 import { Code } from "../../../Code";
 import { Illustration } from "./Illustration";
 
@@ -10,13 +11,8 @@ import {
   Content,
   Footer,
   Highlightor,
-  NextStepButton,
-  NextStepText,
   Option,
   OptionsWrapper,
-  SignupMethodSubtitle,
-  SignupMethodTitle,
-  StepTitle,
   TopBarWrapper,
   Separator,
   SignupText,
@@ -29,8 +25,8 @@ export function Info() {
         <TopNav variant="SMALL" />
       </TopBarWrapper>
       <Content>
-        <StepTitle>Step 1</StepTitle>
-        <SignupMethodTitle>Signup Methods</SignupMethodTitle>
+        <Heading5>Step 1</Heading5>
+        <Heading2>Signup Methods</Heading2>
         <OptionsWrapper>
           <Option>Email Magic Link</Option>
           <Option>Social Signup</Option>
@@ -38,7 +34,7 @@ export function Info() {
         </OptionsWrapper>
         <Highlightor />
         <Separator />
-        <SignupMethodSubtitle>Wally API Process</SignupMethodSubtitle>
+        <Heading3>Wally API Process</Heading3>
         <Illustration />
         <SignupText>
           Placeholder text to demonstrate what Wally will be doing in the background here, as well
@@ -63,10 +59,7 @@ export function Info() {
         />
       </Content>
       <Footer>
-        <NextStepButton to={"/"}>
-          <NextStepText>Next Step</NextStepText>
-          <RightArrow />
-        </NextStepButton>
+        <NextStepButton to="/select-image" />
       </Footer>
     </Container>
   );
