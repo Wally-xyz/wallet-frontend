@@ -7,10 +7,11 @@ export const FlexColumn = styled.div`
   align-items: center;
 `;
 
-export const FlexRow = styled.div`
+export const FlexRow = styled.div<{ justify?: string; width?: string }>`
   display: flex;
-  justify-content: center;
+  justify-content: ${({ justify }) => justify || "center"};
   align-items: center;
+  width: ${({ width }) => width || "auto"};
 `;
 
 export const Separator = styled.div<{ width?: string }>`

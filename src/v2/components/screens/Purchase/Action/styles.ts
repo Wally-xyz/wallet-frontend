@@ -21,7 +21,7 @@ export const SubTitle = styled(Heading3)`
 `;
 
 export const ContentWrapper = styled(FlexColumn)`
-  margin: 100px 48px 0;
+  margin: 75px 48px 0;
 `;
 
 export const ConfirmButton = styled(PrimaryButton)`
