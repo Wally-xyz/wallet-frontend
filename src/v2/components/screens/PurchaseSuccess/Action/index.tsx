@@ -29,7 +29,7 @@ export function Action() {
           View your NFT on OpenSea or connect to Twitter to set the NFT image as your profile photo.
         </SubTitle>
         <MainSection>
-          <Dronie src="/images/dronies.svg" />
+          <Dronie src="/images/dronies.png" />
           <ButtonSection>
             <OpenSeaButton>
               <FlexRow>

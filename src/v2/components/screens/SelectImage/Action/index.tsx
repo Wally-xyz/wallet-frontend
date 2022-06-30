@@ -12,6 +12,7 @@ import {
   ImageWrapper,
   ImageContainer,
   SubTitle,
+  Image,
   ImageTitle,
   ImageSubTitle,
   ImageSection,
@@ -31,28 +32,28 @@ export function Action() {
           <ImageWrapper>
             <ImageTitle>Dronies</ImageTitle>
             <ImageContainer>
-              <img src="/images/dronies.svg" />
+              <Image src="/images/dronies.png" />
             </ImageContainer>
             <ImageSubTitle>16 of 200 Remaining</ImageSubTitle>
           </ImageWrapper>
           <ImageWrapper>
             <ImageTitle>MMCC</ImageTitle>
             <ImageContainer>
-              <img style={{ marginTop: -8 }} src="/images/mmcc.svg" />
+              <Image style={{ marginTop: -8 }} src="/images/mmcc.png" />
             </ImageContainer>
             <ImageSubTitle>98 of 100 Remaining</ImageSubTitle>
           </ImageWrapper>
           <ImageWrapper>
             <ImageTitle>Age of SAM</ImageTitle>
             <ImageContainer>
-              <img src="/images/age-of-sam.svg" />
+              <Image src="/images/age-of-sam.gif" />
             </ImageContainer>
             <ImageSubTitle>2 of 360 Remaining</ImageSubTitle>
           </ImageWrapper>
           <ImageWrapper>
             <ImageTitle>Upload Image</ImageTitle>
             <ImageContainer>
-              <img src="/images/upload-image.svg" />
+              <Image src="/images/upload-image.svg" />
             </ImageContainer>
           </ImageWrapper>
         </ImageSection>

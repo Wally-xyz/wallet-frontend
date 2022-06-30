@@ -39,6 +39,14 @@ export const ImageWrapper = styled(FlexColumn)`
   }
 `;
 
+export const Image = styled.img`
+  width: 120px;
+  height: 120px;
+
+  box-shadow: 0px 8px 0px -4px #090a0b;
+  border-radius: 4px;
+`;
+
 export const ImageContainer = styled(FlexColumn)`
   min-height: 120px;
 `;
