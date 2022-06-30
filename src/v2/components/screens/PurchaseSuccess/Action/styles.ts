@@ -1,5 +1,5 @@
 import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
-import { Heading3 } from "src/v2/components/Styles/Typography";
+import { Heading3, TinyText } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
 import { PrimaryButton } from "src/v2/components/Styles/Button";
 
@@ -35,9 +35,10 @@ export const Dronie = styled.img`
 `;
 
 export const ButtonSection = styled(FlexRow)`
-  margin-top: 64px;
+  margin-top: 48px;
   justify-content: space-between;
   width: 100%;
+  align-items: baseline;
 `;
 
 export const TwitterButtonText = styled.span`
@@ -62,4 +63,12 @@ export const OpenSeaButton = styled(PrimaryButton)`
   span {
     color: white;
   }
+`;
+
+export const TwitterText = styled(TinyText)`
+  margin-top: 16px;
+`;
+
+export const HighlightedText = styled.span`
+  color: #0088ff;
 `;

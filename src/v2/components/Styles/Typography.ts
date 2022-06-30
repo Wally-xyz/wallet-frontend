@@ -95,3 +95,17 @@ export const Paragraph = styled.p`
 
   color: #d9e3e8;
 `;
+
+export const TinyText = styled.span`
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 674;
+  font-size: 10px;
+  line-height: 8px;
+  /* identical to box height, or 67% */
+
+  text-align: center;
+  letter-spacing: 0.0025em;
+
+  color: #d9e3e8;
+`;

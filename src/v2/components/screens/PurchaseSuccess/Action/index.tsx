@@ -12,10 +12,12 @@ import {
   TwitterButtonText,
   MainSection,
   OpenSeaButton,
+  TwitterText,
+  HighlightedText,
 } from "./styles";
 import { PrimaryButton } from "src/v2/components/Styles/Button";
 import { Twitter } from "src/v2/icons/Twitter";
-import { FlexRow } from "src/v2/components/Styles/Layout";
+import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
 import { OpenSea } from "src/v2/icons/OpenSea";
 // import { Separator } from "src/v2/components/Styles/Layout";
 
@@ -37,11 +39,16 @@ export function Action() {
                 <TwitterButtonText>View NFT</TwitterButtonText>
               </FlexRow>
             </OpenSeaButton>
-            <PrimaryButton>
-              <FlexRow>
-                <Twitter /> <TwitterButtonText>Connect</TwitterButtonText>
-              </FlexRow>
-            </PrimaryButton>
+            <FlexColumn>
+              <PrimaryButton>
+                <FlexRow>
+                  <Twitter /> <TwitterButtonText>Connect</TwitterButtonText>
+                </FlexRow>
+              </PrimaryButton>
+              <TwitterText>
+                Requires <HighlightedText>Twitter Blue</HighlightedText>
+              </TwitterText>
+            </FlexColumn>
           </ButtonSection>
         </MainSection>
       </ContentWrapper>
