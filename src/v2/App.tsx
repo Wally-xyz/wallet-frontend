@@ -18,6 +18,7 @@ import { getAppConfig } from "../config";
 import { HowItWorks } from "./components/screens/HowItWorks";
 import { SelectImage } from "./components/screens/SelectImage";
 import { PurchaseSuccess } from "./components/screens/PurchaseSuccess";
+import { MissionAccomplished } from "./components/screens/MissionAccomplished";
 
 const GradientCircle1 = styled.div`
   background: linear-gradient(90.87deg, rgba(40, 0, 71, 0.7) -41.78%, rgba(64, 0, 57, 0.7) 100%);
@@ -438,6 +439,16 @@ export function App() {
           path="/connect-twitter"
           element={
             <ConnectTwitter
+            // onContinue={uri => {
+            //   setState(state => ({ ...state, uri }));
+            // }}
+            />
+          }
+        />
+        <Route
+          path="/mission-accomplished"
+          element={
+            <MissionAccomplished
             // onContinue={uri => {
             //   setState(state => ({ ...state, uri }));
             // }}

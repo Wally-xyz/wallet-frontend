@@ -15,7 +15,7 @@ export const Container = styled.div`
 `;
 
 export const ContentWrapper = styled(FlexColumn)`
-  margin: 75px 48px 0;
+  margin: 48px 48px 0;
 `;
 
 export const ConfirmButton = styled(PrimaryButton)`

@@ -23,7 +23,7 @@ export function Action() {
       <EasyMintLogo />
       <ContentWrapper>
         <Heading1>Select Image</Heading1>
-        <Heading3 align="center">
+        <Heading3 align="center" width="80%">
           Select your image from the options below, or upload your own image to mint an NFT from the
           selected image.
         </Heading3>

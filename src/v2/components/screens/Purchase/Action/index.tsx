@@ -21,7 +21,9 @@ export function Action() {
       <EasyMintLogo />
       <ContentWrapper>
         <Heading1>Purchase NFT</Heading1>
-        <Heading3 align="center">Enter payment details to purchase your NFT.</Heading3>
+        <Heading3 align="center" width="80%">
+          Enter payment details to purchase your NFT.
+        </Heading3>
         <PaymentSection>
           <PaymentRow>
             <Input label="Card Number" placeholder="XXXX XXXX XXXX XXXX" />
