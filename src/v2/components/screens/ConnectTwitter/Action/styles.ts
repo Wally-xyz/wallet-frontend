@@ -16,11 +16,11 @@ export const Container = styled.div`
 `;
 
 export const ContentWrapper = styled(FlexColumn)`
-  margin: 75px 48px 0;
+  margin: 48px 48px 0;
 `;
 
 export const DetailSection = styled(FlexColumn)`
-  margin-top: 48px;
+  margin-top: 24px;
   justify-content: space-between;
   width: 100%;
   align-items: baseline;
@@ -39,7 +39,7 @@ export const TwitterMessage = styled.div`
 `;
 
 export const SubmitButton = styled(PrimaryButton)`
-  margin-top: 40px;
+  margin-top: 16px;
 `;
 
 export const LinkInfoText = styled.div`
@@ -59,6 +59,7 @@ export const LinkInfoText = styled.div`
 
 export const WalletConnectText = styled(Paragraph)`
   font-size: inherit;
+  color: inherit;
   margin: 0;
 `;
 
@@ -96,4 +97,38 @@ export const ConnectButton = styled.button<{ active?: boolean }>`
 
   text-align: center;
   letter-spacing: 0.0025em;
+  cursor: pointer;
+  border-bottom: none;
+`;
+
+export const WhiteText = styled.span`
+  color: #e6ecef;
+`;
+
+export const StepLabel = styled.div`
+  font-family: "Courier";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 10px;
+  /* identical to box height, or 71% */
+
+  letter-spacing: 0.04em;
+
+  color: #8dabb9;
+`;
+
+export const StepText = styled.div`
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 568;
+  font-size: 12px;
+  line-height: 16px;
+  /* or 133% */
+  height: 32px;
+  color: #81a2b1;
+`;
+
+export const Step = styled(FlexColumn)`
+  margin-top: 24px;
 `;
