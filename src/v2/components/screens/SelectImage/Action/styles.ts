@@ -24,7 +24,7 @@ export const ImageSubTitle = styled(TextLight)`
 `;
 
 export const ContentWrapper = styled(FlexColumn)`
-  margin: 75px 48px 0;
+  margin: 48px 48px 0;
 `;
 
 export const ImageWrapper = styled(FlexColumn)`

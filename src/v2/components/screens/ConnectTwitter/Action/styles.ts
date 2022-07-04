@@ -20,7 +20,7 @@ export const ContentWrapper = styled(FlexColumn)`
 `;
 
 export const DetailSection = styled(FlexColumn)`
-  margin-top: 24px;
+  margin-top: 40px;
   justify-content: space-between;
   width: 100%;
   align-items: baseline;
@@ -130,5 +130,5 @@ export const StepText = styled.div`
 `;
 
 export const Step = styled(FlexColumn)`
-  margin-top: 24px;
+  margin-top: 32px;
 `;
