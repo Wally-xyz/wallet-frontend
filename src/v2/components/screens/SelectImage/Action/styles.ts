@@ -1,5 +1,5 @@
 import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
-import { CourierText, Heading3, TextLight } from "src/v2/components/Styles/Typography";
+import { CourierText, TextLight } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
 
 import { Input as _Input } from "../../../Input";
@@ -12,10 +12,6 @@ export const Container = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-`;
-
-export const SubTitle = styled(Heading3)`
-  width: 475px;
 `;
 
 export const ImageTitle = styled(CourierText)`

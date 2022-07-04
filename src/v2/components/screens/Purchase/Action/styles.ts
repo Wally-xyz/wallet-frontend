@@ -1,5 +1,4 @@
 import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
-import { Heading3 } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
 import { PrimaryButton } from "src/v2/components/Styles/Button";
 
@@ -13,11 +12,6 @@ export const Container = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-`;
-
-export const SubTitle = styled(Heading3)`
-  text-align: center;
-  width: 475px;
 `;
 
 export const ContentWrapper = styled(FlexColumn)`

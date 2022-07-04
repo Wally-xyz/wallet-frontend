@@ -25,14 +25,11 @@ export function Info() {
         <TopNav variant="SMALL" />
       </TopBarWrapper>
       <Content>
-        <Heading5>Step 4</Heading5>
-        <Heading2>
-          The NFT is minted using user’s funds and shown with the ability to share
-        </Heading2>
+        <Heading5>Step 5</Heading5>
+        <Heading2>Users can connect NFT directly to Twitter</Heading2>
         <Paragraph>
-          Users pay you with a credit card and the crypto is paid directly to the blockchain from an
-          app wallet. This means users never touch the tokens and you don’t need to use onboarding
-          providers like Moonpay or Ramp.
+          After the NFT has been minted, users can connect to Twitter (requiring a Twitter Blue
+          account) to set the NFT image as their profile photo.
         </Paragraph>
         <ApiTitle>Wally API Process</ApiTitle>
         <Illustration />
@@ -69,8 +66,8 @@ export function Info() {
         />
       </Content>
       <Footer>
-        <PrevStepButton to="/enter-email" />
-        <NextStepButton to="/connect-twitter" />
+        <PrevStepButton to="/payment-success" />
+        <NextStepButton to="/" />
       </Footer>
     </Container>
   );

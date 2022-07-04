@@ -1,5 +1,5 @@
 import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
-import { Heading3, TinyText } from "src/v2/components/Styles/Typography";
+import { TinyText } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
 import { PrimaryButton } from "src/v2/components/Styles/Button";
 
@@ -15,16 +15,9 @@ export const Container = styled.div`
   top: 0;
 `;
 
-export const SubTitle = styled(Heading3)`
-  text-align: center;
-  width: 475px;
-`;
-
 export const ContentWrapper = styled(FlexColumn)`
   margin: 75px 48px 0;
 `;
-
-export const MainSection = styled(FlexColumn)``;
 
 export const Dronie = styled.img`
   width: auto;

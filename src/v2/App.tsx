@@ -438,9 +438,9 @@ export function App() {
           path="/connect-twitter"
           element={
             <ConnectTwitter
-              onContinue={uri => {
-                setState(state => ({ ...state, uri }));
-              }}
+            // onContinue={uri => {
+            //   setState(state => ({ ...state, uri }));
+            // }}
             />
           }
         />

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { BackButton } from "src/v2/components/Styles/BackButton";
 import { EasyMintLogo } from "src/v2/components/EasyMintLogo";
-import { Heading1 } from "src/v2/components/Styles/Typography";
+import { Heading1, Heading3 } from "src/v2/components/Styles/Typography";
 import { Input } from "src/v2/components/Styles/Input";
 
 import {
@@ -10,7 +10,6 @@ import {
   ConfirmButton,
   Container,
   ContentWrapper,
-  SubTitle,
   PaymentRow,
   PaymentSection,
 } from "./styles";
@@ -22,7 +21,7 @@ export function Action() {
       <EasyMintLogo />
       <ContentWrapper>
         <Heading1>Purchase NFT</Heading1>
-        <SubTitle>Enter payment details to purchase your NFT.</SubTitle>
+        <Heading3 align="center">Enter payment details to purchase your NFT.</Heading3>
         <PaymentSection>
           <PaymentRow>
             <Input label="Card Number" placeholder="XXXX XXXX XXXX XXXX" />
