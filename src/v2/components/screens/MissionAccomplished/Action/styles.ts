@@ -30,7 +30,7 @@ export const Dronie = styled.img`
 
 export const ButtonSection = styled(FlexRow)`
   margin-top: 48px;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   align-items: baseline;
 `;

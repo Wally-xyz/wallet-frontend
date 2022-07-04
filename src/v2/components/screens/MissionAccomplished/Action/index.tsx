@@ -9,14 +9,14 @@ import {
   ContentWrapper,
   Dronie,
   TwitterButtonText,
-  OpenSeaButton,
-  TwitterText,
+  // OpenSeaButton,
+  // TwitterText,
   HighlightedText,
 } from "./styles";
 import { PrimaryButton } from "src/v2/components/Styles/Button";
 import { Twitter } from "src/v2/icons/Twitter";
 import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
-import { OpenSea } from "src/v2/icons/OpenSea";
+// import { OpenSea } from "src/v2/icons/OpenSea";
 // import { Separator } from "src/v2/components/Styles/Layout";
 
 export function Action() {
@@ -24,28 +24,20 @@ export function Action() {
     <Container>
       <EasyMintLogo />
       <ContentWrapper>
-        <Heading1>Purchase Successful</Heading1>
+        <Heading1>Mission Accomplished</Heading1>
         <Heading3 align="center" width="80%">
-          View your NFT on OpenSea or connect to Twitter to set the NFT image as your profile photo.
+          View your NFT as your Twitter profile photo, on <HighlightedText>OpenSea</HighlightedText>
+          , or download the image.
         </Heading3>
         <FlexColumn>
           <Dronie src="/images/dronies.png" />
           <ButtonSection>
-            <OpenSeaButton>
-              <FlexRow>
-                <OpenSea />
-                <TwitterButtonText>View NFT</TwitterButtonText>
-              </FlexRow>
-            </OpenSeaButton>
             <FlexColumn>
               <PrimaryButton>
                 <FlexRow>
-                  <Twitter /> <TwitterButtonText>Connect</TwitterButtonText>
+                  <Twitter /> <TwitterButtonText>View Profile</TwitterButtonText>
                 </FlexRow>
               </PrimaryButton>
-              <TwitterText>
-                Requires <HighlightedText>Twitter Blue</HighlightedText>
-              </TwitterText>
             </FlexColumn>
           </ButtonSection>
         </FlexColumn>

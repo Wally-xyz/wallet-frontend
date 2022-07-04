@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NextStepButton, PrevStepButton } from "src/v2/components/Styles/NavButtons";
+import { PrevStepButton } from "src/v2/components/Styles/NavButtons";
 import { Heading2, Heading5, Paragraph } from "src/v2/components/Styles/Typography";
 import { TopNav } from "src/v2/components/TopNav";
 import { Code } from "../../../Code";
@@ -25,11 +25,10 @@ export function Info() {
         <TopNav variant="SMALL" />
       </TopBarWrapper>
       <Content>
-        <Heading5>Step 5</Heading5>
-        <Heading2>Users can connect NFT directly to Twitter</Heading2>
+        <Heading5>Step 6</Heading5>
+        <Heading2>The NFT is set as the user’s Twitter profile photo</Heading2>
         <Paragraph>
-          After the NFT has been minted, users can connect to Twitter (requiring a Twitter Blue
-          account) to set the NFT image as their profile photo.
+          Placeholder text here where any additional information can be given about this step.
         </Paragraph>
         <ApiTitle>Wally API Process</ApiTitle>
         <Illustration />
@@ -66,8 +65,7 @@ export function Info() {
         />
       </Content>
       <Footer>
-        <PrevStepButton to="/purchase-success" />
-        <NextStepButton to="/mission-accomplished" />
+        <PrevStepButton to="/connect-twitter" />
       </Footer>
     </Container>
   );

@@ -36,7 +36,7 @@ export function Action() {
       <ContentWrapper>
         <TwitterMessage>Requires Twitter Blue</TwitterMessage>
         <Heading1>Connect to Twitter</Heading1>
-        <Heading3 align="center" margin="16px">
+        <Heading3 align="center" margin="16px" width="80%">
           Use your computer’s webcam to scan the Twitter QR code, or paste the link.
         </Heading3>
         <DetailSection>
@@ -86,8 +86,7 @@ export function Action() {
                 <Step5 />
                 <StepText>
                   Scan your phone’s QR Code. If the code isn’t scanning try using the{" "}
-                  <WhiteText>Paste Link</WhiteText>
-                  option.
+                  <WhiteText>Paste Link</WhiteText> option.
                 </StepText>
               </Step>
             </FlexRow>
