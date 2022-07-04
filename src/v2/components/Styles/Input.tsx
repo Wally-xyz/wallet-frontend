@@ -60,13 +60,23 @@ const InnerInput = styled.input`
 interface InputProps {
   label: string;
   placeholder?: string;
+  value?: string;
+  onChange?: (val: string) => void;
 }
 
-export function Input({ label, placeholder }: InputProps) {
+export function Input({ label, value, placeholder, onChange }: InputProps) {
   return (
     <Wrapper>
       <Label>{label}</Label>
-      <InnerInput placeholder={placeholder} />
+      <InnerInput
+        placeholder={placeholder}
+        value={value}
+        onChange={evt => {
+          if (onChange) {
+            onChange(evt.target.value);
+          }
+        }}
+      />
     </Wrapper>
   );
 }
