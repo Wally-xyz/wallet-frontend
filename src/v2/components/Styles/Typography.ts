@@ -29,7 +29,7 @@ export const Heading2 = styled.h2`
   color: #dce2e5;
 `;
 
-export const Heading3 = styled.h3<{ align?: string }>`
+export const Heading3 = styled.h3<{ align?: string; margin?: string }>`
   /* EasyMint/H2 */
 
   font-family: "Inter";
@@ -40,6 +40,7 @@ export const Heading3 = styled.h3<{ align?: string }>`
   /* or 160% */
 
   text-align: ${({ align }) => align || "center"};
+  margin: ${({ margin }) => margin || "auto"};
   letter-spacing: -0.005em;
 
   color: #c0d0d8;

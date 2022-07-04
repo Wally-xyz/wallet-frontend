@@ -1,16 +1,14 @@
 import * as React from "react";
 
 import { EasyMintLogo } from "src/v2/components/EasyMintLogo";
-import { Heading1 } from "src/v2/components/Styles/Typography";
+import { Heading1, Heading3 } from "src/v2/components/Styles/Typography";
 
 import {
   ButtonSection,
   Container,
   ContentWrapper,
-  SubTitle,
   Dronie,
   TwitterButtonText,
-  MainSection,
   OpenSeaButton,
   TwitterText,
   HighlightedText,
@@ -27,10 +25,10 @@ export function Action() {
       <EasyMintLogo />
       <ContentWrapper>
         <Heading1>Purchase Successful</Heading1>
-        <SubTitle>
+        <Heading3 align="center">
           View your NFT on OpenSea or connect to Twitter to set the NFT image as your profile photo.
-        </SubTitle>
-        <MainSection>
+        </Heading3>
+        <FlexColumn>
           <Dronie src="/images/dronies.png" />
           <ButtonSection>
             <OpenSeaButton>
@@ -50,7 +48,7 @@ export function Action() {
               </TwitterText>
             </FlexColumn>
           </ButtonSection>
-        </MainSection>
+        </FlexColumn>
       </ContentWrapper>
     </Container>
   );

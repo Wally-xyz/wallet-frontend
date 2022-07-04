@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { BackButton } from "src/v2/components/Styles/BackButton";
 import { EasyMintLogo } from "src/v2/components/EasyMintLogo";
-import { Heading1 } from "src/v2/components/Styles/Typography";
+import { Heading1, Heading3 } from "src/v2/components/Styles/Typography";
 import { PrimaryButton } from "src/v2/components/Styles/Button";
 
 import {
@@ -11,7 +11,6 @@ import {
   ContentWrapper,
   ImageWrapper,
   ImageContainer,
-  SubTitle,
   Image,
   ImageTitle,
   ImageSubTitle,
@@ -24,10 +23,10 @@ export function Action() {
       <EasyMintLogo />
       <ContentWrapper>
         <Heading1>Select Image</Heading1>
-        <SubTitle align="center">
+        <Heading3 align="center">
           Select your image from the options below, or upload your own image to mint an NFT from the
           selected image.
-        </SubTitle>
+        </Heading3>
         <ImageSection>
           <ImageWrapper>
             <ImageTitle>Dronies</ImageTitle>
