@@ -18,8 +18,20 @@ export interface ActionProps {
 }
 
 export function Action(props: ActionProps) {
-  const { pathname } = useLocation();
+  const { search, pathname } = useLocation();
+  const query = new URLSearchParams(search);
   const isEmailMode = pathname === "/enter-email";
+
+  React.useEffect(() => {
+    const email = query.get("email");
+    const code = query.get("code");
+    if (email && props.email !== email) {
+      props.onEmailChange?.(email);
+    }
+    if (code && props.code !== code) {
+      props.onCodeChange?.(code);
+    }
+  }, [query]);
 
   const sendEmail = async () => {
     if (!props.email) {
@@ -35,8 +47,7 @@ export function Action(props: ActionProps) {
     props.onSubmit?.();
   };
 
-  const verifyCode = async () => {
-    const { email, code } = props;
+  const verifyCode = async (email?: string, code?: string) => {
     if (!email || !code) {
       return;
     }
@@ -87,7 +98,7 @@ export function Action(props: ActionProps) {
               value={props.code}
               onChange={props.onCodeChange}
             />
-            <SubmitButton onClick={verifyCode}>Code</SubmitButton>
+            <SubmitButton onClick={() => verifyCode(props.email, props.code)}>Code</SubmitButton>
           </InputWrapper>
         )}
       </ContentWrapper>

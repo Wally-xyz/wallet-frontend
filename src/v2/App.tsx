@@ -132,7 +132,7 @@ export function App() {
       })
         .then(response => {
           if (!response.ok) {
-            if (path !== "/enter-email") {
+            if (path !== "/enter-email" && path !== "/enter-code") {
               navigate("/");
             }
             throw new Error("Network response was not OK");
@@ -328,11 +328,12 @@ export function App() {
             <EnterEmail
               code={state.code}
               email={state.email}
+              onEmailChange={email => setState(state => ({ ...state, email }))}
               onCodeChange={code => setState(state => ({ ...state, code }))}
               onCodeSubmit={({ address, authToken }) => {
                 setState(state => ({ ...state, address, authToken }));
                 window.localStorage.setItem("token", authToken);
-                navigate("/upload-image");
+                navigate("/select-image");
               }}
             />
           }
