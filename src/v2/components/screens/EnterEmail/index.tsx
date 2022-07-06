@@ -3,16 +3,10 @@ import * as React from "react";
 import { Input as _Input } from "../../Input";
 
 import { Container } from "./styles";
-import { Action } from "./Action";
+import { Action, ActionProps } from "./Action";
 import { Info } from "./Info";
 
-interface Props {
-  email: string;
-  onEmailChange(email: string): void;
-  onSubmit?(): void;
-}
-
-export function EnterEmail(props: Props) {
+export function EnterEmail(props: ActionProps) {
   return (
     <Container>
       <Action {...props} />

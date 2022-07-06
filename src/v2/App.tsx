@@ -6,7 +6,6 @@ import WalletConnect from "@walletconnect/client";
 import { CollectUsername } from "./components/screens/CollectUsername";
 import { Complete } from "./components/screens/Complete";
 import { ConnectTwitter } from "./components/screens/ConnectTwitter";
-import { EnterCode } from "./components/screens/EnterCode";
 import { EnterEmail } from "./components/screens/EnterEmail";
 import { Mint } from "./components/screens/Mint";
 import { MintComplete } from "./components/screens/MintComplete";
@@ -133,7 +132,7 @@ export function App() {
       })
         .then(response => {
           if (!response.ok) {
-            if (path !== "/enter-email") {
+            if (path !== "/enter-email" && path !== "/enter-code") {
               navigate("/");
             }
             throw new Error("Network response was not OK");
@@ -326,14 +325,15 @@ export function App() {
         <Route
           path="/enter-code"
           element={
-            <EnterCode
+            <EnterEmail
               code={state.code}
               email={state.email}
+              onEmailChange={email => setState(state => ({ ...state, email }))}
               onCodeChange={code => setState(state => ({ ...state, code }))}
-              onSubmit={({ address, authToken }) => {
+              onCodeSubmit={({ address, authToken }) => {
                 setState(state => ({ ...state, address, authToken }));
                 window.localStorage.setItem("token", authToken);
-                navigate("/upload-image");
+                navigate("/select-image");
               }}
             />
           }
