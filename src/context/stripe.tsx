@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { loadStripe, Stripe, StripeElements, StripePaymentElement } from "@stripe/stripe-js";
-// import { API_URL } from "src/constants";
+import { API_URL } from "src/constants";
 
 interface Appearence {
   theme: "none" | "stripe" | "night" | "flat" | undefined;
@@ -59,21 +59,21 @@ export const StripeContextProvider: React.FC<{
     (async () => {
       try {
         const stripe = await loadStripe(
-          "pk_test_TYooMQauvdEDq54NiTphI7jx",
-          // "pk_live_51KYuRoBRQJlh59705jjvpcRVnOUgFLVOjwhqV6AG7KxMWAFDjIH0RkSXmHiUIhOzxcq4UdbbDPSfbH26fRLfNYNZ00iHsLUJ4m",
+          // "pk_test_TYooMQauvdEDq54NiTphI7jx",
+          "pk_test_51KYuRoBRQJlh5970h18jwRTU79T9oNlKhYzRbqvYMxVygUPL4PZsuQF1zIIK6xKmYDMDIERSGL3Mj1YyskVqG31700ZfreRxGg",
         );
         if (!stripe) {
           return;
         }
         setStripe(stripe);
-        // const response = await fetch(`${API_URL}/payments/create-payment-intent`, {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     Authorization: `Bearer ${props.authToken}`,
-        //   },
-        // });
-        // console.log(response);
+        const response = await fetch(`${API_URL}/payments/create-payment-intent`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${props.authToken}`,
+          },
+        });
+        console.log(response);
         const clientSecret = "pi_1DrN4m2eZvKYlo2CKBqFUrrP_secret_xNxliwI8gmjiBZa8zHamATHbl";
         // const { clientSecret } = await response.json();
         const appearance: Appearence = {
