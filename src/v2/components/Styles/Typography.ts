@@ -12,6 +12,7 @@ export const Heading1 = styled.h1`
 
   text-align: center;
   letter-spacing: 0.0025em;
+  margin: 16px 0;
 
   color: #e6ecef;
 `;

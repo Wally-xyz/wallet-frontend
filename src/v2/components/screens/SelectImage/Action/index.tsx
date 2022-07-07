@@ -3,7 +3,7 @@ import * as React from "react";
 import { BackButton } from "src/v2/components/Styles/BackButton";
 import { EasyMintLogo } from "src/v2/components/EasyMintLogo";
 import { Heading1, Heading3 } from "src/v2/components/Styles/Typography";
-import { PrimaryButton } from "src/v2/components/Styles/Button";
+import { PrimaryLinkButton } from "src/v2/components/Styles/Button";
 
 import {
   ButtonSection,
@@ -58,7 +58,7 @@ export function Action() {
         </ImageSection>
         <ButtonSection>
           <BackButton />
-          <PrimaryButton>Purchase NFT</PrimaryButton>
+          <PrimaryLinkButton to="/purchase">Purchase NFT</PrimaryLinkButton>
         </ButtonSection>
       </ContentWrapper>
     </Container>

@@ -3,6 +3,8 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
 
+import { StripeContextProvider } from "src/context/stripe";
+
 import { CollectUsername } from "./components/screens/CollectUsername";
 import { Complete } from "./components/screens/Complete";
 import { ConnectTwitter } from "./components/screens/ConnectTwitter";
@@ -109,7 +111,7 @@ export function App() {
 
   const fetchImage = async (authToken: string) => {
     const resp = await fetch(`${API_URL}/media/recent`, {
-      headers: { Authorization: `Bearer ${authToken}` },
+      headers: { Authorization: `Bearer ${authToken}`, "Access-Control-Allow-Origin": "*" },
     }).then(r => r.json());
 
     setState(state => ({
@@ -148,7 +150,7 @@ export function App() {
     if (authToken) {
       setState(state => ({ ...state, authToken }));
       fetchWallets();
-      fetchImage(authToken);
+      // fetchImage(authToken);
     }
   };
 
@@ -301,165 +303,167 @@ export function App() {
   }, [location]);
 
   return (
-    <>
-      <GradientCircle1 />
-      <GradientCircle2 />
-      <Routes>
-        <Route path="/" element={<Start />} />
-        <Route path="/how-it-works" element={<HowItWorks />} />
-        <Route path="/select-image" element={<SelectImage />} />
-        <Route
-          path="/dummy"
-          element={<button onClick={() => initWalletConnect(state.uri || "")} />}
-        />
-        <Route
-          path="/enter-email"
-          element={
-            <EnterEmail
-              email={state.email}
-              onEmailChange={email => setState(state => ({ ...state, email }))}
-              onSubmit={() => navigate("/enter-code")}
-            />
-          }
-        />
-        <Route
-          path="/enter-code"
-          element={
-            <EnterEmail
-              code={state.code}
-              email={state.email}
-              onEmailChange={email => setState(state => ({ ...state, email }))}
-              onCodeChange={code => setState(state => ({ ...state, code }))}
-              onCodeSubmit={({ address, authToken }) => {
-                setState(state => ({ ...state, address, authToken }));
-                window.localStorage.setItem("token", authToken);
-                navigate("/select-image");
-              }}
-            />
-          }
-        />
-        <Route
-          path="/upload-image"
-          element={
-            <UploadImage
-              address={state.address}
-              image={state.image}
-              imageUrl={state.imageUrl}
-              name={state.name}
-              uploading={uploadingImage}
-              onImageChange={image =>
-                setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
-              }
-              onNameChange={name => setState(state => ({ ...state, name }))}
-              onSubmit={async () => {
-                if (!(state.image && state.name)) {
-                  return;
+    <StripeContextProvider authToken={state.authToken}>
+      <>
+        <GradientCircle1 />
+        <GradientCircle2 />
+        <Routes>
+          <Route path="/" element={<Start />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/select-image" element={<SelectImage />} />
+          <Route
+            path="/dummy"
+            element={<button onClick={() => initWalletConnect(state.uri || "")} />}
+          />
+          <Route
+            path="/enter-email"
+            element={
+              <EnterEmail
+                email={state.email}
+                onEmailChange={email => setState(state => ({ ...state, email }))}
+                onSubmit={() => navigate("/enter-code")}
+              />
+            }
+          />
+          <Route
+            path="/enter-code"
+            element={
+              <EnterEmail
+                code={state.code}
+                email={state.email}
+                onEmailChange={email => setState(state => ({ ...state, email }))}
+                onCodeChange={code => setState(state => ({ ...state, code }))}
+                onCodeSubmit={({ address, authToken }) => {
+                  setState(state => ({ ...state, address, authToken }));
+                  window.localStorage.setItem("token", authToken);
+                  navigate("/select-image");
+                }}
+              />
+            }
+          />
+          <Route
+            path="/upload-image"
+            element={
+              <UploadImage
+                address={state.address}
+                image={state.image}
+                imageUrl={state.imageUrl}
+                name={state.name}
+                uploading={uploadingImage}
+                onImageChange={image =>
+                  setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
                 }
+                onNameChange={name => setState(state => ({ ...state, name }))}
+                onSubmit={async () => {
+                  if (!(state.image && state.name)) {
+                    return;
+                  }
 
-                const data = new FormData();
-                data.append("upload_file", state.image);
-                setUploadingImage(true);
+                  const data = new FormData();
+                  data.append("upload_file", state.image);
+                  setUploadingImage(true);
 
-                await fetch(`${API_URL}/media/upload?name=${state.name}`, {
-                  method: "POST",
-                  headers: {
-                    Authorization: `Bearer ${state.authToken}`,
-                  },
-                  body: data,
-                });
+                  await fetch(`${API_URL}/media/upload?name=${state.name}`, {
+                    method: "POST",
+                    headers: {
+                      Authorization: `Bearer ${state.authToken}`,
+                    },
+                    body: data,
+                  });
 
-                setUploadingImage(false);
-                navigate("/purchase");
-              }}
-            />
-          }
-        />
-        <Route
-          path="/purchase"
-          element={
-            <Purchase
-              imageUrl={state.imageUrl || ""}
-              name={state.name}
-              onSubmit={async () => {
-                const resp = await fetch(`${API_URL}/payments/checkoutsession`, {
-                  method: "POST",
-                  headers: { Authorization: `Bearer ${state.authToken}` },
-                }).then(r => r.json());
+                  setUploadingImage(false);
+                  navigate("/purchase");
+                }}
+              />
+            }
+          />
+          <Route
+            path="/purchase"
+            element={
+              <Purchase
+                imageUrl={state.imageUrl || ""}
+                name={state.name}
+                onSubmit={async () => {
+                  const resp = await fetch(`${API_URL}/payments/checkoutsession`, {
+                    method: "POST",
+                    headers: { Authorization: `Bearer ${state.authToken}` },
+                  }).then(r => r.json());
 
-                const stripeCheckoutUrl = resp.checkout_session;
-                window.location.href = stripeCheckoutUrl;
-              }}
-            />
-          }
-        />
-        <Route path="/purchase-success" element={<PurchaseSuccess />} />
-        <Route
-          path="/mint"
-          element={
-            <Mint
-              imageUrl={state.imageUrl || ""}
-              name={state.name}
-              tx={mintingTx}
-              onMint={async () => {
-                const resp = await fetch(`${API_URL}/mint/mint`, {
-                  method: "POST",
-                  headers: { Authorization: `Bearer ${state.authToken}` },
-                }).then(r => r.json());
+                  const stripeCheckoutUrl = resp.checkout_session;
+                  window.location.href = stripeCheckoutUrl;
+                }}
+              />
+            }
+          />
+          <Route path="/purchase-success" element={<PurchaseSuccess />} />
+          <Route
+            path="/mint"
+            element={
+              <Mint
+                imageUrl={state.imageUrl || ""}
+                name={state.name}
+                tx={mintingTx}
+                onMint={async () => {
+                  const resp = await fetch(`${API_URL}/mint/mint`, {
+                    method: "POST",
+                    headers: { Authorization: `Bearer ${state.authToken}` },
+                  }).then(r => r.json());
 
-                setMintingTx(resp.hash);
-                setTimeout(() => navigate("/mint-complete"), 10000);
-              }}
-            />
-          }
-        />
-        <Route
-          path="/mint-complete"
-          element={
-            <MintComplete
-              imageUrl={state.imageUrl || ""}
-              name={state.name}
-              onNext={() => navigate("/username")}
-              openseaUrl={state.openseaUrl}
-            />
-          }
-        />
-        <Route
-          path="/username"
-          element={
-            <CollectUsername
-              username={state.twitterUsername}
-              onUsernameChange={twitterUsername =>
-                setState(state => ({ ...state, twitterUsername }))
-              }
-              onSubmit={() => navigate("/connect-twitter")}
-            />
-          }
-        />
-        <Route
-          path="/connect-twitter"
-          element={
-            <ConnectTwitter
-            // onContinue={uri => {
-            //   setState(state => ({ ...state, uri }));
-            // }}
-            />
-          }
-        />
-        <Route
-          path="/mission-accomplished"
-          element={
-            <MissionAccomplished
-            // onContinue={uri => {
-            //   setState(state => ({ ...state, uri }));
-            // }}
-            />
-          }
-        />
-        <Route
-          path="/complete"
-          element={<Complete imageUrl={state.imageUrl || ""} username={state.twitterUsername} />}
-        />
-      </Routes>
-    </>
+                  setMintingTx(resp.hash);
+                  setTimeout(() => navigate("/mint-complete"), 10000);
+                }}
+              />
+            }
+          />
+          <Route
+            path="/mint-complete"
+            element={
+              <MintComplete
+                imageUrl={state.imageUrl || ""}
+                name={state.name}
+                onNext={() => navigate("/username")}
+                openseaUrl={state.openseaUrl}
+              />
+            }
+          />
+          <Route
+            path="/username"
+            element={
+              <CollectUsername
+                username={state.twitterUsername}
+                onUsernameChange={twitterUsername =>
+                  setState(state => ({ ...state, twitterUsername }))
+                }
+                onSubmit={() => navigate("/connect-twitter")}
+              />
+            }
+          />
+          <Route
+            path="/connect-twitter"
+            element={
+              <ConnectTwitter
+              // onContinue={uri => {
+              //   setState(state => ({ ...state, uri }));
+              // }}
+              />
+            }
+          />
+          <Route
+            path="/mission-accomplished"
+            element={
+              <MissionAccomplished
+              // onContinue={uri => {
+              //   setState(state => ({ ...state, uri }));
+              // }}
+              />
+            }
+          />
+          <Route
+            path="/complete"
+            element={<Complete imageUrl={state.imageUrl || ""} username={state.twitterUsername} />}
+          />
+        </Routes>
+      </>
+    </StripeContextProvider>
   );
 }

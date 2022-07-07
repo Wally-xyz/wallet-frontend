@@ -16,7 +16,7 @@ export const Container = styled.div`
 `;
 
 export const ContentWrapper = styled(FlexColumn)`
-  margin: 48px 48px 0;
+  margin: 8px 48px 0;
 `;
 
 export const Dronie = styled.img`

@@ -46,7 +46,6 @@ export const Center = styled.div`
 `;
 
 export const Container = styled.article`
-  height: 100%;
   width: 100%;
   background: radial-gradient(
       50% 50% at 50% 50%,
