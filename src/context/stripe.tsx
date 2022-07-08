@@ -59,7 +59,6 @@ export const StripeContextProvider: React.FC<{
     (async () => {
       try {
         const stripe = await loadStripe(
-          // "pk_test_TYooMQauvdEDq54NiTphI7jx",
           "pk_test_51KYuRoBRQJlh5970h18jwRTU79T9oNlKhYzRbqvYMxVygUPL4PZsuQF1zIIK6xKmYDMDIERSGL3Mj1YyskVqG31700ZfreRxGg",
         );
         if (!stripe) {
@@ -73,9 +72,7 @@ export const StripeContextProvider: React.FC<{
             Authorization: `Bearer ${props.authToken}`,
           },
         });
-        console.log(response);
-        const clientSecret = "pi_1DrN4m2eZvKYlo2CKBqFUrrP_secret_xNxliwI8gmjiBZa8zHamATHbl";
-        // const { clientSecret } = await response.json();
+        const { clientSecret } = await response.json();
         const appearance: Appearence = {
           theme: "night",
         };
@@ -101,7 +98,7 @@ export const StripeContextProvider: React.FC<{
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/purchase-success",
+        return_url: `${window.location.origin}/purchase-success`,
       },
     });
 
