@@ -111,7 +111,7 @@ export function App() {
 
   const fetchImage = async (authToken: string) => {
     const resp = await fetch(`${API_URL}/media/recent`, {
-      headers: { Authorization: `Bearer ${authToken}`, "Access-Control-Allow-Origin": "*" },
+      headers: { Authorization: `Bearer ${authToken}` },
     }).then(r => r.json());
 
     setState(state => ({
@@ -150,7 +150,6 @@ export function App() {
     if (authToken) {
       setState(state => ({ ...state, authToken }));
       fetchWallets();
-      // fetchImage(authToken);
     }
   };
 
