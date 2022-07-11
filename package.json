@@ -26,6 +26,7 @@
     "url": "https://github.com/walletconnect/walletconnect-test-wallet/issues"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.32.0",
     "@types/eth-sig-util": "^2.1.1",
     "@types/react-motion": "^0.0.32",
     "@walletconnect/client": "^1.7.1",

@@ -17,10 +17,10 @@ export const SecondaryButton = styled.button`
   box-shadow: 0px 8px 0px -4px #030303;
   border-radius: 4px;
 
-  font-family: "New York";
+  font-family: "Inter";
   font-style: normal;
-  font-weight: 810;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 14px;
   line-height: 12px;
   /* identical to box height, or 75% */
 
@@ -29,6 +29,11 @@ export const SecondaryButton = styled.button`
   text-decoration: none;
 
   color: #f2f6f7;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 
   &:hover {
     transform: scale(1.05);
@@ -49,10 +54,10 @@ export const PrimaryButton = styled.button`
   border: 1px solid #fcfdfd;
   box-shadow: 0px 8px 0px -4px #030303;
   border-radius: 4px;
-  font-family: "New York";
+  font-family: "Inter";
   font-style: normal;
-  font-weight: 810;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 14px;
   line-height: 12px;
   cursor: pointer;
   /* identical to box height, or 75% */
@@ -61,6 +66,11 @@ export const PrimaryButton = styled.button`
   letter-spacing: 0.0125em;
 
   color: #0a0a0b;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 
   &:hover {
     transform: scale(1.05);
@@ -81,18 +91,24 @@ export const PrimaryLinkButton = styled(Link)`
   border: 1px solid #fcfdfd;
   box-shadow: 0px 8px 0px -4px #030303;
   border-radius: 4px;
-  font-family: "New York";
+  font-family: "Inter";
   font-style: normal;
-  font-weight: 810;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 14px;
   line-height: 12px;
   cursor: pointer;
   /* identical to box height, or 75% */
 
   text-align: center;
+  text-decoration: none;
   letter-spacing: 0.0125em;
 
   color: #0a0a0b;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 
   &:hover {
     transform: scale(1.05);

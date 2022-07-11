@@ -3,7 +3,6 @@ import * as React from "react";
 import { BackButton } from "src/v2/components/Styles/BackButton";
 import { EasyMintLogo } from "src/v2/components/EasyMintLogo";
 import { Heading1, Heading3 } from "src/v2/components/Styles/Typography";
-import { Input } from "src/v2/components/Styles/Input";
 
 import {
   ButtonSection,
@@ -13,9 +12,18 @@ import {
   PaymentRow,
   PaymentSection,
 } from "./styles";
-import { Separator } from "src/v2/components/Styles/Layout";
+import { useStripeContext } from "src/context/stripe";
 
 export function Action() {
+  const { paymentElement, handleSubmit } = useStripeContext();
+
+  React.useEffect(() => {
+    if (!paymentElement) {
+      return;
+    }
+    paymentElement.mount("#payment-element");
+  }, [paymentElement]);
+
   return (
     <Container>
       <EasyMintLogo />
@@ -25,22 +33,19 @@ export function Action() {
           Enter payment details to purchase your NFT.
         </Heading3>
         <PaymentSection>
-          <PaymentRow>
-            <Input label="Card Number" placeholder="XXXX XXXX XXXX XXXX" />
-          </PaymentRow>
-          <PaymentRow>
-            <Input label="Expiration" placeholder="MM/YY" />
-            <Separator />
-            <Input label="CVC" placeholder="123" />
-          </PaymentRow>
-          <PaymentRow>
-            <Input label="Country" placeholder="United States" />
-            <Separator />
-            <Input label="Zip Code" placeholder="90210" />
-          </PaymentRow>
-          <PaymentRow>
-            <ConfirmButton>Confirm</ConfirmButton>
-          </PaymentRow>
+          <form id="payment-form">
+            <div id="payment-element">
+              {/* <!--Stripe.js injects the Payment Element--> */}
+              <div className="spinner" id="placeholder-spinner" />
+            </div>
+            <PaymentRow>
+              <ConfirmButton id="submit" onClick={handleSubmit}>
+                <div className="spinner hidden" id="spinner" />
+                <span id="button-text">Confirm</span>
+              </ConfirmButton>
+            </PaymentRow>
+            <div id="payment-message" className="hidden" />
+          </form>
         </PaymentSection>
         <ButtonSection>
           <BackButton />
