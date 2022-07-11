@@ -1,3 +1,4 @@
+import { QRCodeScanner } from "src/v2/components/QRCodeScanner";
 import { PrimaryButton } from "src/v2/components/Styles/Button";
 import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
 import { Paragraph } from "src/v2/components/Styles/Typography";
@@ -131,4 +132,30 @@ export const StepText = styled.div`
 
 export const Step = styled(FlexColumn)`
   margin-top: 32px;
+`;
+
+export const ScannerWrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.75);
+  flex-direction: column;
+`;
+
+export const Scanner = styled(QRCodeScanner)`
+  border-radius: 40px;
+  height: 250px;
+  width: 444px;
+  background: white;
+`;
+
+export const ScannerTitle = styled.div`
+  margin-top: 24px;
+  text-align: center;
+  width: 35%;
 `;

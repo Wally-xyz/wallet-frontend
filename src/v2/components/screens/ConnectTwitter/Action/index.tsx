@@ -26,10 +26,42 @@ import {
   Step,
   StepText,
   StepLabel,
+  Scanner,
+  ScannerWrapper,
+  ScannerTitle,
 } from "./styles";
 
-export function Action() {
+interface Props {
+  onContinue: (url: string) => void;
+}
+
+enum ScannerState {
+  Checking,
+  Failure,
+  Success,
+}
+
+export function Action(props: Props) {
   const [activeTab, setActiveTab] = React.useState("QR_CODE");
+  const [scanning, setScanning] = React.useState(false);
+  const [inputUrl, setInputUrl] = React.useState("");
+  const [scannerState, setScannerState] = React.useState(ScannerState.Checking);
+
+  const waitForConnection = () => {
+    setTimeout(() => {
+      setScannerState(ScannerState.Failure);
+    }, 10000);
+  };
+
+  let scannerTitle =
+    "💡 Tip: Hold the phone close to the camera, then slowly move it back towards you.";
+  if (scannerState === ScannerState.Success) {
+    scannerTitle = "✅ Got it! Connecting...";
+  } else if (scannerState === ScannerState.Failure) {
+    scannerTitle =
+      "❌ Hmm, we're having trouble connecting to twitter. Try killing your twitter app and trying again.";
+  }
+
   return (
     <Container>
       <EasyMintLogo />
@@ -81,7 +113,7 @@ export function Action() {
                 </Step>
               </FlexColumn>
               <Separator width="32px" />
-              <Step align="baseline" width="45%">
+              <Step align="baseline" width="45%" tabIndex={0} onClick={() => setScanning(true)}>
                 <StepLabel>Step 5</StepLabel>
                 <Step5 />
                 <StepText>
@@ -89,6 +121,29 @@ export function Action() {
                   <WhiteText>Paste Link</WhiteText> option.
                 </StepText>
               </Step>
+              {scanning && (
+                <ScannerWrapper onClick={() => setScanning(false)}>
+                  <div>
+                    <Scanner
+                      validator={() => true}
+                      onSuccess={url => {
+                        const sound = require("../../../../../assets/success-sound-effect.mp3");
+                        const audio = new Audio(sound);
+                        audio.volume = 0.1;
+                        audio.play();
+                        setScannerState(ScannerState.Success);
+                        waitForConnection();
+                        setTimeout(() => props.onContinue(url), 2000);
+                      }}
+                      onFailure={() => {
+                        setScannerState(ScannerState.Failure);
+                        setTimeout(() => setScannerState(ScannerState.Checking), 2000);
+                      }}
+                    />
+                  </div>
+                  <ScannerTitle>{scannerTitle}</ScannerTitle>
+                </ScannerWrapper>
+              )}
             </FlexRow>
           ) : (
             <>
@@ -102,8 +157,20 @@ export function Action() {
                   <li>Paste the URL below</li>
                 </OrderedList>
               </LinkInfoText>
-              <Input label="Link" placeholder="Paste link here" />
-              <SubmitButton>Submit</SubmitButton>
+              <Input
+                label="Link"
+                placeholder="Paste link here"
+                value={inputUrl}
+                onChange={val => setInputUrl(val)}
+              />
+              <SubmitButton
+                onClick={() => {
+                  console.log(inputUrl);
+                  props.onContinue(inputUrl);
+                }}
+              >
+                Submit
+              </SubmitButton>
             </>
           )}
         </DetailSection>

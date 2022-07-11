@@ -13,11 +13,10 @@ import {
   TwitterText,
   HighlightedText,
 } from "./styles";
-import { PrimaryButton } from "src/v2/components/Styles/Button";
+import { PrimaryLinkButton } from "src/v2/components/Styles/Button";
 import { Twitter } from "src/v2/icons/Twitter";
 import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
 import { OpenSea } from "src/v2/icons/OpenSea";
-// import { Separator } from "src/v2/components/Styles/Layout";
 
 export function Action() {
   return (
@@ -38,11 +37,11 @@ export function Action() {
               </FlexRow>
             </OpenSeaButton>
             <FlexColumn>
-              <PrimaryButton>
+              <PrimaryLinkButton to="/connect-twitter">
                 <FlexRow>
                   <Twitter /> <TwitterButtonText>Connect</TwitterButtonText>
                 </FlexRow>
-              </PrimaryButton>
+              </PrimaryLinkButton>
               <TwitterText>
                 Requires <HighlightedText>Twitter Blue</HighlightedText>
               </TwitterText>

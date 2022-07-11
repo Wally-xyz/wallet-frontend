@@ -59,3 +59,8 @@ export const ButtonSection = styled(FlexRow)`
   justify-content: space-between;
   width: 100%;
 `;
+
+export const SelectedImageContainer = styled(ImageContainer)`
+  outline: 4px solid #c0d0d8;
+  outline-offset: 5px;
+`;

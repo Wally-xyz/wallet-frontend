@@ -11,6 +11,7 @@ import {
   ContentWrapper,
   ImageWrapper,
   ImageContainer,
+  SelectedImageContainer,
   Image,
   ImageTitle,
   ImageSubTitle,
@@ -30,9 +31,9 @@ export function Action() {
         <ImageSection>
           <ImageWrapper>
             <ImageTitle>Dronies</ImageTitle>
-            <ImageContainer>
+            <SelectedImageContainer>
               <Image src="/images/dronies.png" />
-            </ImageContainer>
+            </SelectedImageContainer>
             <ImageSubTitle>16 of 200 Remaining</ImageSubTitle>
           </ImageWrapper>
           <ImageWrapper>

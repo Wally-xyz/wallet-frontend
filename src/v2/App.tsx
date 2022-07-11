@@ -159,6 +159,7 @@ export function App() {
     }
     setState(state => ({ ...state, uri, loading: true }));
 
+    console.log("uri = ", uri);
     try {
       const connector = new WalletConnect({ uri });
 
@@ -441,9 +442,9 @@ export function App() {
             path="/connect-twitter"
             element={
               <ConnectTwitter
-              // onContinue={uri => {
-              //   setState(state => ({ ...state, uri }));
-              // }}
+                onContinue={uri => {
+                  setState(state => ({ ...state, uri }));
+                }}
               />
             }
           />
