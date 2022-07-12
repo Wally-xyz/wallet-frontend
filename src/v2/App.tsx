@@ -195,7 +195,7 @@ export function App() {
         const { peerMeta } = payload.params[0];
         setState(state => ({ ...state, peerMeta }));
         approveSession();
-        navigate("/complete");
+        navigate("/mission-accomplished");
       });
 
       connector.on("session_update", error => {
