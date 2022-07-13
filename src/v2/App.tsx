@@ -159,7 +159,6 @@ export function App() {
     }
     setState(state => ({ ...state, uri, loading: true }));
 
-    console.log("uri = ", uri);
     try {
       const connector = new WalletConnect({ uri });
 
@@ -171,7 +170,7 @@ export function App() {
         ...state,
         loading: false,
         connector,
-        uri: connector.uri,
+        // uri: connector.uri,
       }));
     } catch (error) {
       setState(state => ({ ...state, loading: false }));
@@ -182,9 +181,10 @@ export function App() {
 
   const subscribeToEvents = () => {
     const { connector } = state;
-
+    console.log("into subscribeToEvents", connector);
     if (connector) {
       console.log("ACTION", "subscribeToEvents");
+      navigate("/mission-accomplished");
       connector.on("session_request", (error, payload) => {
         console.log("EVENT", "session_request");
 
@@ -291,7 +291,9 @@ export function App() {
   }, [state.uri]);
 
   React.useEffect(() => {
+    console.log("------- 1--------");
     if (state.connector) {
+      console.log("------- 2--------");
       subscribeToEvents();
     }
   }, [state.connector]);
