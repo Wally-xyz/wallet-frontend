@@ -1,5 +1,28 @@
+import * as React from "react";
+
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Spinner } from "./Spinner";
+
+export const PrimaryButton = ({ loading, ...rest }: any) => {
+  return (
+    <ButtonWrapper>
+      {loading && <StyledSpinner />}
+      <PrimaryStyledButton {...rest} />
+    </ButtonWrapper>
+  );
+};
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const StyledSpinner = styled(Spinner)`
+  transform: scale(0.2);
+  margin-top: -32px;
+  margin-right: -75px;
+`;
 
 export const SecondaryButton = styled.button`
   display: flex;
@@ -40,7 +63,7 @@ export const SecondaryButton = styled.button`
   }
 `;
 
-export const PrimaryButton = styled.button`
+const PrimaryStyledButton = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: center;
