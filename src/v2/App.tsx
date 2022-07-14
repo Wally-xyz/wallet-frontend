@@ -326,26 +326,28 @@ export function App() {
                 onImageChange={image =>
                   setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
                 }
+                setImageUrl={(imageUrl: string) => setState(state => ({ ...state, imageUrl }))}
                 onNameChange={name => setState(state => ({ ...state, name }))}
                 onSubmit={() => {
-                  if (!state.image) {
-                    return;
-                  }
+                  console.log("state.imageUrl = ", state.imageUrl);
+                  if (state.image) {
+                    const data = new FormData();
+                    data.append("upload_file", state.image);
+                    setUploadingImage(true);
 
-                  const data = new FormData();
-                  data.append("upload_file", state.image);
-                  setUploadingImage(true);
-
-                  fetch(`${API_URL}/media/upload?name=${state.name}`, {
-                    method: "POST",
-                    headers: {
-                      Authorization: `Bearer ${state.authToken}`,
-                    },
-                    body: data,
-                  }).then(() => {
-                    setUploadingImage(false);
+                    fetch(`${API_URL}/media/upload?name=${state.name}`, {
+                      method: "POST",
+                      headers: {
+                        Authorization: `Bearer ${state.authToken}`,
+                      },
+                      body: data,
+                    }).then(() => {
+                      setUploadingImage(false);
+                      navigate("/purchase");
+                    });
+                  } else {
                     navigate("/purchase");
-                  });
+                  }
                 }}
               />
             }

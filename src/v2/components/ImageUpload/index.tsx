@@ -31,15 +31,28 @@ export const ImageTitle = styled(CourierText)`
   margin-bottom: 12px;
 `;
 
-const ImageContainer = styled(FlexColumn)`
+export const ImageContainer = styled.button<{ selected?: boolean }>`
+  display: flex;
   min-height: 120px;
+  background: none;
+  margin: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  ${({ selected }) =>
+    selected &&
+    `outline: 4px solid #c0d0d8;
+    outline-offset: 5px;
+  `}
 `;
 
 interface Props {
   className?: string;
   image?: File;
   imageUrl?: string;
-  onChange?(image: File): void;
+  selected?: boolean;
+  onChange?: (image: File) => void;
+  setSelected?: () => void;
 }
 
 export function ImageUpload(props: Props) {
@@ -53,13 +66,14 @@ export function ImageUpload(props: Props) {
 
     const file = input.current.files[0];
     props.onChange?.(file);
-  }, [input]);
+    props.setSelected?.();
+  }, [input, props.onChange, props.setSelected]);
 
   return (
     <ImageWrapper>
       <label>
         <ImageTitle>Upload Image</ImageTitle>
-        <ImageContainer>
+        <ImageContainer selected={props.selected} onClick={props.setSelected}>
           <Image src={image ? image : "/images/upload-image.svg"} />
         </ImageContainer>
         <Input

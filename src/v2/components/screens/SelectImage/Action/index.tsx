@@ -12,7 +12,6 @@ import {
   ContentWrapper,
   ImageWrapper,
   ImageContainer,
-  SelectedImageContainer,
   Image,
   ImageTitle,
   ImageSubTitle,
@@ -26,12 +25,45 @@ export interface Props {
   imageUrl?: string;
   name: string;
   uploading?: boolean;
-  onImageChange(file: File): void;
-  onNameChange(name: string): void;
-  onSubmit(): void;
+  onImageChange: (file: File) => void;
+  onNameChange: (name: string) => void;
+  onSubmit: () => void;
+  setImageUrl: (url: string) => void;
 }
 
 export function Action(props: Props) {
+  const [selectedImage, setSelectedImage] = React.useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = React.useState(props.imageUrl);
+
+  const updateSelectedImage = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+    props.setImageUrl(imageUrl);
+  };
+
+  React.useEffect(() => {
+    if (props.imageUrl || props.image) {
+      setSelectedImage("uploaded-image");
+      if (props.imageUrl) {
+        props.setImageUrl(props.imageUrl);
+      }
+    } else {
+      setSelectedImage("/images/dronies");
+      props.setImageUrl("/images/dronies.png");
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (
+      props.imageUrl &&
+      !["/images/dronies.png", "/images/mmcc.png", "/images/age-of-sam.gif"].includes(
+        props.imageUrl,
+      )
+    ) {
+      setUploadedImageUrl(props.imageUrl);
+      setSelectedImage("uploaded-image");
+    }
+  }, [props.imageUrl]);
+
   return (
     <Container>
       <EasyMintLogo />
@@ -45,29 +77,40 @@ export function Action(props: Props) {
           <FlexRow align={"baseline"}>
             <ImageWrapper>
               <ImageTitle>Dronies</ImageTitle>
-              <SelectedImageContainer>
+              <ImageContainer
+                selected={selectedImage === "/images/dronies.png"}
+                onClick={() => updateSelectedImage("/images/dronies.png")}
+              >
                 <Image src="/images/dronies.png" />
-              </SelectedImageContainer>
+              </ImageContainer>
               <ImageSubTitle>16 of 200 Remaining</ImageSubTitle>
             </ImageWrapper>
             <ImageWrapper>
               <ImageTitle>MMCC</ImageTitle>
-              <ImageContainer>
-                <Image style={{ marginTop: -8 }} src="/images/mmcc.png" />
+              <ImageContainer
+                selected={selectedImage === "/images/mmcc.png"}
+                onClick={() => updateSelectedImage("/images/mmcc.png")}
+              >
+                <Image src="/images/mmcc.png" />
               </ImageContainer>
               <ImageSubTitle>98 of 100 Remaining</ImageSubTitle>
             </ImageWrapper>
             <ImageWrapper>
               <ImageTitle>Age of SAM</ImageTitle>
-              <ImageContainer>
+              <ImageContainer
+                selected={selectedImage === "/images/age-of-sam.gif"}
+                onClick={() => updateSelectedImage("/images/age-of-sam.gif")}
+              >
                 <Image src="/images/age-of-sam.gif" />
               </ImageContainer>
               <ImageSubTitle>2 of 360 Remaining</ImageSubTitle>
             </ImageWrapper>
             <ImageUpload
               image={props.image}
-              imageUrl={props.imageUrl}
+              imageUrl={uploadedImageUrl}
               onChange={props.onImageChange}
+              selected={selectedImage === "uploaded-image"}
+              setSelected={() => setSelectedImage("uploaded-image")}
             />
           </FlexRow>
           <ButtonSection>

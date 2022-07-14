@@ -43,8 +43,19 @@ export const Image = styled.img`
   border-radius: 4px;
 `;
 
-export const ImageContainer = styled(FlexColumn)`
+export const ImageContainer = styled.button<{ selected?: boolean }>`
+  display: flex;
   min-height: 120px;
+  background: none;
+  margin: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  ${({ selected }) =>
+    selected &&
+    `outline: 4px solid #c0d0d8;
+    outline-offset: 5px;
+  `}
 `;
 
 export const ImageSection = styled(FlexColumn)`
@@ -57,9 +68,4 @@ export const ButtonSection = styled(FlexRow)`
   margin-top: 64px;
   justify-content: space-between;
   width: 100%;
-`;
-
-export const SelectedImageContainer = styled(ImageContainer)`
-  outline: 4px solid #c0d0d8;
-  outline-offset: 5px;
 `;
