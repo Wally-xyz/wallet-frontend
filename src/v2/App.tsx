@@ -110,16 +110,20 @@ export function App() {
   const navigate = useNavigate();
 
   const fetchImage = async (authToken: string) => {
-    const resp = await fetch(`${API_URL}/media/recent`, {
-      headers: { Authorization: `Bearer ${authToken}` },
-    }).then(r => r.json());
+    try {
+      const resp = await fetch(`${API_URL}/media/recent`, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      }).then(r => r.json());
 
-    setState(state => ({
-      ...state,
-      openseaUrl: resp.opensea_url,
-      imageUrl: resp.s3_url,
-      name: resp.name,
-    }));
+      setState(state => ({
+        ...state,
+        openseaUrl: resp.opensea_url,
+        imageUrl: resp.s3_url,
+        name: resp.name,
+      }));
+    } catch (exp) {
+      console.log(exp);
+    }
   };
 
   const init = () => {
@@ -323,8 +327,8 @@ export function App() {
                   setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
                 }
                 onNameChange={name => setState(state => ({ ...state, name }))}
-                onSubmit={async () => {
-                  if (!(state.image && state.name)) {
+                onSubmit={() => {
+                  if (!state.image) {
                     return;
                   }
 
@@ -332,16 +336,16 @@ export function App() {
                   data.append("upload_file", state.image);
                   setUploadingImage(true);
 
-                  await fetch(`${API_URL}/media/upload?name=${state.name}`, {
+                  fetch(`${API_URL}/media/upload?name=${state.name}`, {
                     method: "POST",
                     headers: {
                       Authorization: `Bearer ${state.authToken}`,
                     },
                     body: data,
+                  }).then(() => {
+                    setUploadingImage(false);
+                    navigate("/purchase");
                   });
-
-                  setUploadingImage(false);
-                  navigate("/purchase");
                 }}
               />
             }

@@ -7,7 +7,7 @@ import {
   ButtonSection,
   Container,
   ContentWrapper,
-  Dronie,
+  Image,
   TwitterButtonText,
   OpenSeaButton,
   TwitterText,
@@ -32,7 +32,7 @@ export function Action(props: Props) {
           View your NFT on OpenSea or connect to Twitter to set the NFT image as your profile photo.
         </Heading3>
         <FlexColumn>
-          <Dronie src={props.imageUrl || "/images/dronies.png"} />
+          <Image src={props.imageUrl} />
           <ButtonSection>
             <OpenSeaButton>
               <FlexRow>

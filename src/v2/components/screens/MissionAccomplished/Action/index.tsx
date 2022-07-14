@@ -7,7 +7,7 @@ import {
   ButtonSection,
   Container,
   ContentWrapper,
-  Dronie,
+  Image,
   TwitterButtonText,
   HighlightedText,
 } from "./styles";
@@ -30,7 +30,7 @@ export function Action(props: Props) {
           , or download the image.
         </Heading3>
         <FlexColumn>
-          <Dronie src={props.imageUrl || "/images/dronies.png"} />
+          <Image src={props.imageUrl} />
           <ButtonSection>
             <FlexColumn>
               <PrimaryButton>

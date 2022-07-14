@@ -47,10 +47,9 @@ export const ImageContainer = styled(FlexColumn)`
   min-height: 120px;
 `;
 
-export const ImageSection = styled(FlexRow)`
+export const ImageSection = styled(FlexColumn)`
   margin-top: 64px;
-  align-items: baseline;
-  width: 100%;
+  align-items: center;
   justify-content: center;
 `;
 

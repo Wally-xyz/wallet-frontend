@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { loadStripe, Stripe, StripeElements, StripePaymentElement } from "@stripe/stripe-js";
 import { API_URL } from "src/constants";
+import { useLocation } from "react-router-dom";
 
 interface Appearence {
   theme: "none" | "stripe" | "night" | "flat" | undefined;
@@ -48,16 +49,23 @@ export const StripeContextProvider: React.FC<{
   children: JSX.Element;
   authToken: string;
 }> = props => {
+  const [gettingPaymentIntent, setGettingPaymentIntent] = useState(false);
+  const location = useLocation();
   const [paymentElement, setPaymentElement] = useState<StripePaymentElement | undefined>();
   const [stripe, setStripe] = useState<Stripe | undefined>();
   const [elements, setElements] = useState<StripeElements | undefined>();
 
   useEffect(() => {
-    if (!props.authToken) {
+    if (
+      !props.authToken ||
+      (location.pathname !== "/purchase" && location.pathname !== "/select-image") ||
+      gettingPaymentIntent
+    ) {
       return;
     }
     (async () => {
       try {
+        setGettingPaymentIntent(true);
         const stripe = await loadStripe(
           "pk_test_51KYuRoBRQJlh5970h18jwRTU79T9oNlKhYzRbqvYMxVygUPL4PZsuQF1zIIK6xKmYDMDIERSGL3Mj1YyskVqG31700ZfreRxGg",
         );
@@ -85,7 +93,7 @@ export const StripeContextProvider: React.FC<{
         console.log("exp = ", exp);
       }
     })();
-  }, [props.authToken]);
+  }, [props.authToken, location.pathname]);
 
   async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     if (!stripe || !elements) {

@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Spinner } from "./Spinner";
 
-export const PrimaryButton = ({ loading, ...rest }: any) => {
+export const PrimaryButton = ({ width, loading, ...rest }: any) => {
   return (
-    <ButtonWrapper>
+    <ButtonWrapper style={{ width }}>
       {loading && <StyledSpinner />}
       <PrimaryStyledButton {...rest} />
     </ButtonWrapper>
@@ -15,7 +15,7 @@ export const PrimaryButton = ({ loading, ...rest }: any) => {
 
 const ButtonWrapper = styled.div`
   display: flex;
-  width: 100%;
+  height: 50px;
 `;
 
 const StyledSpinner = styled(Spinner)`
