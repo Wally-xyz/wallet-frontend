@@ -326,10 +326,8 @@ export function App() {
                 onImageChange={image =>
                   setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
                 }
-                setImageUrl={(imageUrl: string) => setState(state => ({ ...state, imageUrl }))}
                 onNameChange={name => setState(state => ({ ...state, name }))}
                 onSubmit={() => {
-                  console.log("state.imageUrl = ", state.imageUrl);
                   if (state.image) {
                     const data = new FormData();
                     data.append("upload_file", state.image);

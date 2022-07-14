@@ -50,9 +50,7 @@ interface Props {
   className?: string;
   image?: File;
   imageUrl?: string;
-  selected?: boolean;
   onChange?: (image: File) => void;
-  setSelected?: () => void;
 }
 
 export function ImageUpload(props: Props) {
@@ -66,14 +64,13 @@ export function ImageUpload(props: Props) {
 
     const file = input.current.files[0];
     props.onChange?.(file);
-    props.setSelected?.();
-  }, [input, props.onChange, props.setSelected]);
+  }, [input, props.onChange]);
 
   return (
     <ImageWrapper>
       <label>
         <ImageTitle>Upload Image</ImageTitle>
-        <ImageContainer selected={props.selected} onClick={props.setSelected}>
+        <ImageContainer selected={!!image}>
           <Image src={image ? image : "/images/upload-image.svg"} />
         </ImageContainer>
         <Input
