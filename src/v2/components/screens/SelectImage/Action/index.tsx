@@ -4,6 +4,7 @@ import { BackButton } from "src/v2/components/Styles/BackButton";
 import { EasyMintLogo } from "src/v2/components/EasyMintLogo";
 import { Heading1, Heading3 } from "src/v2/components/Styles/Typography";
 import { PrimaryLinkButton } from "src/v2/components/Styles/Button";
+import { ImageUpload } from "../../../ImageUpload";
 
 import {
   ButtonSection,
@@ -18,7 +19,18 @@ import {
   ImageSection,
 } from "./styles";
 
-export function Action() {
+export interface Props {
+  address?: string;
+  image?: File;
+  imageUrl?: string;
+  name: string;
+  uploading?: boolean;
+  onImageChange(file: File): void;
+  onNameChange(name: string): void;
+  onSubmit(): void;
+}
+
+export function Action(props: Props) {
   return (
     <Container>
       <EasyMintLogo />
@@ -50,12 +62,11 @@ export function Action() {
             </ImageContainer>
             <ImageSubTitle>2 of 360 Remaining</ImageSubTitle>
           </ImageWrapper>
-          <ImageWrapper>
-            <ImageTitle>Upload Image</ImageTitle>
-            <ImageContainer>
-              <Image src="/images/upload-image.svg" />
-            </ImageContainer>
-          </ImageWrapper>
+          <ImageUpload
+            image={props.image}
+            imageUrl={props.imageUrl}
+            onChange={props.onImageChange}
+          />
         </ImageSection>
         <ButtonSection>
           <BackButton />

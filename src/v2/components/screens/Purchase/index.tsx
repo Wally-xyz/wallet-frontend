@@ -6,13 +6,7 @@ import { Container } from "./styles";
 import { Action } from "./Action";
 import { Info } from "./Info";
 
-interface Props {
-  imageUrl: string;
-  name: string;
-  onSubmit(): void;
-}
-
-export function Purchase(props: Props) {
+export function Purchase() {
   return (
     <Container>
       <Action />

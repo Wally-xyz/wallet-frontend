@@ -150,6 +150,7 @@ export function App() {
     if (authToken) {
       setState(state => ({ ...state, authToken }));
       fetchWallets();
+      fetchImage(authToken);
     }
   };
 
@@ -181,7 +182,6 @@ export function App() {
 
   const subscribeToEvents = () => {
     const { connector } = state;
-    console.log("into subscribeToEvents", connector);
     if (connector) {
       console.log("ACTION", "subscribeToEvents");
       navigate("/mission-accomplished");
@@ -291,9 +291,7 @@ export function App() {
   }, [state.uri]);
 
   React.useEffect(() => {
-    console.log("------- 1--------");
     if (state.connector) {
-      console.log("------- 2--------");
       subscribeToEvents();
     }
   }, [state.connector]);
@@ -312,7 +310,42 @@ export function App() {
         <Routes>
           <Route path="/" element={<Start />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/select-image" element={<SelectImage />} />
+          <Route
+            path="/select-image"
+            element={
+              <SelectImage
+                address={state.address}
+                image={state.image}
+                imageUrl={state.imageUrl}
+                name={state.name}
+                uploading={uploadingImage}
+                onImageChange={image =>
+                  setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
+                }
+                onNameChange={name => setState(state => ({ ...state, name }))}
+                onSubmit={async () => {
+                  if (!(state.image && state.name)) {
+                    return;
+                  }
+
+                  const data = new FormData();
+                  data.append("upload_file", state.image);
+                  setUploadingImage(true);
+
+                  await fetch(`${API_URL}/media/upload?name=${state.name}`, {
+                    method: "POST",
+                    headers: {
+                      Authorization: `Bearer ${state.authToken}`,
+                    },
+                    body: data,
+                  });
+
+                  setUploadingImage(false);
+                  navigate("/purchase");
+                }}
+              />
+            }
+          />
           <Route
             path="/dummy"
             element={<button onClick={() => initWalletConnect(state.uri || "")} />}
@@ -379,25 +412,11 @@ export function App() {
               />
             }
           />
+          <Route path="/purchase" element={<Purchase />} />
           <Route
-            path="/purchase"
-            element={
-              <Purchase
-                imageUrl={state.imageUrl || ""}
-                name={state.name}
-                onSubmit={async () => {
-                  const resp = await fetch(`${API_URL}/payments/checkoutsession`, {
-                    method: "POST",
-                    headers: { Authorization: `Bearer ${state.authToken}` },
-                  }).then(r => r.json());
-
-                  const stripeCheckoutUrl = resp.checkout_session;
-                  window.location.href = stripeCheckoutUrl;
-                }}
-              />
-            }
+            path="/purchase-success"
+            element={<PurchaseSuccess imageUrl={state.imageUrl || ""} />}
           />
-          <Route path="/purchase-success" element={<PurchaseSuccess />} />
           <Route
             path="/mint"
             element={
@@ -452,13 +471,7 @@ export function App() {
           />
           <Route
             path="/mission-accomplished"
-            element={
-              <MissionAccomplished
-              // onContinue={uri => {
-              //   setState(state => ({ ...state, uri }));
-              // }}
-              />
-            }
+            element={<MissionAccomplished imageUrl={state.imageUrl || ""} />}
           />
           <Route
             path="/complete"
