@@ -146,10 +146,9 @@ export const Scanner = styled(QRCodeScanner)`
 `;
 
 export const ScannerTitle = styled.div`
-  position: absolute;
   width: 100%;
-  color: rgb(18, 21, 23);
-  bottom: 24px;
+  color: #81a2b1;
+  margin-top: 12px;
   text-align: center;
 `;
 
@@ -171,4 +170,11 @@ export const Step5Inner = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+`;
+
+export const ScannerWrapper = styled.div`
+  height: 100%;
+  video {
+    object-fit: cover;
+  }
 `;

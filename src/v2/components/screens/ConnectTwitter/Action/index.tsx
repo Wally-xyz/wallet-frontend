@@ -30,6 +30,8 @@ import {
   ScannerTitle,
   Step5Wrapper,
   Step5Inner,
+  ScannerWrapper,
+  Step5Text,
 } from "./styles";
 
 interface Props {
@@ -119,28 +121,25 @@ export function Action(props: Props) {
                 <Step5Wrapper>
                   <Step5Inner>
                     {scanning ? (
-                      <>
-                        <div style={{ height: "100%" }}>
-                          <Scanner
-                            validator={() => true}
-                            onSuccess={url => {
-                              const sound = require("../../../../../assets/success-sound-effect.mp3");
-                              const audio = new Audio(sound);
-                              audio.volume = 0.1;
-                              audio.play();
-                              setScannerState(ScannerState.Success);
-                              // waitForConnection();
-                              // setTimeout(() => props.onContinue(url), 2000);
-                              props.onContinue(url);
-                            }}
-                            onFailure={() => {
-                              setScannerState(ScannerState.Failure);
-                              setTimeout(() => setScannerState(ScannerState.Checking), 2000);
-                            }}
-                          />
-                        </div>
-                        <ScannerTitle>{scannerTitle}</ScannerTitle>
-                      </>
+                      <ScannerWrapper>
+                        <Scanner
+                          validator={() => true}
+                          onSuccess={url => {
+                            const sound = require("../../../../../assets/success-sound-effect.mp3");
+                            const audio = new Audio(sound);
+                            audio.volume = 0.1;
+                            audio.play();
+                            setScannerState(ScannerState.Success);
+                            // waitForConnection();
+                            // setTimeout(() => props.onContinue(url), 2000);
+                            props.onContinue(url);
+                          }}
+                          onFailure={() => {
+                            setScannerState(ScannerState.Failure);
+                            setTimeout(() => setScannerState(ScannerState.Checking), 2000);
+                          }}
+                        />
+                      </ScannerWrapper>
                     ) : (
                       <Step5Text>
                         Click here to scan your phone’s QR Code. If the code isn’t scanning try
@@ -149,6 +148,7 @@ export function Action(props: Props) {
                     )}
                   </Step5Inner>
                 </Step5Wrapper>
+                {scanning && <ScannerTitle>{scannerTitle}</ScannerTitle>}
               </Step>
             </FlexRow>
           ) : (
