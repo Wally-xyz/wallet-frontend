@@ -23,7 +23,6 @@ import {
   ConnectButton,
   WhiteText,
   Step,
-  Step5Text,
   StepText,
   StepLabel,
   Scanner,
