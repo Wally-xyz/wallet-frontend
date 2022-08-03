@@ -43,14 +43,19 @@ export const Image = styled.img`
   border-radius: 4px;
 `;
 
-export const ImageContainer = styled(FlexColumn)`
+export const ImageContainer = styled.button<{ selected?: boolean }>`
+  display: flex;
   min-height: 120px;
+  background: none;
+  margin: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 `;
 
-export const ImageSection = styled(FlexRow)`
+export const ImageSection = styled(FlexColumn)`
   margin-top: 64px;
-  align-items: baseline;
-  width: 100%;
+  align-items: center;
   justify-content: center;
 `;
 

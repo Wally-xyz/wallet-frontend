@@ -7,19 +7,19 @@ import {
   ButtonSection,
   Container,
   ContentWrapper,
-  Dronie,
+  Image,
   TwitterButtonText,
-  // OpenSeaButton,
-  // TwitterText,
   HighlightedText,
 } from "./styles";
 import { PrimaryButton } from "src/v2/components/Styles/Button";
 import { Twitter } from "src/v2/icons/Twitter";
 import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
-// import { OpenSea } from "src/v2/icons/OpenSea";
-// import { Separator } from "src/v2/components/Styles/Layout";
 
-export function Action() {
+export interface Props {
+  imageUrl: string;
+}
+
+export function Action(props: Props) {
   return (
     <Container>
       <EasyMintLogo />
@@ -30,7 +30,7 @@ export function Action() {
           , or download the image.
         </Heading3>
         <FlexColumn>
-          <Dronie src="/images/dronies.png" />
+          <Image src={props.imageUrl} />
           <ButtonSection>
             <FlexColumn>
               <PrimaryButton>

@@ -19,9 +19,9 @@ export const ContentWrapper = styled(FlexColumn)`
   margin: 8px 48px 0;
 `;
 
-export const Dronie = styled.img`
-  width: auto;
-  height: 384px;
+export const Image = styled.img`
+  width: 450px;
+  height: auto;
   border: 1px solid #222b2f;
   box-shadow: 0px 8px 0px -4px #090a0b;
   border-radius: 4px;
