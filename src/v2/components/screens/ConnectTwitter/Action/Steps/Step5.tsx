@@ -7,7 +7,7 @@ export const Step5 = () => (
     viewBox="0 0 298 302"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    style={{ margin: "5px 0" }}
+    style={{ margin: "5px 0", cursor: "pointer" }}
   >
     <g filter="url(#filter0_d_180_1864)">
       <rect x="1" y="1" width="296" height="296" rx="4" fill="#090A0B" />

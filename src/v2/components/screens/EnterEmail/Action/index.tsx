@@ -3,10 +3,11 @@ import { EasyMintLogo } from "src/v2/components/EasyMintLogo";
 import { Heading1 } from "src/v2/components/Styles/Typography";
 import { Input } from "src/v2/components/Styles/Input";
 import { useLocation } from "react-router-dom";
+import { PrimaryButton } from "src/v2/components/Styles/Button";
 
 import { API_URL } from "../../../../../constants/default";
 
-import { Container, ContentWrapper, InputWrapper, SubTitle, SubmitButton } from "./styles";
+import { Container, ContentWrapper, InputWrapper, SubTitle, ButtonWrapper } from "./styles";
 
 export interface ActionProps {
   code?: string;
@@ -18,6 +19,7 @@ export interface ActionProps {
 }
 
 export function Action(props: ActionProps) {
+  const [showSpinner, setShowSpinner] = React.useState(false);
   const { search, pathname } = useLocation();
   const query = new URLSearchParams(search);
   const isEmailMode = pathname === "/enter-email";
@@ -88,7 +90,9 @@ export function Action(props: ActionProps) {
               value={props.email}
               onChange={props.onEmailChange}
             />
-            <SubmitButton onClick={sendEmail}>Send Email</SubmitButton>
+            <ButtonWrapper>
+              <PrimaryButton onClick={sendEmail}>Send Email</PrimaryButton>
+            </ButtonWrapper>
           </InputWrapper>
         ) : (
           <InputWrapper>
@@ -98,7 +102,17 @@ export function Action(props: ActionProps) {
               value={props.code}
               onChange={props.onCodeChange}
             />
-            <SubmitButton onClick={() => verifyCode(props.email, props.code)}>Code</SubmitButton>
+            <ButtonWrapper>
+              <PrimaryButton
+                loading={showSpinner}
+                onClick={() => {
+                  setShowSpinner(true);
+                  verifyCode(props.email, props.code);
+                }}
+              >
+                Code
+              </PrimaryButton>
+            </ButtonWrapper>
           </InputWrapper>
         )}
       </ContentWrapper>

@@ -1,3 +1,4 @@
+import { QRCodeScanner } from "src/v2/components/QRCodeScanner";
 import { PrimaryButton } from "src/v2/components/Styles/Button";
 import { FlexColumn, FlexRow } from "src/v2/components/Styles/Layout";
 import { Paragraph } from "src/v2/components/Styles/Typography";
@@ -20,7 +21,6 @@ export const ContentWrapper = styled(FlexColumn)`
 `;
 
 export const DetailSection = styled(FlexColumn)`
-  margin-top: 40px;
   justify-content: space-between;
   width: 100%;
   align-items: baseline;
@@ -127,8 +127,48 @@ export const StepText = styled.div`
   /* or 133% */
   height: 32px;
   color: #81a2b1;
+  width: 100px;
+`;
+
+export const Step5Text = styled(StepText)`
+  width: 60%;
+  text-align: center;
 `;
 
 export const Step = styled(FlexColumn)`
-  margin-top: 32px;
+  margin-top: 16px;
+`;
+
+export const Scanner = styled(QRCodeScanner)`
+  height: 100%;
+  width: 100%;
+  background: white;
+`;
+
+export const ScannerTitle = styled.div`
+  position: absolute;
+  width: 100%;
+  color: rgb(18, 21, 23);
+  bottom: 24px;
+  text-align: center;
+`;
+
+export const Step5Wrapper = styled.div`
+  background: #090a0b;
+  border: 1px solid #222b2f;
+  box-shadow: 0px 8px 0px -4px #090a0b;
+  border-radius: 4px;
+  margin-top: 5px;
+  cursor: pointer;
+`;
+
+export const Step5Inner = styled.div`
+  background: rgba(107, 134, 148, 0.12);
+  border: 2px dashed #c0d0d8;
+  height: 352px;
+  margin: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 `;

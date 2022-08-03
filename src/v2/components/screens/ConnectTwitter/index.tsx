@@ -6,10 +6,14 @@ import { Container } from "./styles";
 import { Action } from "./Action";
 import { Info } from "./Info";
 
-export function ConnectTwitter() {
+interface Props {
+  onContinue: (url: string) => void;
+}
+
+export function ConnectTwitter(props: Props) {
   return (
     <Container>
-      <Action />
+      <Action {...props} />
       <Info />
     </Container>
   );

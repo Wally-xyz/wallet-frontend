@@ -39,7 +39,7 @@ export function Action() {
               <div className="spinner" id="placeholder-spinner" />
             </div>
             <PaymentRow>
-              <ConfirmButton id="submit" onClick={handleSubmit}>
+              <ConfirmButton id="submit" width="100%" onClick={handleSubmit}>
                 <div className="spinner hidden" id="spinner" />
                 <span id="button-text">Confirm</span>
               </ConfirmButton>

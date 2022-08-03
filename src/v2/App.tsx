@@ -110,16 +110,20 @@ export function App() {
   const navigate = useNavigate();
 
   const fetchImage = async (authToken: string) => {
-    const resp = await fetch(`${API_URL}/media/recent`, {
-      headers: { Authorization: `Bearer ${authToken}` },
-    }).then(r => r.json());
+    try {
+      const resp = await fetch(`${API_URL}/media/recent`, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      }).then(r => r.json());
 
-    setState(state => ({
-      ...state,
-      openseaUrl: resp.opensea_url,
-      imageUrl: resp.s3_url,
-      name: resp.name,
-    }));
+      setState(state => ({
+        ...state,
+        openseaUrl: resp.opensea_url,
+        imageUrl: resp.s3_url,
+        name: resp.name,
+      }));
+    } catch (exp) {
+      console.log(exp);
+    }
   };
 
   const init = () => {
@@ -150,6 +154,7 @@ export function App() {
     if (authToken) {
       setState(state => ({ ...state, authToken }));
       fetchWallets();
+      fetchImage(authToken);
     }
   };
 
@@ -170,7 +175,7 @@ export function App() {
         ...state,
         loading: false,
         connector,
-        uri: connector.uri,
+        // uri: connector.uri,
       }));
     } catch (error) {
       setState(state => ({ ...state, loading: false }));
@@ -181,9 +186,9 @@ export function App() {
 
   const subscribeToEvents = () => {
     const { connector } = state;
-
     if (connector) {
       console.log("ACTION", "subscribeToEvents");
+      navigate("/mission-accomplished");
       connector.on("session_request", (error, payload) => {
         console.log("EVENT", "session_request");
 
@@ -194,7 +199,7 @@ export function App() {
         const { peerMeta } = payload.params[0];
         setState(state => ({ ...state, peerMeta }));
         approveSession();
-        navigate("/complete");
+        navigate("/mission-accomplished");
       });
 
       connector.on("session_update", error => {
@@ -309,7 +314,42 @@ export function App() {
         <Routes>
           <Route path="/" element={<Start />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/select-image" element={<SelectImage />} />
+          <Route
+            path="/select-image"
+            element={
+              <SelectImage
+                address={state.address}
+                image={state.image}
+                imageUrl={state.imageUrl}
+                name={state.name}
+                uploading={uploadingImage}
+                onImageChange={image =>
+                  setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
+                }
+                onNameChange={name => setState(state => ({ ...state, name }))}
+                onSubmit={() => {
+                  if (state.image) {
+                    const data = new FormData();
+                    data.append("upload_file", state.image);
+                    setUploadingImage(true);
+
+                    fetch(`${API_URL}/media/upload?name=${state.name}`, {
+                      method: "POST",
+                      headers: {
+                        Authorization: `Bearer ${state.authToken}`,
+                      },
+                      body: data,
+                    }).then(() => {
+                      setUploadingImage(false);
+                      navigate("/purchase");
+                    });
+                  } else {
+                    navigate("/purchase");
+                  }
+                }}
+              />
+            }
+          />
           <Route
             path="/dummy"
             element={<button onClick={() => initWalletConnect(state.uri || "")} />}
@@ -376,25 +416,11 @@ export function App() {
               />
             }
           />
+          <Route path="/purchase" element={<Purchase />} />
           <Route
-            path="/purchase"
-            element={
-              <Purchase
-                imageUrl={state.imageUrl || ""}
-                name={state.name}
-                onSubmit={async () => {
-                  const resp = await fetch(`${API_URL}/payments/checkoutsession`, {
-                    method: "POST",
-                    headers: { Authorization: `Bearer ${state.authToken}` },
-                  }).then(r => r.json());
-
-                  const stripeCheckoutUrl = resp.checkout_session;
-                  window.location.href = stripeCheckoutUrl;
-                }}
-              />
-            }
+            path="/purchase-success"
+            element={<PurchaseSuccess imageUrl={state.imageUrl || ""} />}
           />
-          <Route path="/purchase-success" element={<PurchaseSuccess />} />
           <Route
             path="/mint"
             element={
@@ -441,21 +467,15 @@ export function App() {
             path="/connect-twitter"
             element={
               <ConnectTwitter
-              // onContinue={uri => {
-              //   setState(state => ({ ...state, uri }));
-              // }}
+                onContinue={uri => {
+                  setState(state => ({ ...state, uri }));
+                }}
               />
             }
           />
           <Route
             path="/mission-accomplished"
-            element={
-              <MissionAccomplished
-              // onContinue={uri => {
-              //   setState(state => ({ ...state, uri }));
-              // }}
-              />
-            }
+            element={<MissionAccomplished imageUrl={state.imageUrl || ""} />}
           />
           <Route
             path="/complete"

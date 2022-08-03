@@ -1,4 +1,3 @@
-import { PrimaryButton } from "src/v2/components/Styles/Button";
 import { FlexColumn } from "src/v2/components/Styles/Layout";
 import { Heading3 } from "src/v2/components/Styles/Typography";
 import styled from "styled-components";
@@ -27,7 +26,9 @@ export const InputWrapper = styled(FlexColumn)`
   width: 392px;
 `;
 
-export const SubmitButton = styled(PrimaryButton)`
+export const ButtonWrapper = styled.div`
   margin-top: 32px;
+  display: flex;
   align-self: flex-end;
+  align-items: center;
 `;
