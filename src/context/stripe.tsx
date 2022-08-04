@@ -45,10 +45,12 @@ export const StripeContext = createContext<{
   },
 });
 
-export const StripeContextProvider: React.FC<{
+interface Props {
   children: JSX.Element;
   authToken: string;
-}> = props => {
+}
+
+export const StripeContextProvider: React.FC<Props> = (props: Props) => {
   const [gettingPaymentIntent, setGettingPaymentIntent] = useState(false);
   const location = useLocation();
   const [paymentElement, setPaymentElement] = useState<StripePaymentElement | undefined>();
@@ -64,11 +66,14 @@ export const StripeContextProvider: React.FC<{
       return;
     }
     (async () => {
+      console.log("------------------", process.env.REACT_APP_STRIPE_KEY);
+      if (process.env.REACT_APP_STRIPE_KEY === undefined) {
+        console.log("Please configure stripe key environment variable");
+        return;
+      }
       try {
         setGettingPaymentIntent(true);
-        const stripe = await loadStripe(
-          "pk_test_51KYuRoBRQJlh5970h18jwRTU79T9oNlKhYzRbqvYMxVygUPL4PZsuQF1zIIK6xKmYDMDIERSGL3Mj1YyskVqG31700ZfreRxGg",
-        );
+        const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
         if (!stripe) {
           return;
         }
