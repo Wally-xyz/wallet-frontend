@@ -66,7 +66,6 @@ export const StripeContextProvider: React.FC<Props> = (props: Props) => {
       return;
     }
     (async () => {
-      console.log("------------------", process.env.REACT_APP_STRIPE_KEY);
       if (process.env.REACT_APP_STRIPE_KEY === undefined) {
         console.log("Please configure stripe key environment variable");
         return;
