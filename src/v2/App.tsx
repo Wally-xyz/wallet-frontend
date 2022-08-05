@@ -104,6 +104,7 @@ export function App() {
   });
 
   const [uploadingImage, setUploadingImage] = React.useState(false);
+  const [selectedImageUrl, setSelectedImageUrl] = React.useState<string>("");
   const [mintingTx, setMintingTx] = React.useState("");
 
   const location = useLocation();
@@ -323,9 +324,14 @@ export function App() {
                 imageUrl={state.imageUrl}
                 name={state.name}
                 uploading={uploadingImage}
-                onImageChange={image =>
-                  setState(state => ({ ...state, image, imageUrl: URL.createObjectURL(image) }))
-                }
+                onImageChange={image => {
+                  setSelectedImageUrl("");
+                  setState(state => ({
+                    ...state,
+                    image,
+                    imageUrl: URL.createObjectURL(image),
+                  }));
+                }}
                 onNameChange={name => setState(state => ({ ...state, name }))}
                 onSubmit={() => {
                   if (state.image) {
@@ -347,6 +353,8 @@ export function App() {
                     navigate("/purchase");
                   }
                 }}
+                setSelectedImageUrl={setSelectedImageUrl}
+                selectedImageUrl={selectedImageUrl}
               />
             }
           />
