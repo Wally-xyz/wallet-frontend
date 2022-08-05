@@ -23,11 +23,13 @@ export interface Props {
   address?: string;
   image?: File;
   imageUrl?: string;
+  selectedImageUrl?: string;
   name: string;
   uploading?: boolean;
   onImageChange: (file: File) => void;
   onNameChange: (name: string) => void;
   onSubmit: () => void;
+  setSelectedImageUrl: (imageUrl: string) => void;
 }
 
 export function Action(props: Props) {
@@ -44,28 +46,37 @@ export function Action(props: Props) {
           <FlexRow align={"baseline"}>
             <ImageWrapper>
               <ImageTitle>Dronies</ImageTitle>
-              <ImageContainer>
+              <ImageContainer
+                onClick={() => props.setSelectedImageUrl("/images/dronies.png")}
+                selected={props.selectedImageUrl === "/images/dronies.png"}
+              >
                 <Image src="/images/dronies.png" />
               </ImageContainer>
               <ImageSubTitle>16 of 200 Remaining</ImageSubTitle>
             </ImageWrapper>
             <ImageWrapper>
               <ImageTitle>MMCC</ImageTitle>
-              <ImageContainer>
+              <ImageContainer
+                onClick={() => props.setSelectedImageUrl("/images/mmcc.png")}
+                selected={props.selectedImageUrl === "/images/mmcc.png"}
+              >
                 <Image src="/images/mmcc.png" />
               </ImageContainer>
               <ImageSubTitle>98 of 100 Remaining</ImageSubTitle>
             </ImageWrapper>
             <ImageWrapper>
               <ImageTitle>Age of SAM</ImageTitle>
-              <ImageContainer>
+              <ImageContainer
+                onClick={() => props.setSelectedImageUrl("/images/age-of-sam.gif")}
+                selected={props.selectedImageUrl === "/images/age-of-sam.gif"}
+              >
                 <Image src="/images/age-of-sam.gif" />
               </ImageContainer>
               <ImageSubTitle>2 of 360 Remaining</ImageSubTitle>
             </ImageWrapper>
             <ImageUpload
               image={props.image}
-              imageUrl={props.imageUrl}
+              imageUrl={props.selectedImageUrl ? undefined : props.imageUrl}
               onChange={props.onImageChange}
             />
           </FlexRow>
