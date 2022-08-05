@@ -43,14 +43,9 @@ export const Image = styled.img`
   border-radius: 4px;
 `;
 
-export const ImageContainer = styled.button<{ selected?: boolean }>`
+export const ImageContainer = styled.div<{ selected?: boolean }>`
   display: flex;
   min-height: 120px;
-  background: none;
-  margin: 0;
-  border: none;
-  padding: 0;
-  cursor: pointer;
 `;
 
 export const ImageSection = styled(FlexColumn)`

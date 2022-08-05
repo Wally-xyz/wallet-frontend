@@ -31,13 +31,9 @@ export const ImageTitle = styled(CourierText)`
   margin-bottom: 12px;
 `;
 
-export const ImageContainer = styled.button<{ selected?: boolean }>`
+export const ImageContainer = styled.div<{ selected?: boolean }>`
   display: flex;
   min-height: 120px;
-  background: none;
-  margin: 0;
-  border: none;
-  padding: 0;
   cursor: pointer;
   ${({ selected }) =>
     selected &&
@@ -68,7 +64,7 @@ export function ImageUpload(props: Props) {
 
   return (
     <ImageWrapper>
-      <label>
+      <label htmlFor="image">
         <ImageTitle>Upload Image</ImageTitle>
         <ImageContainer selected={!!image}>
           <Image src={image ? image : "/images/upload-image.svg"} />
@@ -79,6 +75,7 @@ export function ImageUpload(props: Props) {
           ref={input}
           type="file"
           onChange={handleFile}
+          id="image"
         />
       </label>
     </ImageWrapper>
