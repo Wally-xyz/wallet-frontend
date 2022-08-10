@@ -169,7 +169,7 @@ export function Start() {
             on your desktop browser.
           </Disclaimer>
           <PoweredBy>
-            This app is powered by <Logo/> | <DocsLink href="https://docs.wallylabs.xyz">View API docs</DocsLink>
+            This app is powered by <Logo/> | <DocsLink href="https://docs.wally.xyz">View API docs</DocsLink>
           </PoweredBy>
         </Content>
         <RightCol>
