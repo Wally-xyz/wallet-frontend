@@ -41,6 +41,7 @@ export const NavButton = styled.button`
   margin-right: 32px;
   text-decoration: none;
   letter-spacing: 0.0025em;
+  background: none;
 `;
 
 export const NavRouterLink = styled(Link)`
