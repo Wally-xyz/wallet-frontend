@@ -28,22 +28,6 @@ export const NavLink = styled.a`
   letter-spacing: 0.0025em;
 `;
 
-export const NavButton = styled.button`
-  display: flex;
-  align-items: center;
-  color: #cec6d2;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  height: 12px;
-  line-height: 12px;
-  margin-right: 32px;
-  text-decoration: none;
-  letter-spacing: 0.0025em;
-  background: none;
-`;
-
 export const NavRouterLink = styled(Link)`
   display: flex;
   align-items: center;
