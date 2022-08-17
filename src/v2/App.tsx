@@ -1,7 +1,10 @@
 import * as React from "react";
+import { useRef } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
+
+import { WallyConnector } from "wallet-connector";
 
 import { StripeContextProvider } from "src/context/stripe";
 
@@ -106,6 +109,7 @@ export function App() {
   const [uploadingImage, setUploadingImage] = React.useState(false);
   const [selectedImageUrl, setSelectedImageUrl] = React.useState<string>("");
   const [mintingTx, setMintingTx] = React.useState("");
+  const wallyConnector = useRef(new WallyConnector({}));
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -369,6 +373,7 @@ export function App() {
                 email={state.email}
                 onEmailChange={email => setState(state => ({ ...state, email }))}
                 onSubmit={() => navigate("/enter-code")}
+                wallyConnector={wallyConnector.current}
               />
             }
           />
@@ -385,6 +390,7 @@ export function App() {
                   window.localStorage.setItem("token", authToken);
                   navigate("/select-image");
                 }}
+                wallyConnector={wallyConnector.current}
               />
             }
           />
