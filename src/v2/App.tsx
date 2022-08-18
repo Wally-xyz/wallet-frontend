@@ -250,7 +250,7 @@ export function App() {
     const { connector } = state;
 
     try {
-      await getAppConfig().rpcEngine.signer(payload, state, bindedSetState);
+      await getAppConfig().rpcEngine.signer(payload, state, bindedSetState, wallyConnector.current);
     } catch (error) {
       console.error(error);
       if (connector) {
