@@ -109,7 +109,13 @@ export function App() {
   const [uploadingImage, setUploadingImage] = React.useState(false);
   const [selectedImageUrl, setSelectedImageUrl] = React.useState<string>("");
   const [mintingTx, setMintingTx] = React.useState("");
-  const wallyConnector = useRef(new WallyConnector({}));
+  const authToken = window.localStorage.getItem("token");
+  const wallyConnector = useRef(
+    new WallyConnector({
+      appId: "5b6b2003-4059-491a-b210-ad1d4ad8b7a1",
+      authToken: authToken || undefined,
+    }),
+  );
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -133,32 +139,9 @@ export function App() {
 
   const init = () => {
     const authToken = window.localStorage.getItem("token");
-    const path = location.pathname;
-
-    const fetchWallets = async () => {
-      await fetch(`${API_URL}/tokens/wallet?access_token=${authToken}`, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      })
-        .then(response => {
-          if (!response.ok) {
-            if (path !== "/enter-email" && path !== "/enter-code") {
-              navigate("/");
-            }
-            throw new Error("Network response was not OK");
-          }
-          return response.json();
-        })
-        .then(response => {
-          setState(state => ({ ...state, address: response.data }));
-        })
-        .catch(error => console.log(error));
-    };
 
     if (authToken) {
       setState(state => ({ ...state, authToken }));
-      fetchWallets();
       fetchImage(authToken);
     }
   };
@@ -292,6 +275,16 @@ export function App() {
   };
 
   React.useEffect(init, []);
+
+  React.useEffect(() => {
+    if (!wallyConnector.current) {
+      return;
+    }
+    (async () => {
+      const wallets = await wallyConnector.current.getWallets();
+      setState(state => ({ ...state, address: wallets[0].address }));
+    })();
+  }, [wallyConnector.current]);
 
   React.useEffect(() => {
     if (state.uri) {
