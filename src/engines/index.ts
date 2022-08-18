@@ -1,3 +1,5 @@
+import { WallyConnector } from "wallet-connector";
+
 import { IRpcEngine } from "../helpers/types";
 import { IAppState } from "../App";
 import { State } from "../v2/App";
@@ -24,9 +26,14 @@ class RpcEngine implements IRpcEngine {
     return engine.render(payload);
   }
 
-  public signer(payload: any, state: IAppState | State, setState: any) {
+  public signer(
+    payload: any,
+    state: IAppState | State,
+    setState: any,
+    wallyConnector: WallyConnector,
+  ) {
     const engine = this.getEngine(payload);
-    return engine.signer(payload, state, setState);
+    return engine.signer(payload, state, setState, wallyConnector);
   }
 
   private getEngine(payload: any) {

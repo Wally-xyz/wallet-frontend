@@ -464,7 +464,7 @@ class App extends React.Component<{}> {
     const { connector } = this.state;
 
     try {
-      await getAppConfig().rpcEngine.signer(payload, this.state, this.bindedSetState);
+      // await getAppConfig().rpcEngine.signer(payload, this.state, this.bindedSetState);
     } catch (error) {
       console.error(error);
       if (connector) {
