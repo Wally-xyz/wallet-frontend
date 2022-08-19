@@ -276,14 +276,14 @@ export function App() {
   React.useEffect(init, []);
 
   React.useEffect(() => {
-    if (!wallyConnector.current) {
+    if (!wallyConnector.current || !state.authToken) {
       return;
     }
     (async () => {
       const wallets = await wallyConnector.current.getWallets();
       setState(state => ({ ...state, address: wallets[0].address }));
     })();
-  }, [wallyConnector.current]);
+  }, [wallyConnector.current, state.authToken]);
 
   React.useEffect(() => {
     if (state.uri) {

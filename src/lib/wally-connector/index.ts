@@ -11,16 +11,16 @@ export class WallyConnector {
     this.authToken = authToken;
   }
 
-  setAuthToken = (authToken: string): void => {
+  public setAuthToken = (authToken: string): void => {
     this.authToken = authToken;
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async requestGet(url: string, isAuthenticated?: boolean): Promise<any> {
+  public async requestGet(url: string, isAuthenticated?: boolean): Promise<any> {
     return request(this.authToken, "GET", url, undefined, isAuthenticated);
   }
 
-  async requestPost(
+  public async requestPost(
     url: string,
     data?: Record<string, unknown>,
     isAuthenticated?: boolean,
@@ -29,11 +29,11 @@ export class WallyConnector {
     return request(this.authToken, "POST", url, data, isAuthenticated);
   }
 
-  async getOTP(email: string): Promise<Wallet[]> {
+  public async getOTP(email: string): Promise<Wallet[]> {
     return this.requestPost("users/login", { email }, false);
   }
 
-  async verifyOTP(email: string, OTP: string): Promise<VeriftOTPResult> {
+  public async verifyOTP(email: string, OTP: string): Promise<VeriftOTPResult> {
     const result = this.requestPost(
       "users/verifyOTP",
       {
@@ -48,11 +48,11 @@ export class WallyConnector {
     return result;
   }
 
-  async signMessage(message: string): Promise<SignedMessage> {
+  public async signMessage(message: string): Promise<SignedMessage> {
     return this.requestPost("users/sign-message", { message, appId: this.appId }, false);
   }
 
-  async getWallets(): Promise<Wallet[]> {
+  public async getWallets(): Promise<Wallet[]> {
     return this.requestGet("users/wallets");
   }
 }

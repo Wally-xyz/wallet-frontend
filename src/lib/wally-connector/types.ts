@@ -1,14 +1,16 @@
-export type Wallet = {
+export interface Wallet {
   id: string;
   email: string;
   address: string;
   tags: string[];
   referenceId: string;
-};
+}
 
-export type VeriftOTPResult = { token?: string };
+export interface VeriftOTPResult {
+  token?: string;
+}
 
-export type RequestObject = {
+export interface RequestObject {
   method: string;
   headers: {
     Authorization?: string | undefined;
@@ -16,9 +18,9 @@ export type RequestObject = {
     "Content-Type": string;
   };
   body?: string | undefined;
-};
+}
 
-export type SignedMessage = {
+export interface SignedMessage {
   address: string;
   signature: string;
-};
+}

@@ -50,6 +50,7 @@ export function Action(props: ActionProps) {
     if (response.token) {
       const ls = window.localStorage;
       ls.setItem("token", response.token);
+      props.wallyConnector.setAuthToken(response.token);
       props.onCodeSubmit?.({ address: response.id, authToken: response.token });
     }
   };
