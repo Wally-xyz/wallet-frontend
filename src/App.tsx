@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
-import { SActions, SActionsColumn } from './components/Actions';
+import { SActions, SActionsColumn } from "./components/Actions";
 import Button, { SSButton as SButton } from "./components/Button";
 import Card from "./components/Card";
 import { SSInput as SInput } from "./components/Input";
@@ -157,48 +157,49 @@ class App extends React.Component<{}> {
 
     const session = getCachedSession();
 
-    const getQueryVariable: (variable:string) => string | null = (variable:string) => {
+    const getQueryVariable: (variable: string) => string | null = (variable: string) => {
       const query = window.location.search.substring(1);
-      const vars = query.split('&');
+      const vars = query.split("&");
       for (let i = 0; i < vars.length; i++) {
-          const pair = vars[i].split('=');
-          if (decodeURIComponent(pair[0]) === variable) {
-              return decodeURIComponent(pair[1]);
-          }
+        const pair = vars[i].split("=");
+        if (decodeURIComponent(pair[0]) === variable) {
+          return decodeURIComponent(pair[1]);
+        }
       }
-      return null
+      return null;
+    };
+    if (getQueryVariable("success") === "True" || getQueryVariable("success") === "true") {
+      this.setState({ step: 3 });
     }
-    if (getQueryVariable('success') === 'True' || getQueryVariable('success') === 'true') {
-      this.setState({ 'step': 3})
-    }
-    const step = getQueryVariable('step')
+    const step = getQueryVariable("step");
     if (step) {
-      this.setState({ 'step': parseInt(step, 10) })
+      this.setState({ step: parseInt(step, 10) });
     }
-    const authToken = window.localStorage.getItem('token')
+    const authToken = window.localStorage.getItem("token");
 
     if (authToken) {
-      this.setState({ authToken })
+      this.setState({ authToken });
       await fetch(`${API_URL}/tokens/wallet?access_token=${authToken}`, {
-          headers: {
-              'Authorization': `Bearer ${authToken}`
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            this.setState({
+              step: 0,
+            });
+            throw new Error("Network response was not OK");
           }
-      }).then(response => {
-        if (!response.ok) {
-          this.setState({
-            'step': 0,
-          })
-          throw new Error('Network response was not OK');
-        }
-        return response.json()
-      })
-      .then(response => {
-        this.setState({
-          'accounts': [response.data],
-          'address': response.data,
+          return response.json();
         })
-      })
-      .catch(error => console.log(error))
+        .then(response => {
+          this.setState({
+            accounts: [response.data],
+            address: response.data,
+          });
+        })
+        .catch(error => console.log(error));
     }
 
     if (!session) {
@@ -415,7 +416,7 @@ class App extends React.Component<{}> {
   public onQRCodeScan = async (data: any) => {
     const uri = typeof data === "string" ? data : "";
     if (uri) {
-      console.log('SCANNED', uri)
+      console.log("SCANNED", uri);
       await this.setState({ uri });
       await this.initWalletConnect();
       this.toggleScanner();
@@ -423,7 +424,7 @@ class App extends React.Component<{}> {
   };
 
   public onURIPaste = async (e: any) => {
-    console.log('URI Pasted')
+    console.log("URI Pasted");
     const data = e.target.value;
     const uri = typeof data === "string" ? data : "";
     if (uri) {
@@ -451,7 +452,7 @@ class App extends React.Component<{}> {
     });
   };
 
-  public closeRequest = async (payload:any) => {
+  public closeRequest = async (payload: any) => {
     const { requests } = this.state;
     const filteredRequests = requests.filter(request => request.id !== payload.id);
     await this.setState({
@@ -464,7 +465,7 @@ class App extends React.Component<{}> {
     const { connector } = this.state;
 
     try {
-      // await getAppConfig().rpcEngine.signer(payload, this.state, this.bindedSetState);
+      // await getAppConfig().rpcEngine.signer(payload, this.state, this.bindedSetState, wallyConnector.current);
     } catch (error) {
       console.error(error);
       if (connector) {
@@ -492,10 +493,10 @@ class App extends React.Component<{}> {
   };
 
   public setAuthToken = (authToken: string) => {
-    this.setState({ authToken })
+    this.setState({ authToken });
     const ls = window.localStorage;
-    ls.setItem('token', authToken);
-  }
+    ls.setItem("token", authToken);
+  };
 
   public render() {
     const {
@@ -534,71 +535,86 @@ class App extends React.Component<{}> {
                   </Column>
                 ) : (
                   <Column>
-                    {this.state.step === 0 ?
+                    {this.state.step === 0 ? (
                       <Email
                         setAuthToken={this.setAuthToken}
-                        setAccounts={(accounts, address) => this.setState({
-                          accounts,
-                          address,
-                          'step': 1,
-                        })}
-                      /> : <></>
-                    }
-                    {this.state.step === 1 ?
+                        setAccounts={(accounts, address) =>
+                          this.setState({
+                            accounts,
+                            address,
+                            step: 1,
+                          })
+                        }
+                      />
+                    ) : (
+                      <></>
+                    )}
+                    {this.state.step === 1 ? (
                       <Upload
                         authToken={this.state.authToken}
-                        onComplete={() => this.setState({'step': this.state.step+1})}
-                      /> : <></>
-                    }
-                    {this.state.step === 2 ?
+                        onComplete={() => this.setState({ step: this.state.step + 1 })}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                    {this.state.step === 2 ? (
                       <Checkout
                         authToken={this.state.authToken}
-                        onComplete={() => this.setState({'step': this.state.step+1})}
-                      /> : <></>
-                    }
-                    { this.state.step === 3 ?
+                        onComplete={() => this.setState({ step: this.state.step + 1 })}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                    {this.state.step === 3 ? (
                       <Mint
                         authToken={this.state.authToken}
-                        setTxn={ (txn:string) => this.setState({txn})}
-                        onComplete={() => this.setState({'step': this.state.step+1})}
-                      /> : <></>
-                    }
-                    { this.state.step === 4 ?
+                        setTxn={(txn: string) => this.setState({ txn })}
+                        onComplete={() => this.setState({ step: this.state.step + 1 })}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                    {this.state.step === 4 ? (
                       <Success
                         authToken={this.state.authToken}
                         txn={this.state.txn}
-                        onComplete={() => this.setState({'step': this.state.step+1})}
-                      /> : <></>
-                    }
-                    { this.state.step === 5 ?
+                        onComplete={() => this.setState({ step: this.state.step + 1 })}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                    {this.state.step === 5 ? (
                       <Twitter
                         authToken={this.state.authToken}
-                        onComplete={() => this.setState({'step': this.state.step+1})}
-                      /> : <></>
-                    }
-                    {
-                      this.state.step === 6
-                        ? <>
-                          <AccountDetails
-                            chains={getAppConfig().chains}
-                            address={address}
-                            activeIndex={activeIndex}
-                            chainId={chainId}
-                            accounts={accounts}
-                            updateAddress={this.updateAddress}
-                            updateChain={this.updateChain}
-                          />
-                          <SActionsColumn>
-                            <SButton onClick={this.toggleScanner}>{`Scan`}</SButton>
-                            {getAppConfig().styleOpts.showPasteUri && (
-                              <>
-                                <p>{"OR"}</p>
-                                <SInput onChange={this.onURIPaste} placeholder={"Paste link"} />
-                              </>
-                            )}
-                          </SActionsColumn>
-                        </>
-                    : <></>}
+                        onComplete={() => this.setState({ step: this.state.step + 1 })}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                    {this.state.step === 6 ? (
+                      <>
+                        <AccountDetails
+                          chains={getAppConfig().chains}
+                          address={address}
+                          activeIndex={activeIndex}
+                          chainId={chainId}
+                          accounts={accounts}
+                          updateAddress={this.updateAddress}
+                          updateChain={this.updateChain}
+                        />
+                        <SActionsColumn>
+                          <SButton onClick={this.toggleScanner}>{`Scan`}</SButton>
+                          {getAppConfig().styleOpts.showPasteUri && (
+                            <>
+                              <p>{"OR"}</p>
+                              <SInput onChange={this.onURIPaste} placeholder={"Paste link"} />
+                            </>
+                          )}
+                        </SActionsColumn>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </Column>
                 )
               ) : !payload ? (

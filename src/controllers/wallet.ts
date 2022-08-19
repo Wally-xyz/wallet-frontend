@@ -1,6 +1,6 @@
 import * as ethers from "ethers";
 import { signTypedData_v4 } from "eth-sig-util";
-import { WallyConnector } from "wallet-connector";
+import { WallyConnector } from "src/lib/wally-connector";
 
 import { getChainData } from "../helpers/utilities";
 import { setLocal, getLocal } from "../helpers/local";

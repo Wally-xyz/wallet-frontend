@@ -1,4 +1,4 @@
-import { WallyConnector } from "wallet-connector";
+import { WallyConnector } from "src/lib/wally-connector";
 
 import { IRpcEngine } from "../helpers/types";
 import { IAppState } from "../App";
