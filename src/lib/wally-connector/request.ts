@@ -1,19 +1,18 @@
 import { APP_ROOT } from "./constants";
-import { RequestObject } from "./types";
 
 export const request = async (
   authToken: string | undefined,
   method: string,
   url: string,
   data?: Record<string, unknown>,
-  isAuthenticated = true
+  isAuthenticated = true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> => {
   if (!authToken && isAuthenticated) {
     console.error("--- UNAUTHORISED ACCESS ---");
     return;
   }
-  const requestObject: RequestObject = {
+  const requestObject: RequestInit = {
     method,
     headers: {
       Accept: "application/json",
@@ -21,7 +20,7 @@ export const request = async (
     },
   };
   if (isAuthenticated) {
-    requestObject.headers.Authorization = `Bearer ${authToken}`;
+    requestObject.headers = { ...requestObject.headers, Authorization: `Bearer ${authToken}` };
   }
   if (method === "POST" && data) {
     requestObject.body = JSON.stringify(data);

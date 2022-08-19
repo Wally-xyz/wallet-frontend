@@ -5,10 +5,7 @@ export class WallyConnector {
   appId: string | undefined = undefined;
   authToken: string | undefined = undefined;
 
-  constructor({
-    appId,
-    authToken,
-  }: { appId?: string; authToken?: string } = {}) {
+  constructor({ appId, authToken }: { appId?: string; authToken?: string } = {}) {
     // TODO: is appId required field
     this.appId = appId;
     this.authToken = authToken;
@@ -26,7 +23,7 @@ export class WallyConnector {
   async requestPost(
     url: string,
     data?: Record<string, unknown>,
-    isAuthenticated?: boolean
+    isAuthenticated?: boolean,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     return request(this.authToken, "POST", url, data, isAuthenticated);
@@ -43,7 +40,7 @@ export class WallyConnector {
         email,
         OTP,
       },
-      false
+      false,
     ) as VeriftOTPResult;
     if (result.token) {
       this.authToken = result.token;
@@ -52,11 +49,7 @@ export class WallyConnector {
   }
 
   async signMessage(message: string): Promise<SignedMessage> {
-    return this.requestPost(
-      "users/sign-message",
-      { message, appId: this.appId },
-      false
-    );
+    return this.requestPost("users/sign-message", { message, appId: this.appId }, false);
   }
 
   async getWallets(): Promise<Wallet[]> {

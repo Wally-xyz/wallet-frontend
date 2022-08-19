@@ -11,11 +11,11 @@ export type VeriftOTPResult = { token?: string };
 export type RequestObject = {
   method: string;
   headers: {
-    Authorization?: string;
+    Authorization?: string | undefined;
     Accept: string;
     "Content-Type": string;
   };
-  body?: string;
+  body?: string | undefined;
 };
 
 export type SignedMessage = {
