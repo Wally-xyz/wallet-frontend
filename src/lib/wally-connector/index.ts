@@ -2,8 +2,8 @@ import { request } from "./request";
 import { SignedMessage, VeriftOTPResult, Wallet } from "./types";
 
 export class WallyConnector {
-  appId: string | undefined = undefined;
-  authToken: string | undefined = undefined;
+  private appId: string | undefined = undefined;
+  private authToken: string | undefined = undefined;
 
   constructor({ appId, authToken }: { appId?: string; authToken?: string } = {}) {
     // TODO: is appId required field
