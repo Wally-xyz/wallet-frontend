@@ -4,7 +4,7 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
 
-import { WallyConnector } from "wallet-connector";
+import { WallyConnector } from "src/lib/wally-connector";
 
 import { StripeContextProvider } from "src/context/stripe";
 

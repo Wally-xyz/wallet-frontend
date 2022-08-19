@@ -1,5 +1,5 @@
 import { IJsonRpcRequest } from "@walletconnect/types";
-import { WallyConnector } from "wallet-connector";
+import { WallyConnector } from "src/lib/wally-connector";
 
 import { IAppState } from "../App";
 import { State } from "../v2/App";
