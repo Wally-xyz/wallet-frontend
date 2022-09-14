@@ -108,12 +108,8 @@ export function App() {
 
   const [uploadingImage, setUploadingImage] = React.useState(false);
   const [mintingTx, setMintingTx] = React.useState("");
-  const authToken = window.localStorage.getItem("token");
   const wallyConnector = useRef(
-    new WallyConnector({
-      appId: "5b6b2003-4059-491a-b210-ad1d4ad8b7a1",
-      authToken: authToken || undefined,
-    }),
+    new WallyConnector(process.env.REACT_APP_WALLET_CLIENTID || "", { isDevelopment: true }),
   );
 
   const location = useLocation();
@@ -279,10 +275,10 @@ export function App() {
     if (!wallyConnector.current || !state.authToken) {
       return;
     }
-    (async () => {
-      const wallets = await wallyConnector.current.getWallets();
-      setState(state => ({ ...state, address: wallets[0].address }));
-    })();
+    // (async () => {
+    //   const wallets = await wallyConnector.current.getWallets();
+    //   setState(state => ({ ...state, address: wallets[0].address }));
+    // })();
   }, [wallyConnector.current, state.authToken]);
 
   React.useEffect(() => {
@@ -309,7 +305,7 @@ export function App() {
         <GradientCircle1 />
         <GradientCircle2 />
         <Routes>
-          <Route path="/" element={<Start />} />
+          <Route path="/" element={<Start wallyConnector={wallyConnector.current} />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route
             path="/select-image"

@@ -33,6 +33,37 @@ export const Button = styled(ButtonLink)`
   color: #0a0a0b;
 `;
 
+export const StyledButton = styled.button`
+  margin-top: 48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 48px;
+  gap: 12px;
+  cursor: pointer;
+
+  width: 217px;
+  height: 60px;
+
+  background: #f2f6f7;
+  border: 1px solid #fcfdfd;
+  box-shadow: 0px 8px 0px -4px #030303;
+  border-radius: 4px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 12px;
+  /* identical to box height, or 60% */
+
+  text-align: center;
+  letter-spacing: 0.0125em;
+
+  color: #0a0a0b;
+`;
+
 export const Center = styled.div`
   margin-top: 200px;
   align-items: flex-start;
