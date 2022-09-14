@@ -108,8 +108,11 @@ export function App() {
 
   const [uploadingImage, setUploadingImage] = React.useState(false);
   const [mintingTx, setMintingTx] = React.useState("");
+
   const wallyConnector = useRef(
-    new WallyConnector(process.env.REACT_APP_WALLET_CLIENTID || "", { isDevelopment: true }),
+    new WallyConnector(process.env.REACT_APP_WALLET_CLIENTID || "", {
+      isDevelopment: process.env.NODE_ENV === "development",
+    }),
   );
 
   const location = useLocation();
