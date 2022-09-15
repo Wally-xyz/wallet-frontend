@@ -278,10 +278,10 @@ export function App() {
     if (!wallyConnector.current || !state.authToken) {
       return;
     }
-    // (async () => {
-    //   const wallets = await wallyConnector.current.getWallets();
-    //   setState(state => ({ ...state, address: wallets[0].address }));
-    // })();
+    (async () => {
+      const wallets = await wallyConnector.current.getWallets();
+      setState(state => ({ ...state, address: wallets[0].address }));
+    })();
   }, [wallyConnector.current, state.authToken]);
 
   React.useEffect(() => {
