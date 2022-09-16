@@ -5,8 +5,6 @@ import { Input } from "src/v2/components/Styles/Input";
 import { useLocation } from "react-router-dom";
 import { PrimaryButton } from "src/v2/components/Styles/Button";
 
-import { API_URL } from "../../../../../constants/default";
-
 import { Container, ContentWrapper, InputWrapper, SubTitle, ButtonWrapper } from "./styles";
 
 export interface ActionProps {
@@ -16,6 +14,7 @@ export interface ActionProps {
   onSubmit?: () => void;
   onCodeChange?: (email: string) => void;
   onCodeSubmit?: (obj: { address: string; authToken: string }) => void;
+  wallyConnector: any;
 }
 
 export function Action(props: ActionProps) {
@@ -39,13 +38,7 @@ export function Action(props: ActionProps) {
     if (!props.email) {
       return;
     }
-    fetch(`${API_URL}/auth/sendcode?email=${encodeURIComponent(props.email)}`, {
-      method: "POST",
-      body: JSON.stringify({ email: props.email }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    props.wallyConnector.getOTP(props.email);
     props.onSubmit?.();
   };
 
@@ -53,25 +46,13 @@ export function Action(props: ActionProps) {
     if (!email || !code) {
       return;
     }
-    const body = {
-      email,
-      code,
-    };
-    await fetch(`${API_URL}/auth/verifyemail?email=${encodeURIComponent(email)}&code=${code}`, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.access_token) {
-          const ls = window.localStorage;
-          ls.setItem("token", response.access_token);
-          props.onCodeSubmit?.({ address: response.address, authToken: response.access_token });
-        }
-      });
+    const response = await props.wallyConnector.verifyOTP(props.email, props.code);
+    if (response.token) {
+      const ls = window.localStorage;
+      ls.setItem("token", response.token);
+      props.wallyConnector.setAuthToken(response.token);
+      props.onCodeSubmit?.({ address: response.id, authToken: response.token });
+    }
   };
 
   return (

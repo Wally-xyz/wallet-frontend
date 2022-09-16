@@ -1,4 +1,5 @@
 import { signingMethods, convertHexToNumber } from "@walletconnect/utils";
+import { WallyConnector } from "src/lib/wally-connector";
 
 import { IAppState } from "../App";
 import { State } from "../v2/App";
@@ -106,7 +107,12 @@ export function renderEthereumRequests(payload: any): IRequestRenderParams[] {
   return params;
 }
 
-export async function signEthereumRequests(payload: any, state: IAppState | State, setState: any) {
+export async function signEthereumRequests(
+  payload: any,
+  state: IAppState | State,
+  setState: any,
+  wallyConnector: WallyConnector,
+) {
   const { connector, address, activeIndex, chainId } = state;
 
   let errorMsg = "";
@@ -153,7 +159,7 @@ export async function signEthereumRequests(payload: any, state: IAppState | Stat
         dataToSign = payload.params[0];
         addressRequested = payload.params[1];
         if (address.toLowerCase() === addressRequested.toLowerCase()) {
-          result = await getAppControllers().wallet.signPersonalMessage(dataToSign, state.authToken);
+          result = await getAppControllers().wallet.signPersonalMessage(dataToSign, wallyConnector);
         } else {
           errorMsg = "Address requested does not match active account";
         }
