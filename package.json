@@ -26,6 +26,7 @@
     "url": "https://github.com/walletconnect/walletconnect-test-wallet/issues"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.32.0",
     "@types/eth-sig-util": "^2.1.1",
     "@types/react-motion": "^0.0.32",
     "@walletconnect/client": "^1.7.1",
@@ -43,6 +44,7 @@
     "react-motion": "^0.5.2",
     "react-router-dom": "6",
     "react-scripts-ts": "^4.0.8",
+    "react-syntax-highlighter": "^15.5.0",
     "styled-components": "^5.2.0"
   },
   "devDependencies": {
@@ -52,6 +54,7 @@
     "@types/react": "^16.9.51",
     "@types/react-dom": "^16.9.4",
     "@types/react-qr-reader": "^2.1.2",
+    "@types/react-syntax-highlighter": "^15.5.2",
     "@types/styled-components": "^5.1.2",
     "@typescript-eslint/eslint-plugin": "^2.20.0",
     "@typescript-eslint/parser": "^2.20.0",

@@ -103,7 +103,6 @@ export const globalStyle = `
     font-stretch: normal;
     font-weight: ${fonts.weight.normal};
     font-size: ${fonts.size.medium};
-    background-color: rgb(${colors.backgroundColor});
     color: rgb(${colors.white});
     overflow-y:auto;
     text-rendering: optimizeLegibility;
@@ -116,6 +115,10 @@ export const globalStyle = `
     -webkit-text-size-adjust: 100%;  
   }
 
+  body {
+    background: #131516;
+  }
+
   button {
     border-style: none;
     line-height: 1em;
@@ -123,12 +126,6 @@ export const globalStyle = `
     outline: 0;
     -webkit-box-shadow: none;
             box-shadow: none;
-  }
-
-  [tabindex] {
-    outline: none;
-    width: 100%;
-    height: 100%;
   }
 
   p, h1, h2, h3, h4, h5, h6 {
@@ -226,8 +223,4 @@ export const globalStyle = `
 
 export const globalStyleV2 = `
   ${globalStyle}
-
-  body {
-    background-color: ${colors.backgroundColorV2};
-  }
 `;

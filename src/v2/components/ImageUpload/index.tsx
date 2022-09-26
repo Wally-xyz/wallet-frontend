@@ -1,79 +1,52 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { UploadIcon } from "../UploadIcon";
-import { commonStyles } from "../Button";
-
-export const Bordered = styled.div`
-  border-radius: 100px;
-  border: 4px dashed black;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-
-  @media (max-width: 940px) {
-    border-radius: 86px;
-  }
-`;
-
-const Button = styled.div`
-  ${commonStyles}
-`;
-
-export const Container = styled.label`
-  background: linear-gradient(87.18deg, #32adf0 -15.08%, #ff00fe 107.47%),
-    linear-gradient(0deg, #ff5959, #ff5959);
-  border-radius: 100px;
-  cursor: pointer;
-  display: block;
-  height: 350px;
-  position: relative;
-  width: 350px;
-
-  @media (max-width: 940px) {
-    border-radius: 86px;
-    height: 305px;
-    width: 305px;
-  }
-`;
-
-export const Content = styled.div`
-  align-items: center;
-  background: black;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 96px;
-  bottom: 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  left: 4px;
-  position: absolute;
-  right: 4px;
-  top: 4px;
-
-  @media (max-width: 940px) {
-    border-radius: 82px;
-  }
-`;
-
-const Icon = styled(UploadIcon)`
-  height: 86px;
-  margin-bottom: 24px;
-`;
+import { FlexColumn } from "../Styles/Layout";
+import { CourierText } from "../Styles/Typography";
 
 const Input = styled.input`
   visibility: hidden;
+  width: 0;
+`;
+
+const ImageWrapper = styled(FlexColumn)`
+  align-items: flex-start;
+  cursor: pointer;
+
+  &:not(:last-of-type) {
+    margin-right: 24px;
+  }
+`;
+
+const Image = styled.img`
+  width: 120px;
+  height: 120px;
+
+  box-shadow: 0px 8px 0px -4px #090a0b;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+export const ImageTitle = styled(CourierText)`
+  margin-bottom: 12px;
+`;
+
+export const ImageContainer = styled.div<{ selected?: boolean }>`
+  display: flex;
+  min-height: 120px;
+  cursor: pointer;
+  ${({ selected }) =>
+    selected &&
+    `outline: 4px solid #c0d0d8;
+    outline-offset: 5px;
+  `}
 `;
 
 interface Props {
   className?: string;
   image?: File;
   imageUrl?: string;
-  onChange?(image: File): void;
+  onChange?: (image: File) => void;
 }
 
 export function ImageUpload(props: Props) {
@@ -87,30 +60,24 @@ export function ImageUpload(props: Props) {
 
     const file = input.current.files[0];
     props.onChange?.(file);
-  }, [input]);
+  }, [input, props.onChange]);
 
   return (
-    <Container className={props.className}>
-      <Bordered />
-      <Content
-        style={{
-          backgroundImage: image ? `url(${image})` : undefined,
-        }}
-      >
-        {!image && (
-          <>
-            <Icon />
-            <Button>Upload image</Button>
-          </>
-        )}
-      </Content>
-      <Input
-        accept="image/png, image/jpeg, image/gif"
-        className={props.className}
-        ref={input}
-        type="file"
-        onChange={handleFile}
-      />
-    </Container>
+    <ImageWrapper>
+      <label htmlFor="image">
+        <ImageTitle>Upload Image</ImageTitle>
+        <ImageContainer selected={!!image}>
+          <Image src={image ? image : "/images/upload-image.svg"} />
+        </ImageContainer>
+        <Input
+          accept="image/png, image/jpeg, image/gif"
+          className={props.className}
+          ref={input}
+          type="file"
+          onChange={handleFile}
+          id="image"
+        />
+      </label>
+    </ImageWrapper>
   );
 }
