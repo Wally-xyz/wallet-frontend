@@ -4,32 +4,17 @@ import { Whale as _Whale } from "../../Whale";
 import { ButtonLink } from "../../Button";
 
 export const Button = styled(ButtonLink)`
-  margin-top: 48px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   padding: 24px 48px;
-  gap: 12px;
-
-  width: 217px;
-  height: 60px;
-
   background: #f2f6f7;
   border: 1px solid #fcfdfd;
   box-shadow: 0px 8px 0px -4px #030303;
   border-radius: 4px;
-
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
+  font-family: "Merriweather", serif;
+  font-weight: 900;
   font-size: 20px;
   line-height: 12px;
-  /* identical to box height, or 60% */
-
   text-align: center;
   letter-spacing: 0.0125em;
-
   color: #0a0a0b;
 `;
 
@@ -47,6 +32,7 @@ export const Center = styled.div`
 
 export const Container = styled.article`
   width: 100%;
+  height: 100%;
   background: radial-gradient(
       50% 50% at 50% 50%,
       rgba(18, 21, 23, 0.92) 0%,
@@ -62,10 +48,12 @@ export const Container = styled.article`
 `;
 
 export const Message = styled.div`
-  font-weight: 400;
-  font-size: 20px;
-  margin-top: 28px;
-  width: 60%;
+  font-family: "Merriweather", serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  margin: 32px auto 48px;
+  max-width: 440px;
 
   @media (max-width: 940px) {
     text-align: center;
@@ -96,7 +84,8 @@ export const TwitterBlueText = styled.span`
 
 export const Tagline = styled.div`
   //styleName: EasyMint/H1;
-  font-family: "Inter";
+  font-family: "Merriweather", serif;
+  font-weight: 500;
   font-size: 40px;
   font-weight: 934;
   line-height: 56px;
