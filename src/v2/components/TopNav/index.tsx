@@ -16,7 +16,7 @@ export function TopNav({ variant = "BIG" }: { variant?: string }) {
           <ChevronDown />
         </IconWrapper>
       </NavLink>
-      <NavLink target="_blank" href="https://docs.wallylabs.xyz">
+      <NavLink target="_blank" href="https://docs.wally.xyz">
         Docs
         <IconWrapper>
           <ExternalLink />

@@ -37,7 +37,7 @@ export function Info() {
         <CodeBlockTitle>Request</CodeBlockTitle>
         <Code
           code={`curl -i -X POST \\
-  https://docs.wallylabs.xyz/nfts/create/from-uri \\
+  https://docs.wally.xyz/nfts/create/from-uri \\
   -H 'Authorization: Bearer <YOUR_JWT_HERE>' \\
   -H 'Content-Type: application/json' \\
   -d '{
