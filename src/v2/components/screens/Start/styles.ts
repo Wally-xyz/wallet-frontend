@@ -52,6 +52,7 @@ export const Message = styled.div`
   font-weight: 500;
   font-size: 24px;
   line-height: 36px;
+  color: #C0D0D8;
   margin: 32px auto 48px;
   max-width: 440px;
 
@@ -62,19 +63,14 @@ export const Message = styled.div`
 
 export const TwitterInfo = styled.div`
   margin-top: 32px;
-  width: 50%;
-  height: 48px;
-
-  font-family: "Inter";
+  max-width: 328px;
+  font-family: "Merriweather", serif;
   font-style: normal;
-  font-weight: 568;
-  font-size: 12px;
+  font-weight: 500;
+  font-size: 14px;
   line-height: 24px;
-  /* or 171% */
-
   text-align: center;
   letter-spacing: 0.0125em;
-
   color: #f2f6f7;
 `;
 
@@ -108,30 +104,18 @@ export const Footer = styled.footer`
 `;
 
 export const FooterHeading = styled.h5`
-  height: 8px;
-
-  /* Wally/H5 */
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 800;
   font-size: 12px;
   line-height: 8px;
-  /* identical to box height, or 67% */
-
   letter-spacing: 0.3em;
   text-transform: uppercase;
   margin-right: 15px;
-
   color: #d9e3e8;
 `;
 
 export const FooterText = styled.span`
-  width: 45%;
-  height: 48px;
-
-  /* Wally/Paragraph */
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
