@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const EasyMintLogoSVG = styled.svg`
-  width: 137.48px;
+  width: 138px;
   height: 32px;
 `;
 
