@@ -37,7 +37,7 @@ export function Start() {
         </TwitterInfo>
       </Center>
       <Footer>
-        <FooterHeading>POWERED BY</FooterHeading>
+        <FooterHeading>Powered By</FooterHeading>
         <Logo />
         <FooterText>
           Wally is an API that makes it easy to integrate crypto wallets and transactions into your
