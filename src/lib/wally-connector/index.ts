@@ -4,7 +4,7 @@ export class WallyConnector {
   private host: string;
 
   constructor(private readonly clientId: string, private readonly options?: WallyConnectorOptions) {
-    this.host = this.options?.isDevelopment ? "http://localhost:8888" : "https://api.wally.xyz";
+    this.host = this.options?.isDevelopment ? "http://localhost:8888/v1" : "https://api.wally.xyz/v1";
   }
 
   public loginWithEmail() {
