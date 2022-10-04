@@ -1,5 +1,7 @@
 import * as ethers from "ethers";
 import { signTypedData_v4 } from "eth-sig-util";
+import { WallyConnector } from "src/lib/wally-connector";
+
 import { getChainData } from "../helpers/utilities";
 import { setLocal, getLocal } from "../helpers/local";
 import {
@@ -7,7 +9,6 @@ import {
   MNEMONIC_KEY,
   DEFAULT_ACTIVE_INDEX,
   DEFAULT_CHAIN_ID,
-  API_URL,
 } from "../constants/default";
 import { getAppConfig } from "../config";
 
@@ -201,22 +202,8 @@ export class WalletController {
     return null;
   }
 
-  public async signPersonalMessage(message: any, authToken: string) {
-    const body = {
-      'message': message,
-    }
-    const result = await fetch(`${API_URL}/tokens/sign`, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${authToken}`
-      }
-    }).then(response => {
-      return response.json().then(data => {
-        return data.result;
-      })
-    })
+  public async signPersonalMessage(message: any, wallyConnector: WallyConnector) {
+    const result = await wallyConnector.signMessage(message);
     return result;
   }
 

@@ -1,7 +1,10 @@
 import * as React from "react";
+import { useRef } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
+
+import { WallyConnector } from "src/lib/wally-connector";
 
 import { StripeContextProvider } from "src/context/stripe";
 
@@ -107,6 +110,12 @@ export function App() {
   const [selectedImageUrl, setSelectedImageUrl] = React.useState<string>("");
   const [mintingTx, setMintingTx] = React.useState("");
 
+  const wallyConnector = useRef(
+    new WallyConnector(process.env.REACT_APP_WALLET_CLIENTID || "", {
+      isDevelopment: process.env.NODE_ENV === "development",
+    }),
+  );
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -129,32 +138,9 @@ export function App() {
 
   const init = () => {
     const authToken = window.localStorage.getItem("token");
-    const path = location.pathname;
-
-    const fetchWallets = async () => {
-      await fetch(`${API_URL}/tokens/wallet?access_token=${authToken}`, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      })
-        .then(response => {
-          if (!response.ok) {
-            if (path !== "/enter-email" && path !== "/enter-code") {
-              navigate("/");
-            }
-            throw new Error("Network response was not OK");
-          }
-          return response.json();
-        })
-        .then(response => {
-          setState(state => ({ ...state, address: response.data }));
-        })
-        .catch(error => console.log(error));
-    };
 
     if (authToken) {
       setState(state => ({ ...state, authToken }));
-      fetchWallets();
       fetchImage(authToken);
     }
   };
@@ -263,7 +249,7 @@ export function App() {
     const { connector } = state;
 
     try {
-      await getAppConfig().rpcEngine.signer(payload, state, bindedSetState);
+      await getAppConfig().rpcEngine.signer(payload, state, bindedSetState, wallyConnector.current);
     } catch (error) {
       console.error(error);
       if (connector) {
@@ -290,6 +276,16 @@ export function App() {
   React.useEffect(init, []);
 
   React.useEffect(() => {
+    if (!wallyConnector.current || !state.authToken) {
+      return;
+    }
+    (async () => {
+      const wallets = await wallyConnector.current.getWallets();
+      setState(state => ({ ...state, address: wallets[0].address }));
+    })();
+  }, [wallyConnector.current, state.authToken]);
+
+  React.useEffect(() => {
     if (state.uri) {
       initWalletConnect(state.uri);
     }
@@ -313,7 +309,7 @@ export function App() {
         <GradientCircle1 />
         <GradientCircle2 />
         <Routes>
-          <Route path="/" element={<Start />} />
+          <Route path="/" element={<Start wallyConnector={wallyConnector.current} />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route
             path="/select-image"
@@ -369,6 +365,7 @@ export function App() {
                 email={state.email}
                 onEmailChange={email => setState(state => ({ ...state, email }))}
                 onSubmit={() => navigate("/enter-code")}
+                wallyConnector={wallyConnector.current}
               />
             }
           />
@@ -385,6 +382,7 @@ export function App() {
                   window.localStorage.setItem("token", authToken);
                   navigate("/select-image");
                 }}
+                wallyConnector={wallyConnector.current}
               />
             }
           />
