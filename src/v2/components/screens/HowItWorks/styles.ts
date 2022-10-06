@@ -23,6 +23,8 @@ export const TitleWrapper = styled(FlexColumn)`
   margin-left: 48px;
   align-items: flex-start;
   width: 45%;
+  position: absolute;
+  top: 48px;
 `;
 
 export const Message = styled.div`

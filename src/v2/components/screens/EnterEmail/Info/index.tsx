@@ -1,5 +1,6 @@
 import * as React from "react";
 import { NextStepButton } from "src/v2/components/Styles/NavButtons";
+import { PrevStepButton } from "src/v2/components/Styles/NavButtons";
 import { Heading2, Heading5 } from "src/v2/components/Styles/Typography";
 import { TopNav } from "src/v2/components/TopNav";
 import { Code } from "../../../Code";
@@ -59,6 +60,7 @@ export function Info() {
         />
       </Content>
       <Footer>
+        <PrevStepButton to="/" />
         <NextStepButton to="/select-image" />
       </Footer>
     </Container>

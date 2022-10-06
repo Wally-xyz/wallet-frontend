@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PrevStepButton } from "src/v2/components/Styles/NavButtons";
+import { NextStepButton, PrevStepButton } from "src/v2/components/Styles/NavButtons";
 import { Heading2, Heading5, Paragraph } from "src/v2/components/Styles/Typography";
 import { TopNav } from "src/v2/components/TopNav";
 import { Code } from "../../../Code";
@@ -66,6 +66,7 @@ export function Info() {
       </Content>
       <Footer>
         <PrevStepButton to="/connect-twitter" />
+        <NextStepButton to="/" />
       </Footer>
     </Container>
   );

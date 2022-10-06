@@ -9,9 +9,11 @@ const EasyMintLogoSVG = styled.svg`
 
 const EasyMintLogoWrapper = styled.div`
   align-self: baseline;
-  margin-left: 48px;
+  left: 32px;
   display: flex;
   align-items: center;
+  position: absolute;
+  top: 32px;
 `;
 
 const DemoBadge = styled.span`

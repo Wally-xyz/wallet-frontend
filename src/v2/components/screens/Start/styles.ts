@@ -19,8 +19,6 @@ export const Button = styled(ButtonLink)`
 `;
 
 export const Center = styled.div`
-  margin-top: 200px;
-  align-items: flex-start;
   display: flex;
   flex-direction: column;
   max-width: 620px;
@@ -44,7 +42,7 @@ export const Container = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 `;
 
 export const Message = styled.div`
@@ -97,10 +95,17 @@ export const FlexWrapper = styled.div`
 `;
 
 export const Footer = styled.footer`
+  height: 48px;
+  background: #1a1533;
+  border-top: 1px solid rgba(252, 253, 253, 0.08);
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: 200px;
+  justify-content: space-between;
+  padding: 0 16px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 50%;
 `;
 
 export const FooterHeading = styled.h5`

@@ -10,11 +10,8 @@ const LinkButton = styled(Link)<{ dir: string }>`
   font-weight: 800;
   font-size: 14px;
   line-height: 12px;
-  /* identical to box height, or 86% */
-
   text-align: right;
   letter-spacing: 0.0025em;
-
   color: #e6ecef;
   text-decoration: none;
   margin-right: ${({ dir }) => (dir === "right" ? "16px" : 0)};
@@ -34,7 +31,7 @@ const PrevStepText = styled.div`
 export function NextStepButton({ to }: { to: string }) {
   return (
     <LinkButton to={to || "/"} dir="right">
-      <NextStepText>Next Step</NextStepText>
+      <NextStepText>Next</NextStepText>
       <RightArrow />
     </LinkButton>
   );
@@ -44,7 +41,7 @@ export function PrevStepButton({ to }: { to: string }) {
   return (
     <LinkButton to={to || "/"} dir="left">
       <LeftArrow />
-      <PrevStepText>Previous Step</PrevStepText>
+      <PrevStepText>Go Back</PrevStepText>
     </LinkButton>
   );
 }

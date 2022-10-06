@@ -6,7 +6,10 @@ export const Wrapper = styled.div<{ variant?: string }>`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  margin: ${({ variant }) => (variant === "BIG" ? "32px 64px 0 0" : "32px 0")};
+  margin: 32px 0;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 export const IconWrapper = styled.span`
