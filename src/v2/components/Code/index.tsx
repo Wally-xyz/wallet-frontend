@@ -19,13 +19,11 @@ export const Wrapper = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  /* or 143% */
-
   letter-spacing: 0.0025em;
-  background: #180920;
-  border-radius: 12px;
-
+  padding: 0 !important;
   pre {
-    border-radius: 12px;
+    background: #180920;
+    border-radius: 16px !important;
+    padding: 16px 24px !important;
   }
 `;
