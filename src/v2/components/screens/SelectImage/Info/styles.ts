@@ -11,30 +11,24 @@ export const Container = styled.div`
 `;
 
 export const TopBarWrapper = styled.div`
+  position: fixed;
   box-sizing: border-box;
-
-  /* Auto layout */
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 32px;
+  padding: 0px;
   gap: 16px;
-
-  width: 100%;
+  width: 50%;
   height: 80px;
   right: 0px;
   top: 0px;
-
   background: #1a1533;
   border-bottom: 1px solid rgba(252, 253, 253, 0.08);
 `;
 
 export const Content = styled.div`
-  margin-top: 48px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin: 120px 32px 80px;
 `;
 
 export const StepTitle = styled.h5`
@@ -97,12 +91,15 @@ export const Highlightor = styled.div`
 `;
 
 export const Footer = styled.footer`
-  height: 64px;
-
+  height: 48px;
   background: #1a1533;
   border-top: 1px solid rgba(252, 253, 253, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 200px;
+  padding: 0 16px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 50%;
 `;

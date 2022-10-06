@@ -12,27 +12,21 @@ export const Container = styled.div`
 `;
 
 export const TopBarWrapper = styled(FlexRow)`
+  position: fixed;
   box-sizing: border-box;
-
-  /* Auto layout */
-
   justify-content: space-between;
   padding: 0px 32px;
   gap: 16px;
-
-  width: 100%;
+  width: 50%;
   height: 80px;
   right: 0px;
   top: 0px;
-
   background: #1a1533;
   border-bottom: 1px solid rgba(252, 253, 253, 0.08);
 `;
 
 export const Content = styled.div`
-  margin-top: 48px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin: 120px 32px 80px;
 `;
 
 export const SignupText = styled.div`
@@ -74,14 +68,22 @@ export const Highlightor = styled.div`
 `;
 
 export const Footer = styled.footer`
-  height: 64px;
-
+  height: 48px;
   background: #1a1533;
   border-top: 1px solid rgba(252, 253, 253, 0.08);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  margin-top: 200px;
+  justify-content: space-between;
+  padding: 0 16px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+`;
+
+export const IntroFooter = styled.footer`
+  width: 100%;
+  background: transparent;
 `;
 
 export const ApiTitle = styled(Heading3)`
