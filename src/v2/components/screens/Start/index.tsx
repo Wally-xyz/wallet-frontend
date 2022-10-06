@@ -30,7 +30,7 @@ export function Start() {
             Create an NFT from any image quickly, without any prior crypto experience.
           </Message>
         </FlexWrapper>
-        <Button to="/enter-email">Get Started</Button>
+        <Button to="/how-it-works">Get Started</Button>
         <TwitterInfo>
           Note: to be able to set the NFT as your Twitter profile photo, you’ll need{" "}
           <TwitterBlueText>Twitter Blue</TwitterBlueText>.
