@@ -6,7 +6,7 @@ import { Whale as _Whale } from "../../Whale";
 
 export const Container = styled(FlexColumn)`
   box-sizing: border-box;
-  justify-content: space-between;
+  justify-content: center;
   height: 100%;
   width: 100%;
   background: #1a1533;
@@ -20,11 +20,12 @@ export const TopNavWrapper = styled(FlexColumn)`
 
 export const TitleWrapper = styled(FlexColumn)`
   align-self: baseline;
-  margin-left: 48px;
   align-items: flex-start;
-  width: 45%;
   position: absolute;
-  top: 48px;
+  max-width: 504px;
+  top: 8px;
+  left: 32px;
+  padding: 0;
 `;
 
 export const Message = styled.div`
@@ -44,6 +45,11 @@ export const Footer = styled.footer`
   justify-content: center;
   width: 100%;
   justify-content: flex-end;
-  margin-right: 64px;
-  margin-bottom: 64px;
+  position: absolute;
+  right: 32px;
+  bottom: 32px;
+  margin: 0;
+  button {
+    margin-right: 24px;
+  }
 `;

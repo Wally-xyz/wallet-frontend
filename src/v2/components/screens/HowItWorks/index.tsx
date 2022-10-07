@@ -2,7 +2,6 @@ import * as React from "react";
 
 import { BackButton } from "../../Styles/BackButton";
 import { PrimaryLinkButton } from "../../Styles/Button";
-import { Separator } from "../../Styles/Layout";
 import { Heading1, Heading3 } from "../../Styles/Typography";
 import { TopNav } from "../../TopNav";
 
@@ -26,7 +25,6 @@ export function HowItWorks() {
       <Illustration />
       <Footer>
         <BackButton />
-        <Separator width="32px" />
         <PrimaryLinkButton to="/enter-email">Start EasyMint Demo</PrimaryLinkButton>
       </Footer>
     </Container>
