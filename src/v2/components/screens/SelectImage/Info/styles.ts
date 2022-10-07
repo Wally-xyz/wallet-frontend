@@ -4,10 +4,17 @@ import styled from "styled-components";
 export const Container = styled.div`
   min-height: 100%;
   box-sizing: border-box;
-  max-width: 1000px;
   width: 50%;
-  margin-left: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
   background: #1a1533;
+
+  @media (max-width: 1124px) {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
 `;
 
 export const TopBarWrapper = styled.div`
@@ -20,7 +27,7 @@ export const TopBarWrapper = styled.div`
   padding: 0px;
   gap: 16px;
   width: 50%;
-  height: 80px;
+  height: 64px;
   right: 0px;
   top: 0px;
   background: #1a1533;
@@ -28,7 +35,7 @@ export const TopBarWrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  margin: 120px 32px 80px;
+  margin: 96px 32px 80px;
 `;
 
 export const StepTitle = styled.h5`
