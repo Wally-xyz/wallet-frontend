@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const Illustration = () => (
-  <svg width="100%" viewBox="0 0 615 490" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 615 490" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M561 280H54C25.2812 280 2 303.281 2 332V436C2 464.719 25.2812 488 54 488H561C589.719 488 613 464.719 613 436V332C613 303.281 589.719 280 561 280Z"
       stroke="url(#paint0_linear_295_5800)"
