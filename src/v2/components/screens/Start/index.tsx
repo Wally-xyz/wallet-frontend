@@ -8,7 +8,7 @@ import {
   Button,
   Center,
   Container,
-  Footer,
+  IntroFooter,
   FooterHeading,
   FooterText,
   FlexWrapper,
@@ -36,14 +36,14 @@ export function Start() {
           <TwitterBlueText>Twitter Blue</TwitterBlueText>.
         </TwitterInfo>
       </Center>
-      <Footer>
+      <IntroFooter style={{"background":"#fff !important"}}>
         <FooterHeading>Powered By</FooterHeading>
         <Logo />
         <FooterText>
           Wally is an API that makes it easy to integrate crypto wallets and transactions into your
           application.
         </FooterText>
-      </Footer>
+      </IntroFooter>
     </Container>
   );
 }
