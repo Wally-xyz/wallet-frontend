@@ -6,7 +6,7 @@ export const Wrapper = styled.div<{ variant?: string }>`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  margin: 32px 0;
+  margin: 24px 0;
   position: absolute;
   top: 0;
   right: 0;
