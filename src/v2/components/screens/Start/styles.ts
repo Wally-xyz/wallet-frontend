@@ -94,6 +94,20 @@ export const FlexWrapper = styled.div`
   justify-content: center;
 `;
 
+export const IntroFooter = styled.footer`
+  height: 48px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 648px;
+`;
+
 export const Footer = styled.footer`
   height: 48px;
   background: #1a1533;
