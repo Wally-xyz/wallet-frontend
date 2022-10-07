@@ -5,10 +5,18 @@ import styled from "styled-components";
 export const Container = styled.div`
   min-height: 100%;
   box-sizing: border-box;
-  max-width: 1000px;
   width: 50%;
-  margin-left: 50%;
+  max-width: 1080px;
+  position: absolute;
+  right: 0;
+  top: 0;
   background: #1a1533;
+
+  @media (max-width: 1124px) {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
 `;
 
 export const TopBarWrapper = styled(FlexRow)`
@@ -18,7 +26,8 @@ export const TopBarWrapper = styled(FlexRow)`
   padding: 0px 32px;
   gap: 16px;
   width: 50%;
-  height: 80px;
+  max-width: 1080px;
+  height: 64px;
   right: 0px;
   top: 0px;
   background: #1a1533;
@@ -26,7 +35,11 @@ export const TopBarWrapper = styled(FlexRow)`
 `;
 
 export const Content = styled.div`
-  margin: 120px 32px 80px;
+  margin: 96px 32px 80px;
+
+  svg {
+    max-width: 640px;
+  }
 `;
 
 export const SignupText = styled.div`
@@ -79,6 +92,7 @@ export const Footer = styled.footer`
   bottom: 0;
   right: 0;
   width: 50%;
+  max-width: 1080px;
 `;
 
 export const IntroFooter = styled.footer`

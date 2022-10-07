@@ -4,12 +4,24 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 50%;
+  max-width: 1080px;
   min-height: 100%;
   background: #121517;
   padding: 48px 0;
   position: fixed;
   left: 0;
   top: 0;
+
+  @media (max-width: 1124px) {
+    width: 100%;
+    padding: 24px;
+  }
+
+  @media (min-width: 2160px) {
+    width: calc(100% - 1080px);
+    max-width: none;
+  }
+
 `;
 
 export const SubTitle = styled(Heading3)`

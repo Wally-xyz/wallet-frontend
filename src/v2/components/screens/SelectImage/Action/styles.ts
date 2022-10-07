@@ -6,12 +6,19 @@ import { Input as _Input } from "../../../Input";
 
 export const Container = styled.div`
   width: 50%;
+  max-width: 1080px;
   min-height: 100%;
   background: #121517;
   padding: 48px 0;
   position: fixed;
   left: 0;
   top: 0;
+
+  @media (max-width: 1124px) {
+    width: 100%;
+    padding: 24px;
+  }
+
 `;
 
 export const ImageTitle = styled(CourierText)`

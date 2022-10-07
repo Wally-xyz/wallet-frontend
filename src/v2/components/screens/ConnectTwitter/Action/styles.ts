@@ -8,12 +8,19 @@ import { Input as _Input } from "../../../Input";
 
 export const Container = styled.div`
   width: 50%;
+  max-width: 1080px;
   min-height: 100%;
   background: #121517;
   padding: 48px 0;
   position: fixed;
   left: 0;
   top: 0;
+
+  @media (max-width: 1124px) {
+    width: 100%;
+    padding: 24px;
+  }
+
 `;
 
 export const ContentWrapper = styled(FlexColumn)`
@@ -32,10 +39,13 @@ export const HighlightedText = styled.span`
 
 export const TwitterMessage = styled.div`
   padding: 7px 8px;
-
   background: #0088ff;
   border-radius: 4px;
-  color: white;
+  color: hsl(200, 8%, 8%);
+  font-size: 14px;
+  line-height: 10px;
+  letter-spacing: -0.5%;
+  font-weight: bold;
 `;
 
 export const SubmitButton = styled(PrimaryButton)`
