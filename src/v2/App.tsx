@@ -1,10 +1,7 @@
 import * as React from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import WalletConnect from "@walletconnect/client";
-
 import { StripeContextProvider } from "src/context/stripe";
-
 import { CollectUsername } from "./components/screens/CollectUsername";
 import { Complete } from "./components/screens/Complete";
 import { ConnectTwitter } from "./components/screens/ConnectTwitter";
@@ -20,35 +17,6 @@ import { HowItWorks } from "./components/screens/HowItWorks";
 import { SelectImage } from "./components/screens/SelectImage";
 import { PurchaseSuccess } from "./components/screens/PurchaseSuccess";
 import { MissionAccomplished } from "./components/screens/MissionAccomplished";
-
-const GradientCircle1 = styled.div`
-  background: linear-gradient(90.87deg, rgba(40, 0, 71, 0.7) -41.78%, rgba(64, 0, 57, 0.7) 100%);
-  border-radius: 836px;
-  filter: blur(300px);
-  height: 836px;
-  opacity: 0.8;
-  pointer-events: none;
-  position: fixed;
-  right: 0;
-  top: 0;
-  transform: translateX(70%) translateY(-70%);
-  width: 836px;
-  z-index: -1;
-`;
-
-const GradientCircle2 = styled.div`
-  background: linear-gradient(90.87deg, rgba(40, 0, 71, 0.7) -41.78%, rgba(64, 0, 57, 0.7) 100%);
-  border-radius: 836px;
-  bottom: 0;
-  filter: blur(300px);
-  height: 836px;
-  left: 0;
-  pointer-events: none;
-  position: fixed;
-  transform: translateX(-50%) translateY(50%);
-  width: 836px;
-  z-index: -1;
-`;
 
 export interface State {
   address: string;
@@ -310,8 +278,6 @@ export function App() {
   return (
     <StripeContextProvider authToken={state.authToken}>
       <>
-        <GradientCircle1 />
-        <GradientCircle2 />
         <Routes>
           <Route path="/" element={<Start />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
