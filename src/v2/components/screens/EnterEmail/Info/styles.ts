@@ -37,8 +37,14 @@ export const TopBarWrapper = styled(FlexRow)`
 export const Content = styled.div`
   margin: 96px 32px 80px;
 
+  h3 {
+    margin-top: 32px;
+  }
+
+
   svg {
     max-width: 640px;
+    margin-bottom: 48px;
   }
 `;
 
@@ -48,12 +54,8 @@ export const SignupText = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  /* or 150% */
-
   letter-spacing: 0.0025em;
-
   color: #d9e3e8;
-  margin-top: 64px;
 `;
 
 export const Separator = styled.div`
@@ -101,6 +103,5 @@ export const IntroFooter = styled.footer`
 `;
 
 export const ApiTitle = styled(Heading3)`
-  margin-top: 24px;
   text-align: left;
 `;

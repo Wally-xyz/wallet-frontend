@@ -7,10 +7,13 @@ export const Container = styled.div`
   max-width: 1080px;
   min-height: 100%;
   background: #121517;
-  padding: 48px 0;
+  padding: 48px 32px;
+  display: flex;
+  justify-content: center;
   position: fixed;
   left: 0;
   top: 0;
+  overflow-y: auto;
 
   @media (max-width: 1124px) {
     width: 100%;
@@ -25,17 +28,18 @@ export const Container = styled.div`
 `;
 
 export const SubTitle = styled(Heading3)`
-  width: 416px;
+  max-width: 416px;
 `;
 
 export const ContentWrapper = styled(FlexColumn)`
-  margin-top: 100px;
+  margin-top: 64px;
 `;
 
 export const InputWrapper = styled(FlexColumn)`
   margin-top: 64px;
   align-items: flex-start;
-  width: 392px;
+  width: 100%;
+  max-width: 416px;
 `;
 
 export const ButtonWrapper = styled.div`

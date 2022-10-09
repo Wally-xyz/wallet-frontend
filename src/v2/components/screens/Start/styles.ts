@@ -5,17 +5,27 @@ import { ButtonLink } from "../../Button";
 
 export const Button = styled(ButtonLink)`
   padding: 24px 48px;
-  background: #f2f6f7;
-  border: 1px solid #fcfdfd;
+  background: hsl(200, 24%, 84%);
+  border: 1px solid hsl(200, 24%, 84%);
   box-shadow: 0px 8px 0px -4px #030303;
   border-radius: 4px;
   font-family: "Merriweather", serif;
   font-weight: 900;
   font-size: 20px;
-  line-height: 12px;
+  line-height: 14px;
   text-align: center;
   letter-spacing: 0.0125em;
   color: #0a0a0b;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: hsl(200, 24%, 96%);
+  }
 `;
 
 export const Center = styled.div`
@@ -47,12 +57,13 @@ export const Container = styled.article`
 
 export const Message = styled.div`
   font-family: "Merriweather", serif;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 36px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 40px;
+  letter-spacing: -0.5%;
   color: #C0D0D8;
   margin: 32px auto 48px;
-  max-width: 440px;
+  max-width: 480px;
 
   @media (max-width: 940px) {
     text-align: center;
@@ -79,8 +90,8 @@ export const TwitterBlueText = styled.span`
 export const Tagline = styled.div`
   //styleName: EasyMint/H1;
   font-family: "Merriweather", serif;
-  font-weight: 500;
-  font-size: 40px;
+  font-weight: 900;
+  font-size: 38px;
   font-weight: 934;
   line-height: 56px;
   letter-spacing: 0.0025em;
@@ -120,6 +131,7 @@ export const Footer = styled.footer`
   bottom: 0;
   right: 0;
   width: 50%;
+  max-width: 1080px;
 `;
 
 export const FooterHeading = styled.h5`
@@ -140,8 +152,7 @@ export const FooterText = styled.span`
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  /* or 150% */
-
+  max-width: 400px;
   letter-spacing: 0.0025em;
   margin-left: 24px;
 
