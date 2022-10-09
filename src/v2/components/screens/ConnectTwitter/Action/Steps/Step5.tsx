@@ -2,7 +2,6 @@ import * as React from "react";
 
 export const Step5 = () => (
   <svg
-    width="100%"
     height="auto"
     viewBox="0 0 298 302"
     fill="none"
