@@ -87,7 +87,14 @@ export const Container = styled.div`
 
   @media (max-width: 1124px) {
     width: 100%;
+    padding: 24px;
   }
+
+  @media (min-width: 2160px) {
+    width: calc(100% - 1080px);
+    max-width: none;
+  }
+
 `;
 
 export const ContentWrapper = styled(FlexColumn)`
