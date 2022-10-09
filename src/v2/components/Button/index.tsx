@@ -19,7 +19,6 @@ export const commonStyles = css<{ disabled?: boolean }>`
     ${props =>
       !props.disabled &&
       `
-      transform: scale(1.05);
     `}
   }
 
@@ -27,7 +26,6 @@ export const commonStyles = css<{ disabled?: boolean }>`
     ${props =>
       !props.disabled &&
       `
-      transform: scale(0.98);
     `}
   }
 
