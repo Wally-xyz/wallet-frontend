@@ -30,28 +30,20 @@ export const SecondaryButton = styled.button`
   justify-content: center;
   align-items: center;
   padding: 18px 36px;
-  gap: 12px;
-
-  width: 143px;
   height: 48px;
-
-  background: #1a1533;
-  border: 1px solid #f2f6f7;
+  background: transparent;
+  border: 1px solid hsl(200, 24%, 64%);
   box-shadow: 0px 8px 0px -4px #030303;
   border-radius: 4px;
-
-  font-family: "Inter";
+  font-family: "Merriweather", serif;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 900;
   font-size: 14px;
   line-height: 12px;
-  /* identical to box height, or 75% */
-
   text-align: center;
   letter-spacing: 0.0125em;
   text-decoration: none;
-
-  color: #f2f6f7;
+  color: hsl(200, 24%, 96%);
 
   &:disabled {
     opacity: 0.5;
@@ -59,7 +51,8 @@ export const SecondaryButton = styled.button`
   }
 
   &:hover {
-    transform: scale(1.05);
+    cursor: pointer;
+    border: 1px solid hsl(200, 24%, 96%);
   }
 `;
 
@@ -70,33 +63,28 @@ const PrimaryStyledButton = styled.button`
   align-items: center;
   padding: 18px 36px;
   gap: 12px;
-
   height: 48px;
-
-  background: #f2f6f7;
-  border: 1px solid #fcfdfd;
+  background: hsl(200, 24%, 84%);
+  border: 1px solid hsl(200, 24%, 84%);
   box-shadow: 0px 8px 0px -4px #030303;
   border-radius: 4px;
-  font-family: "Inter";
+  font-family: "Merriweather", serif;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 900;
   font-size: 14px;
   line-height: 12px;
   cursor: pointer;
-  /* identical to box height, or 75% */
-
   text-align: center;
   letter-spacing: 0.0125em;
-
   color: #0a0a0b;
-
   &:disabled {
     opacity: 0.5;
     cursor: default;
   }
 
   &:hover {
-    transform: scale(1.05);
+    cursor: pointer;
+    background: hsl(200, 24%, 96%);
   }
 `;
 
@@ -107,33 +95,28 @@ export const PrimaryLinkButton = styled(Link)`
   align-items: center;
   padding: 18px 36px;
   gap: 12px;
-
   height: 48px;
-
-  background: #f2f6f7;
-  border: 1px solid #fcfdfd;
+  background: hsl(200, 24%, 84%);
+  border: 1px solid hsl(200, 24%, 84%);
   box-shadow: 0px 8px 0px -4px #030303;
   border-radius: 4px;
-  font-family: "Inter";
+  font-family: "Merriweather", serif;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 900;
   font-size: 14px;
   line-height: 12px;
   cursor: pointer;
-  /* identical to box height, or 75% */
-
   text-align: center;
   text-decoration: none;
   letter-spacing: 0.0125em;
-
   color: #0a0a0b;
-
   &:disabled {
     opacity: 0.5;
     cursor: default;
   }
 
   &:hover {
-    transform: scale(1.05);
+    cursor: pointer;
+    background: hsl(200, 24%, 96%);
   }
 `;
