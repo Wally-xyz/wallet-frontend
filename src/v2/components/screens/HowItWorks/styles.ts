@@ -50,6 +50,6 @@ export const Footer = styled.footer`
   bottom: 32px;
   margin: 0;
   button {
-    margin-right: 24px;
+    margin-right: 16px;
   }
 `;
