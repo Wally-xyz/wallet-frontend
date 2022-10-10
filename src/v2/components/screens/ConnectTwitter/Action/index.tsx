@@ -61,7 +61,7 @@ export function Action(props: Props) {
     scannerTitle = "✅ Got it! Connecting...";
   } else if (scannerState === ScannerState.Failure) {
     scannerTitle =
-      "❌ Hmm, we're having trouble connecting to twitter. Try killing your twitter app and trying again.";
+      "❌ Hmm, we're having trouble connecting to Twitter. Try closing and then re-opening your Twitter mobile app.";
   }
 
   return (
@@ -84,7 +84,7 @@ export function Action(props: Props) {
             </ConnectButton>
           </ButtonSection>
           {activeTab === "QR_CODE" ? (
-            <FlexRow align="baseline" width="100%">
+            <FlexRow align="baseline" justify="space-between" width="100%">
               <FlexColumn>
                 <Step align="baseline">
                   <StepLabel>Step 1</StepLabel>
@@ -147,6 +147,7 @@ export function Action(props: Props) {
                     )}
                   </Step5Inner>
                 </Step5Wrapper>
+                Scan your phone’s QR Code. If the code isn’t scanning try using the Paste Link option.
                 {scanning && <ScannerTitle>{scannerTitle}</ScannerTitle>}
               </Step>
             </FlexRow>
