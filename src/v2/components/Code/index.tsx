@@ -6,7 +6,7 @@ import styled from "styled-components";
 export function Code({ code }: { code: string }) {
   return (
     <Wrapper>
-      <SyntaxHighlighter language="javascript" style={dark} customStyle={{ background: "#180920" }}>
+      <SyntaxHighlighter language="javascript" style={dark} customStyle={{ background: "#180920", color: "#00AAFF", borderRadius: "16px", padding: "16px 24px" }}>
         {code}
       </SyntaxHighlighter>
     </Wrapper>
@@ -21,9 +21,7 @@ export const Wrapper = styled.div`
   line-height: 20px;
   letter-spacing: 0.0025em;
   padding: 0 !important;
-  pre {
-    background: #180920;
-    border-radius: 16px !important;
-    padding: 16px 24px !important;
+  pre > code > span > .hljs-string, pre > code > span > .hljs-title, pre > code > span > .hljs-name, pre > code > span > .hljs-type, pre > code > span > .hljs-attribute, pre > code > span > .hljs-symbol, pre > code > span > .hljs-bullet, pre > code > span > .hljs-built_in, pre > code > span > .hljs-addition, pre > code > span > .hljs-variable, pre > code > span > .hljs-template-tag, pre > code > span > .hljs-template-variable {
+    color: #00AAFF;
   }
 `;
