@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { BackButton } from "../../Styles/BackButton";
 import { PrimaryLinkButton } from "../../Styles/Button";
-import { Heading1, Heading3 } from "../../Styles/Typography";
+import { Heading1Wally, Heading3 } from "../../Styles/Typography";
 import { TopNav } from "../../TopNav";
 
 import { Illustration } from "./Illustration";
@@ -15,7 +15,7 @@ export function HowItWorks() {
       <TopNavWrapper>
         <TopNav />
         <TitleWrapper>
-          <Heading1>How It Works</Heading1>
+          <Heading1Wally>How It Works</Heading1Wally>
           <Heading3 align="left">
             Wally is an API that makes it easy to integrate crypto wallets and transactions into
             your application.
