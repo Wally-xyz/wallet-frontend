@@ -69,7 +69,7 @@ export function Info() {
         />
       </Content>
       <Footer>
-        <PrevStepButton to="/enter-email" />
+        <PrevStepButton to="/purchase" />
         <NextStepButton to="/connect-twitter" />
       </Footer>
     </Container>

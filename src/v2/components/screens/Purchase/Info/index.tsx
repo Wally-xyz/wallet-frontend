@@ -67,7 +67,7 @@ export function Info() {
         />
       </Content>
       <Footer>
-        <PrevStepButton to="/enter-email" />
+        <PrevStepButton to="/select-image" />
         <NextStepButton to="/purchase-success" />
       </Footer>
     </Container>
