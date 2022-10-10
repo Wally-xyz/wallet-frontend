@@ -84,6 +84,9 @@ export const Container = styled.div`
   position: fixed;
   left: 0;
   top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media (max-width: 1124px) {
     width: 100%;
