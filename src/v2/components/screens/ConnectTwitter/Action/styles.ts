@@ -137,15 +137,12 @@ export const StepLabel = styled.div`
 `;
 
 export const StepText = styled.div`
-  font-family: "Inter";
+  font-family: "Merriweather", serif;
   font-style: normal;
-  font-weight: 568;
+  font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  /* or 133% */
-  height: 32px;
   color: #81a2b1;
-  width: 100px;
 `;
 
 export const Step5Text = styled(StepText)`
@@ -177,13 +174,15 @@ export const Step5Wrapper = styled.div`
   border-radius: 4px;
   margin-top: 5px;
   cursor: pointer;
+  padding: 24px;
+  width: 100%;
+  height: 100%;
+  min-height: 248px;
 `;
 
 export const Step5Inner = styled.div`
-  background: rgba(107, 134, 148, 0.12);
-  border: 2px dashed #c0d0d8;
-  height: 352px;
-  margin: 24px;
+  background: hsla(200, 16%, 50%, 0.12);
+  border: 2px dashed hsl(200, 24%, 80%);
   display: flex;
   align-items: center;
   justify-content: center;

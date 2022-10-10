@@ -51,17 +51,14 @@ export const ButtonSection = styled(FlexRow)`
 `;
 
 export const TwitterButtonText = styled.span`
-  font-family: "Inter";
+  font-family: "Merriweather", serif;
   font-style: normal;
-  font-weight: 934;
+  font-weight: 900;
   font-size: 14px;
   line-height: 12px;
   margin-left: 12px;
-  /* identical to box height, or 75% */
-
   text-align: center;
   letter-spacing: 0.0025em;
-
   color: #0a0a0b;
 `;
 

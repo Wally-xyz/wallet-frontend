@@ -1,19 +1,26 @@
 import styled from "styled-components";
 
 export const Heading1 = styled.h1`
-  /* EasyMint/H1 */
-
-  font-family: "Inter";
+  font-family: "Merriweather", serif;
   font-style: normal;
-  font-weight: 934;
+  font-weight: 900;
   font-size: 40px;
   line-height: 56px;
-  /* identical to box height, or 140% */
-
   text-align: center;
   letter-spacing: 0.0025em;
   margin: 16px 0;
+  color: #e6ecef;
+`;
 
+export const Heading1Wally = styled.h1`
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 56px;
+  text-align: center;
+  letter-spacing: 0.0025em;
+  margin: 16px 0;
   color: #e6ecef;
 `;
 

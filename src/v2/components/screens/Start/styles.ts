@@ -88,11 +88,9 @@ export const TwitterBlueText = styled.span`
 `;
 
 export const Tagline = styled.div`
-  //styleName: EasyMint/H1;
   font-family: "Merriweather", serif;
   font-weight: 900;
   font-size: 38px;
-  font-weight: 934;
   line-height: 56px;
   letter-spacing: 0.0025em;
   text-align: center;
