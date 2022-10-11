@@ -15,7 +15,7 @@ const Container = styled.article`
 `;
 
 const Details = styled.div`
-  padding-top: 105px;
+  padding-top: 104px;
 
   @media (max-width: 940px) {
     align-items: center;
@@ -39,7 +39,7 @@ const Disclaimer = styled.div`
 
 const Form = styled.form`
   display: flex;
-  gap: 63px;
+  gap: 64px;
   margin-top: 56px;
   flex-wrap: wrap;
 
@@ -50,7 +50,7 @@ const Form = styled.form`
 `;
 
 const Name = styled(Input)`
-  margin-top: 39px;
+  margin-top: 40px;
 
   @media (max-width: 940px) {
     width: 80%;
