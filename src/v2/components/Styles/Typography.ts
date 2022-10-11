@@ -8,7 +8,7 @@ export const Heading1 = styled.h1`
   line-height: 56px;
   text-align: center;
   letter-spacing: 0.0025em;
-  margin: 16px 0;
+  margin: 16px 0 0;
   color: #e6ecef;
 `;
 
@@ -42,7 +42,7 @@ export const Heading3 = styled.h3<{ align?: string; margin?: string; width?: str
 
   font-family: "Inter";
   font-style: normal;
-  font-weight: 496;
+  font-weight: 400;
   font-size: 20px;
   line-height: 32px;
   /* or 160% */

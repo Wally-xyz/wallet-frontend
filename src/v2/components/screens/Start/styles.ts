@@ -57,27 +57,25 @@ export const Container = styled.article`
 
 export const Message = styled.div`
   font-family: "Merriweather", serif;
+  text-align: center;
   font-weight: 400;
-  font-size: 22px;
-  line-height: 40px;
+  font-size: 20px;
+  line-height: 32px;
   letter-spacing: -0.5%;
   color: #C0D0D8;
-  margin: 32px auto 48px;
-  max-width: 480px;
-
-  @media (max-width: 940px) {
-    text-align: center;
-  }
+  margin: 16px auto 40px;
+  padding: 0 32px;
+  max-width: 544px;
 `;
 
 export const TwitterInfo = styled.div`
-  margin-top: 32px;
-  max-width: 328px;
+  margin-top: 24px;
+  max-width: 280px;
   font-family: "Merriweather", serif;
   font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
   text-align: center;
   letter-spacing: 0.0125em;
   color: #f2f6f7;
@@ -104,17 +102,39 @@ export const FlexWrapper = styled.div`
 `;
 
 export const IntroFooter = styled.footer`
-  height: 48px;
   background: transparent;
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 0;
   position: absolute;
-  bottom: 48px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 648px;
+  width: 100%;
+  max-width: 576px;
+
+  svg {
+    width: 60px;
+    height: 20px;
+  }
+
+  @media (max-width: 1080px) {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+`;
+
+export const PoweredBy = styled.div`  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  @media (max-width: 1080px) {
+    margin-bottom: 12px;
+  }
 `;
 
 export const Footer = styled.footer`
@@ -140,7 +160,7 @@ export const FooterHeading = styled.h5`
   line-height: 8px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  margin-right: 15px;
+  margin-right: 8px;
   color: #d9e3e8;
 `;
 
@@ -150,7 +170,7 @@ export const FooterText = styled.span`
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  max-width: 400px;
+  max-width: 360px;
   letter-spacing: 0.0025em;
   margin-left: 24px;
 

@@ -54,6 +54,7 @@ export const TwitterMessage = styled.div`
   line-height: 10px;
   letter-spacing: -0.5%;
   font-weight: bold;
+  text-decoration: none !important;
 `;
 
 export const SubmitButton = styled(PrimaryButton)`
@@ -61,17 +62,13 @@ export const SubmitButton = styled(PrimaryButton)`
 `;
 
 export const LinkInfoText = styled.div`
-  font-family: "Inter";
+  font-family: "Merriweather", serif;
   font-style: normal;
-  font-weight: 496;
+  font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  /* or 150% */
-
   margin: 40px 0;
-
   letter-spacing: -0.005em;
-
   color: #81a2b1;
 `;
 
@@ -111,8 +108,6 @@ export const ConnectButton = styled.button<{ active?: boolean }>`
   font-weight: 934;
   font-size: 14px;
   line-height: 12px;
-  /* identical to box height, or 75% */
-
   text-align: center;
   letter-spacing: 0.0025em;
   cursor: pointer;
@@ -129,10 +124,7 @@ export const StepLabel = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 10px;
-  /* identical to box height, or 71% */
-
   letter-spacing: 0.04em;
-
   color: #8dabb9;
 `;
 
@@ -146,12 +138,11 @@ export const StepText = styled.div`
 `;
 
 export const Step5Text = styled(StepText)`
-  width: 60%;
-  text-align: center;
+  margin-top: 12px;
 `;
 
 export const Step = styled(FlexColumn)`
-  margin-top: 16px;
+  margin-top: 40px;
 `;
 
 export const Scanner = styled(QRCodeScanner)`
@@ -172,7 +163,7 @@ export const Step5Wrapper = styled.div`
   border: 1px solid #222b2f;
   box-shadow: 0px 8px 0px -4px #090a0b;
   border-radius: 4px;
-  margin-top: 5px;
+  margin-top: 8px;
   cursor: pointer;
   padding: 24px;
   width: 100%;
@@ -187,6 +178,7 @@ export const Step5Inner = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  height: 100%;
 `;
 
 export const ScannerWrapper = styled.div`
