@@ -9,6 +9,7 @@ import {
   Center,
   Container,
   IntroFooter,
+  PoweredBy,
   FooterHeading,
   FooterText,
   FlexWrapper,
@@ -33,15 +34,18 @@ export function Start() {
         <Button to="/how-it-works">Get Started</Button>
         <TwitterInfo>
           Note: to be able to set the NFT as your Twitter profile photo, you’ll need{" "}
-          <TwitterBlueText>Twitter Blue</TwitterBlueText>.
+          <a href="https://twitter.com/i/twitter_blue_sign_up" rel="noreferrer" target="_blank">
+            <TwitterBlueText>Twitter Blue</TwitterBlueText>
+          </a>.
         </TwitterInfo>
       </Center>
-      <IntroFooter style={{"background":"#fff !important"}}>
-        <FooterHeading>Powered By</FooterHeading>
-        <Logo />
+      <IntroFooter>
+        <PoweredBy>
+          <FooterHeading>Powered By</FooterHeading>
+          <Logo />
+        </PoweredBy>
         <FooterText>
-          Wally is an API that makes it easy to integrate crypto wallets and transactions into your
-          application.
+          Wally is an API that makes it easy to integrate crypto wallets and transactions into your application.
         </FooterText>
       </IntroFooter>
     </Container>
