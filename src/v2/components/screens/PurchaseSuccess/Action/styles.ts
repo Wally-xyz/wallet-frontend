@@ -63,11 +63,18 @@ export const TwitterButtonText = styled.span`
 `;
 
 export const OpenSeaButton = styled(PrimaryButton)`
-  background-color: #0088ff;
-  border: 1px solid #0088ff;
+  background-color: hsl(208, 100%, 50%);
+  border: 1px solid hsl(208, 100%, 50%);
 
   span {
     color: white;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: hsl(208, 100%, 60%);
+      border: 1px solid hsl(208, 100%, 60%);
+    }
   }
 `;
 
