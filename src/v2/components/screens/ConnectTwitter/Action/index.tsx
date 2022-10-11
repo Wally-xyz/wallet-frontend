@@ -3,7 +3,7 @@ import * as React from "react";
 import { EasyMintLogo } from "src/v2/components/EasyMintLogo";
 import { Heading1, Heading3 } from "src/v2/components/Styles/Typography";
 import { Input } from "src/v2/components/Styles/Input";
-import { FlexColumn, FlexRow, Separator } from "src/v2/components/Styles/Layout";
+import { StepFlexColumn, StepFlexRow, Separator } from "src/v2/components/Styles/Layout";
 
 import { Step1 } from "./Steps/Step1";
 import { Step2 } from "./Steps/Step2";
@@ -68,9 +68,11 @@ export function Action(props: Props) {
     <Container>
       <EasyMintLogo />
       <ContentWrapper>
-        <TwitterMessage>Requires Twitter Blue</TwitterMessage>
+        <a href="https://twitter.com/i/twitter_blue_sign_up" rel="noreferrer" target="_blank">
+          <TwitterMessage>Requires Twitter Blue</TwitterMessage>
+        </a>
         <Heading1>Connect to Twitter</Heading1>
-        <Heading3 align="center" margin="8px" width="80%">
+        <Heading3 align="center" margin="0 auto 16px" width="80%">
           Use your computer’s webcam to scan the Twitter QR code, or paste the link.
         </Heading3>
         <DetailSection>
@@ -84,8 +86,8 @@ export function Action(props: Props) {
             </ConnectButton>
           </ButtonSection>
           {activeTab === "QR_CODE" ? (
-            <FlexRow align="baseline" justify="space-between" width="100%">
-              <FlexColumn>
+            <StepFlexRow align="baseline" justify="space-between" width="100%">
+              <StepFlexColumn>
                 <Step align="baseline">
                   <StepLabel>Step 1</StepLabel>
                   <Step1 />
@@ -98,9 +100,8 @@ export function Action(props: Props) {
                     Select <WhiteText>Choose NFT</WhiteText>
                   </StepText>
                 </Step>
-              </FlexColumn>
-              <Separator width="32px" />
-              <FlexColumn>
+              </StepFlexColumn>
+              <StepFlexColumn>
                 <Step align="baseline">
                   <StepLabel>Step 3</StepLabel>
                   <Step3 />
@@ -113,9 +114,8 @@ export function Action(props: Props) {
                     Select <WhiteText>Scan QR Code</WhiteText>
                   </StepText>
                 </Step>
-              </FlexColumn>
-              <Separator width="32px" />
-              <Step align="baseline" width="60%" tabIndex={0} onClick={() => setScanning(true)}>
+              </StepFlexColumn>
+              <Step align="baseline" tabIndex={0} onClick={() => setScanning(true)}>
                 <StepLabel>Step 5</StepLabel>
                 <Step5Wrapper>
                   <Step5Inner>
@@ -139,18 +139,17 @@ export function Action(props: Props) {
                           }}
                         />
                       </ScannerWrapper>
-                    ) : (
-                      <Step5Text>
-                        Click here to scan your phone’s QR Code. If the code isn’t scanning try
-                        using the <WhiteText>Paste Link</WhiteText> option.
-                      </Step5Text>
-                    )}
+                      ) : (
+                        <></>
+                      )
+                    }
                   </Step5Inner>
                 </Step5Wrapper>
-                Scan your phone’s QR Code. If the code isn’t scanning try using the Paste Link option.
-                {scanning && <ScannerTitle>{scannerTitle}</ScannerTitle>}
+                <Step5Text>Scan your phone’s QR Code. If the code isn’t scanning try using the Paste Link option.</Step5Text>
+                
+                  {scanning && <ScannerTitle>{scannerTitle}</ScannerTitle>}
               </Step>
-            </FlexRow>
+            </StepFlexRow>
           ) : (
             <>
               <LinkInfoText>
