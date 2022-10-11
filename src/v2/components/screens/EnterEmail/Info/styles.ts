@@ -97,11 +97,6 @@ export const Footer = styled.footer`
   max-width: 1080px;
 `;
 
-export const IntroFooter = styled.footer`
-  width: 100%;
-  background: transparent;
-`;
-
 export const ApiTitle = styled(Heading3)`
   text-align: left;
 `;
