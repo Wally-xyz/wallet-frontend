@@ -10,6 +10,12 @@ export const Wrapper = styled.div<{ variant?: string }>`
   position: absolute;
   top: 0;
   right: 0;
+
+  @media (max-width: 1080px) {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
 `;
 
 export const IconWrapper = styled.span`
