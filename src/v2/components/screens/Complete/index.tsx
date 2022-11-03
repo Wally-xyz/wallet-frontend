@@ -45,6 +45,10 @@ const View = styled.a`
   text-decoration: none;
 `;
 
+const SecondaryButton = styled.a`
+  margin-top: 32px;
+`;
+
 interface Props {
   imageUrl: string;
   username: string;
@@ -58,6 +62,8 @@ export function Complete(props: Props) {
         <Explanation>Freshly minted on the Ethereum network.</Explanation>
         <Image style={{ backgroundImage: `url(${props.imageUrl})` }} />
         <View href={`https://www.twitter.com/${props.username}`}>View on Twitter</View>
+        <SecondaryButton href={`https://app.wally.xyz/wallet`} target="_blank">Access your wallet</SecondaryButton>
+        <Explanation>Questions? Contact us at contact@wally.xyz</Explanation>
       </Container>
     </Chrome>
   );
