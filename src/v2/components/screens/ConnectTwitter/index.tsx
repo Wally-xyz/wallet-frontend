@@ -357,6 +357,7 @@ export function ConnectTwitter(props: Props) {
           >
             Submit
           </Submit>
+          <Disclaimer>Having issues? Send us an email at contact@wally.xyz</Disclaimer>
         </RightCol>
       </Container>
     </Chrome>
