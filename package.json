@@ -30,7 +30,7 @@
     "@types/react-motion": "^0.0.32",
     "@walletconnect/client": "^1.7.1",
     "@walletconnect/utils": "^1.7.1",
-    "axios": "^0.21.1",
+    "axios": "^0.27.2",
     "bignumber.js": "^9.0.1",
     "blockies-ts": "^1.0.0",
     "bn.js": "^5.1.3",
