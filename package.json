@@ -29,7 +29,7 @@
     "@types/eth-sig-util": "^2.1.1",
     "@types/react-motion": "^0.0.32",
     "@walletconnect/client": "^1.7.1",
-    "@walletconnect/utils": "^1.7.1",
+    "@walletconnect/utils": "^1.8.0",
     "axios": "^0.21.1",
     "bignumber.js": "^9.0.1",
     "blockies-ts": "^1.0.0",
